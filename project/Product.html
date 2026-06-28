@@ -1,0 +1,782 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<title>Coriander Mint Chutney — Farm Puro</title>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+<style>
+  :root{
+    --green:#2D6A2D;
+    --green-deep:#234E22;
+    --green-soft:#3D7A3D;
+    --green-tint:#EBF2E5;
+    --green-tint-2:#DDE8D2;
+    --brown:#6B3A1F;
+    --brown-deep:#4E2A14;
+    --cream:#FAF7F2;
+    --cream-warm:#F1EBDF;
+    --gold:#C8860A;
+    --gold-deep:#A66E07;
+    --gold-soft:#E0A93C;
+    --ink:#1F1A14;
+    --ink-soft:#5B5347;
+    --rule:rgba(31,26,20,.10);
+    --mild:#7FA85B;
+    --medium:#D9A100;
+    --hot:#D26B1F;
+    --very-hot:#B23A1A;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html,body{background:var(--cream);color:var(--ink);font-family:'Inter',sans-serif;font-size:15px;line-height:1.55;-webkit-font-smoothing:antialiased}
+  img{display:block;max-width:100%}
+  a{color:inherit;text-decoration:none}
+  button{font-family:inherit;cursor:pointer;border:0;background:none;color:inherit}
+  .wrap{max-width:1200px;margin:0 auto;padding:0 40px}
+  h1,h2,h3,h4,.serif{font-family:'Playfair Display',serif;font-weight:600;letter-spacing:-.01em;color:var(--ink)}
+  .eyebrow{font-family:'Inter',sans-serif;font-size:12px;font-weight:600;letter-spacing:.22em;text-transform:uppercase;color:var(--gold)}
+
+  /* ====================== HEADER (shared) ====================== */
+  .header{position:sticky;top:0;z-index:60;background:rgba(250,247,242,.92);backdrop-filter:saturate(140%) blur(10px);border-bottom:1px solid var(--rule)}
+  .header-inner{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;height:84px;gap:24px}
+  .brand{display:flex;align-items:center;gap:10px}
+  .brand img{height:54px;width:auto}
+  .nav{display:flex;gap:38px;justify-content:center}
+  .nav a{font-size:14px;font-weight:500;color:var(--ink);letter-spacing:.02em;position:relative;padding:6px 0}
+  .nav a.active::after,.nav a:hover::after{content:"";position:absolute;left:0;right:0;bottom:-2px;height:2px;background:var(--gold)}
+  .header-right{display:flex;justify-content:flex-end;align-items:center;gap:18px}
+  .icon-btn{width:40px;height:40px;border-radius:50%;display:grid;place-items:center;color:var(--ink);transition:background .2s}
+  .icon-btn:hover{background:rgba(45,106,45,.08)}
+  .cart{position:relative}
+  .cart-badge{position:absolute;top:4px;right:4px;background:var(--gold);color:#fff;font-size:10px;font-weight:700;min-width:16px;height:16px;border-radius:8px;display:grid;place-items:center;padding:0 4px}
+  .login{font-size:13px;font-weight:500;color:var(--ink-soft)}
+  .login:hover{color:var(--green)}
+
+  /* ====================== BREADCRUMB ====================== */
+  .breadcrumb{padding:22px 0 14px;border-bottom:1px solid var(--rule)}
+  .breadcrumb-inner{display:flex;align-items:center;gap:10px;font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-soft);font-weight:500}
+  .breadcrumb a{color:var(--ink-soft);transition:color .15s}
+  .breadcrumb a:hover{color:var(--brown)}
+  .breadcrumb .sep{opacity:.45}
+  .breadcrumb .here{color:var(--brown-deep);font-weight:600}
+
+  /* ====================== PDP MAIN ====================== */
+  .pdp{padding:48px 0 88px}
+  .pdp-grid{display:grid;grid-template-columns:1.05fr 1fr;gap:72px;align-items:start}
+
+  /* LEFT — gallery */
+  .gallery{position:relative}
+  .main-img{position:relative;aspect-ratio:1/1;border-radius:14px;overflow:hidden;background:var(--cream-warm);box-shadow:0 30px 60px -32px rgba(31,26,20,.30)}
+  .main-img img{width:100%;height:100%;object-fit:cover}
+  .main-img .float-pill{position:absolute;top:18px;left:18px;display:inline-flex;align-items:center;gap:6px;background:rgba(35,78,34,.92);color:#FFF8E7;font-size:10px;letter-spacing:.18em;text-transform:uppercase;font-weight:700;padding:7px 11px;border-radius:3px;backdrop-filter:blur(6px)}
+  .main-img .nav-thumb{position:absolute;top:50%;width:44px;height:44px;border-radius:50%;background:rgba(255,255,255,.92);display:grid;place-items:center;color:var(--ink);transform:translateY(-50%);transition:background .15s;box-shadow:0 6px 18px -8px rgba(31,26,20,.4)}
+  .main-img .nav-thumb:hover{background:#fff}
+  .main-img .nav-thumb.prev{left:18px}
+  .main-img .nav-thumb.next{right:18px}
+  .main-img .zoom{position:absolute;bottom:18px;right:18px;display:inline-flex;align-items:center;gap:7px;background:rgba(255,255,255,.92);padding:9px 14px;border-radius:999px;font-size:11px;font-weight:600;letter-spacing:.06em;color:var(--ink);backdrop-filter:blur(4px)}
+
+  .thumbs{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:14px}
+  .thumb{aspect-ratio:1/1;border-radius:8px;overflow:hidden;background:var(--cream-warm);border:1.5px solid transparent;cursor:pointer;position:relative;transition:border-color .15s, transform .15s}
+  .thumb img{width:100%;height:100%;object-fit:cover}
+  .thumb.on{border-color:var(--brown);box-shadow:0 6px 18px -10px rgba(107,58,31,.4)}
+  .thumb:not(.on):hover{transform:translateY(-2px)}
+  .thumb.detail{display:grid;place-items:center;background:linear-gradient(160deg,#DDE8D2,#B8CFA6);font-family:'Playfair Display',serif;font-style:italic;font-size:14px;color:var(--green-deep);text-align:center;padding:14px;line-height:1.2}
+  .thumb.detail small{font-family:'Inter',sans-serif;font-style:normal;font-size:8px;letter-spacing:.2em;text-transform:uppercase;color:var(--brown);font-weight:600;display:block;margin-bottom:6px}
+
+  /* RIGHT — info */
+  .info{padding-top:6px;display:flex;flex-direction:column}
+  .info .cat{font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:var(--gold);font-weight:700;margin-bottom:14px}
+  .info .cat .num{color:var(--brown-deep);margin-right:8px}
+  .info h1{font-family:'Playfair Display',serif;font-size:52px;line-height:1.02;font-weight:500;letter-spacing:-.02em;color:var(--ink)}
+  .info h1 em{font-style:italic;color:var(--green-deep);font-weight:500}
+
+  .meta-row{display:flex;align-items:center;gap:14px;margin-top:18px}
+  .spice-badge{display:inline-flex;align-items:center;gap:8px;padding:7px 13px 7px 11px;border:1px solid var(--rule);border-radius:999px;font-size:11px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--ink);background:#fff}
+  .spice-badge .dot{width:9px;height:9px;border-radius:50%;background:var(--green);box-shadow:0 0 0 3px rgba(45,106,45,.15)}
+  .stars{display:inline-flex;align-items:center;gap:8px;font-size:12px;color:var(--ink-soft)}
+  .stars .star-row{color:var(--gold)}
+  .stars b{color:var(--brown-deep);font-weight:600}
+
+  .tagline{font-family:'Playfair Display',serif;font-style:italic;font-size:18px;line-height:1.5;color:var(--brown);margin-top:18px;font-weight:400}
+
+  .desc{font-size:15px;line-height:1.7;color:var(--ink-soft);margin-top:14px;max-width:480px}
+
+  /* Price block */
+  .price-block{display:flex;align-items:baseline;gap:14px;margin-top:32px;padding-top:28px;border-top:1px solid var(--rule)}
+  .price-now{font-family:'Playfair Display',serif;font-size:44px;font-weight:600;color:var(--green-deep);line-height:1;letter-spacing:-.01em}
+  .price-was{font-size:15px;color:var(--ink-soft);text-decoration:line-through}
+  .price-tax{font-size:11px;color:var(--ink-soft);letter-spacing:.06em;margin-left:auto;text-align:right}
+
+  .weight-row{display:flex;align-items:center;gap:12px;margin-top:18px;font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-soft);font-weight:600}
+  .weight-row .pill-w{padding:8px 14px;border:1px solid var(--brown);color:var(--brown-deep);border-radius:999px;font-weight:700;letter-spacing:.18em}
+  .weight-row .stock{display:inline-flex;align-items:center;gap:7px}
+  .weight-row .stock::before{content:"";width:8px;height:8px;border-radius:50%;background:var(--green);animation:pulse 2s infinite}
+  @keyframes pulse{0%,100%{opacity:1}50%{opacity:.4}}
+
+  /* Quantity + Add to Cart row */
+  .cta-row{display:grid;grid-template-columns:auto 1fr;gap:14px;margin-top:24px;align-items:stretch}
+  .stepper{display:flex;align-items:center;background:#fff;border:1.5px solid var(--rule);border-radius:14px;overflow:hidden;width:148px}
+  .stepper button{width:48px;height:64px;font-size:22px;font-weight:500;color:var(--brown-deep);transition:background .15s}
+  .stepper button:hover{background:var(--cream-warm)}
+  .stepper .qty{flex:1;text-align:center;font-family:'Playfair Display',serif;font-size:22px;font-weight:600;color:var(--ink);border-left:1px solid var(--rule);border-right:1px solid var(--rule);height:64px;line-height:64px}
+
+  .add-cart{
+    display:flex;align-items:center;justify-content:center;gap:14px;
+    background:var(--gold);
+    color:#1F1409;
+    border-radius:14px;
+    font-size:14px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;
+    box-shadow:0 18px 36px -14px rgba(200,134,10,.65), inset 0 -3px 0 rgba(31,20,9,.18);
+    transition:transform .15s, box-shadow .15s, background .15s;
+    position:relative;overflow:hidden;
+  }
+  .add-cart::before{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(255,255,255,.18),transparent 40%);pointer-events:none}
+  .add-cart:hover{background:var(--gold-deep);transform:translateY(-2px);box-shadow:0 24px 44px -14px rgba(200,134,10,.75), inset 0 -3px 0 rgba(31,20,9,.22)}
+  .add-cart .price-tag{font-family:'Playfair Display',serif;font-size:20px;font-weight:600;letter-spacing:0;text-transform:none;margin-left:6px;padding-left:14px;border-left:1px solid rgba(31,20,9,.25)}
+  .add-cart svg{flex-shrink:0}
+
+  .buy-now{margin-top:10px;width:100%;padding:14px;border:1.5px solid var(--brown);color:var(--brown-deep);border-radius:14px;font-size:12px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;background:transparent;transition:background .15s, color .15s}
+  .buy-now:hover{background:var(--brown);color:#FFF8E7}
+
+  /* Divider */
+  .div-line{margin:36px 0 28px;height:1px;background:var(--rule);position:relative}
+  .div-line::after{content:"";position:absolute;left:50%;top:-4px;transform:translateX(-50%);width:9px;height:9px;border-radius:50%;background:var(--cream);border:1.5px solid var(--gold)}
+
+  /* Best Paired With */
+  .paired h4{font-family:'Inter',sans-serif;font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:var(--ink-soft);font-weight:700;margin-bottom:18px}
+  .paired-list{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+  .paired-item{background:#fff;border:1px solid var(--rule);border-radius:10px;padding:18px 14px;text-align:center;display:flex;flex-direction:column;align-items:center;gap:8px;transition:transform .2s, border-color .2s}
+  .paired-item:hover{transform:translateY(-3px);border-color:var(--green)}
+  .paired-item .emoji{font-size:30px;line-height:1;filter:grayscale(.05)}
+  .paired-item .lbl{font-family:'Playfair Display',serif;font-size:13px;line-height:1.25;color:var(--brown-deep);font-weight:500}
+  .paired-item .sub{font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-soft);font-weight:600}
+
+  /* Hero ingredient highlight */
+  .ingredient{margin-top:24px;background:var(--green-tint);border:1px solid var(--green-tint-2);border-radius:14px;padding:20px 22px;display:grid;grid-template-columns:auto 1fr auto;gap:18px;align-items:center;position:relative;overflow:hidden}
+  .ingredient::before{content:"";position:absolute;top:-40px;right:-30px;width:180px;height:180px;border-radius:50%;background:radial-gradient(circle,rgba(45,106,45,.10),transparent 70%);pointer-events:none}
+  .ing-icon{width:56px;height:56px;border-radius:50%;background:var(--green);display:grid;place-items:center;color:#FFF8E7;flex-shrink:0;box-shadow:0 8px 18px -6px rgba(35,78,34,.5)}
+  .ing-body .lbl{font-size:10px;letter-spacing:.22em;text-transform:uppercase;color:var(--green-deep);font-weight:700;margin-bottom:4px}
+  .ing-body .name{font-family:'Playfair Display',serif;font-size:22px;font-weight:600;color:var(--green-deep);line-height:1.1;letter-spacing:-.01em}
+  .ing-body .name em{font-style:italic;font-weight:500}
+  .ing-meta{text-align:right;font-size:11px;color:var(--ink-soft);line-height:1.45;border-left:1px solid rgba(45,106,45,.18);padding-left:18px}
+  .ing-meta b{display:block;color:var(--green-deep);font-family:'Playfair Display',serif;font-size:18px;font-weight:600;line-height:1}
+
+  /* Freshness strip */
+  .freshness{margin-top:16px;display:flex;align-items:center;gap:14px;padding:14px 18px;background:#fff;border:1px dashed rgba(45,106,45,.32);border-radius:10px}
+  .freshness .leaf{flex-shrink:0;width:36px;height:36px;border-radius:50%;background:var(--green-tint);display:grid;place-items:center;color:var(--green-deep)}
+  .freshness p{font-size:12px;color:var(--brown-deep);line-height:1.5;letter-spacing:.02em}
+  .freshness p b{color:var(--green-deep);font-weight:700}
+
+  /* small trust row above the fold */
+  .micro-trust{display:flex;align-items:center;gap:22px;margin-top:24px;font-size:11px;letter-spacing:.06em;color:var(--ink-soft)}
+  .micro-trust .t{display:inline-flex;align-items:center;gap:8px}
+  .micro-trust svg{color:var(--green)}
+
+  /* ====================== FULL DESCRIPTION ====================== */
+  .full-desc{background:var(--cream-warm);padding:90px 0;border-top:1px solid rgba(107,58,31,.08);border-bottom:1px solid rgba(107,58,31,.08)}
+  .fd-grid{display:grid;grid-template-columns:1fr 1.6fr;gap:80px;align-items:start}
+  .fd-left .eyebrow{margin-bottom:18px}
+  .fd-left h2{font-family:'Playfair Display',serif;font-size:44px;line-height:1.05;letter-spacing:-.02em;font-weight:500;color:var(--ink)}
+  .fd-left h2 em{font-style:italic;color:var(--green-deep);font-weight:500}
+  .fd-quote{margin-top:24px;font-family:'Playfair Display',serif;font-style:italic;font-size:16px;line-height:1.6;color:var(--brown);max-width:300px;padding-left:18px;border-left:2px solid var(--gold)}
+
+  .fd-right p{font-size:16px;line-height:1.75;color:var(--ink);margin-bottom:18px}
+  .fd-right p.lead{font-size:18px;line-height:1.65;color:var(--ink);font-weight:400}
+  .fd-right p.lead::first-letter{font-family:'Playfair Display',serif;font-size:54px;float:left;line-height:.92;margin:6px 12px 0 0;color:var(--green-deep);font-weight:600}
+
+  .specs{margin-top:36px;display:grid;grid-template-columns:repeat(2,1fr);gap:0;border-top:1px solid rgba(107,58,31,.18)}
+  .spec{padding:18px 0;border-bottom:1px solid rgba(107,58,31,.18);display:flex;justify-content:space-between;align-items:baseline;gap:18px}
+  .spec:nth-child(odd){padding-right:30px;border-right:1px solid rgba(107,58,31,.18)}
+  .spec:nth-child(even){padding-left:30px}
+  .spec .k{font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--ink-soft);font-weight:600}
+  .spec .v{font-family:'Playfair Display',serif;font-size:15px;color:var(--brown-deep);font-weight:600;text-align:right}
+
+  .ingredients-tags{margin-top:32px;display:flex;flex-wrap:wrap;gap:8px}
+  .ingredients-tags h5{width:100%;font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:var(--ink-soft);font-weight:700;margin-bottom:12px}
+  .ing-tag{font-size:12px;padding:7px 13px;border-radius:999px;background:#fff;border:1px solid var(--rule);color:var(--brown-deep);font-weight:500;display:inline-flex;align-items:center;gap:7px}
+  .ing-tag::before{content:"";width:6px;height:6px;border-radius:50%;background:var(--green)}
+
+  /* ====================== YOU MAY ALSO LIKE ====================== */
+  .related{padding:90px 0 110px}
+  .related-head{display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:40px}
+  .related-head .eyebrow{margin-bottom:8px}
+  .related-head h2{font-family:'Playfair Display',serif;font-size:42px;line-height:1.05;font-weight:500;letter-spacing:-.02em}
+  .related-head h2 em{font-style:italic;color:var(--green-deep);font-weight:500}
+  .related-head .all-link{font-size:12px;letter-spacing:.18em;text-transform:uppercase;font-weight:700;color:var(--brown-deep);border-bottom:1.5px solid var(--gold);padding-bottom:4px}
+  .related-head .all-link:hover{color:var(--green-deep)}
+
+  .related-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:28px}
+  .product{background:#fff;border:1px solid var(--rule);border-radius:6px;overflow:hidden;display:flex;flex-direction:column;transition:transform .25s, box-shadow .25s;position:relative}
+  .product:hover{transform:translateY(-6px);box-shadow:0 22px 44px -18px rgba(31,26,20,.22)}
+  .product .pic{position:relative;aspect-ratio:1/1;background:var(--cream-warm);overflow:hidden}
+  .product .pic img{width:100%;height:100%;object-fit:cover;transition:transform .5s}
+  .product:hover .pic img{transform:scale(1.04)}
+  .product .placeholder{position:absolute;inset:0;display:grid;place-items:center;padding:24px;background:linear-gradient(160deg,var(--ph-a,#F1EBDF),var(--ph-b,#E6DCC8))}
+  .product .placeholder::before{content:"";position:absolute;inset:0;background-image:repeating-linear-gradient(45deg, rgba(31,26,20,.04) 0 8px, transparent 8px 16px);opacity:.7}
+  .product .placeholder .ph-jar{position:relative;width:54%;aspect-ratio:5/7;background:var(--ph-jar,rgba(255,255,255,.55));border-radius:14px 14px 18px 18px;box-shadow:0 12px 24px -10px rgba(31,26,20,.25), inset 0 -22px 40px rgba(31,26,20,.06);display:flex;align-items:center;justify-content:center;padding:30px 14px 14px}
+  .product .placeholder .ph-jar::before{content:"";position:absolute;top:-12px;left:18%;right:18%;height:18px;background:var(--brown-deep);border-radius:3px}
+  .product .placeholder .ph-jar::after{content:"";position:absolute;top:6px;left:30%;right:30%;height:12px;background:var(--gold);border-radius:1px}
+  .product .placeholder .ph-label{position:relative;background:#FFF8E7;padding:14px 8px;border-radius:3px;text-align:center;width:100%;font-family:'Playfair Display',serif;color:var(--brown-deep);font-size:13px;line-height:1.15;border:1px solid rgba(107,58,31,.18);box-shadow:0 1px 0 rgba(31,26,20,.04)}
+  .product .placeholder .ph-label .ph-eyebrow{font-family:'Inter',sans-serif;font-size:8px;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);font-weight:600;margin-bottom:4px;display:block}
+  .product .placeholder .ph-label em{font-style:italic;font-weight:500}
+  .badge{position:absolute;top:14px;left:14px;font-size:9px;letter-spacing:.18em;text-transform:uppercase;font-weight:700;padding:5px 9px;border-radius:3px;z-index:2}
+  .badge.b-green{background:var(--green);color:#fff}
+  .badge.b-gold{background:var(--gold);color:#1F1409}
+  .badge.b-cream{background:#FFF8E7;color:var(--brown-deep)}
+  .body{padding:20px 20px 22px;display:flex;flex-direction:column;gap:6px;flex:1}
+  .row-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:2px}
+  .category-tag{font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);font-weight:600}
+  .spice-indicator{display:inline-flex;align-items:center;gap:5px;font-size:10px;letter-spacing:.14em;text-transform:uppercase;font-weight:600;color:var(--ink-soft)}
+  .spice-indicator .lvl{display:flex;gap:3px}
+  .spice-indicator .lvl span{width:6px;height:6px;border-radius:50%;background:rgba(31,26,20,.12)}
+  .spice-indicator[data-level="mild"] .lvl span:nth-child(-n+1){background:var(--mild)}
+  .spice-indicator[data-level="medium"] .lvl span:nth-child(-n+2){background:var(--medium)}
+  .spice-indicator[data-level="hot"] .lvl span:nth-child(-n+3){background:var(--hot)}
+  .spice-indicator[data-level="very-hot"] .lvl span:nth-child(-n+4){background:var(--very-hot)}
+  .product h3{font-size:20px;line-height:1.18;font-weight:600;margin-top:4px}
+  .product .pdesc{font-size:13px;color:var(--ink-soft);line-height:1.5}
+  .weight{font-size:11px;color:var(--ink-soft);letter-spacing:.16em;text-transform:uppercase;font-weight:500;margin-top:2px}
+  .row-bot{display:flex;align-items:center;justify-content:space-between;margin-top:14px;padding-top:16px;border-top:1px dashed var(--rule)}
+  .price-mini{display:flex;align-items:baseline;gap:8px}
+  .price-mini .now{font-family:'Playfair Display',serif;font-size:22px;color:var(--brown-deep);font-weight:600}
+  .add{display:inline-flex;align-items:center;gap:8px;background:var(--green);color:#fff;padding:9px 14px;border-radius:999px;font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;transition:background .15s, transform .15s}
+  .add:hover{background:var(--green-deep);transform:translateX(2px)}
+
+  /* ====================== FOOTER (shared) ====================== */
+  footer{background:#1A1410;color:rgba(244,239,227,.7);padding:80px 0 0}
+  .foot-grid{display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr 1fr;gap:48px;padding-bottom:60px}
+  .foot-brand img{height:60px;background:#FAF7F2;padding:8px;border-radius:6px}
+  .foot-brand p{margin-top:20px;font-size:13px;line-height:1.7;max-width:280px}
+  .socials{display:flex;gap:10px;margin-top:24px}
+  .socials a{width:36px;height:36px;border-radius:50%;border:1px solid rgba(244,239,227,.18);display:grid;place-items:center;color:rgba(244,239,227,.7)}
+  .socials a:hover{background:var(--gold);color:#1F1409;border-color:var(--gold)}
+  .foot-col h4{font-family:'Inter',sans-serif;font-size:12px;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:var(--gold-soft);margin-bottom:22px}
+  .foot-col ul{list-style:none;display:flex;flex-direction:column;gap:12px}
+  .foot-col a{font-size:13px;color:rgba(244,239,227,.7)}
+  .foot-col a:hover{color:#FFF8E7}
+  .copy{border-top:1px solid rgba(244,239,227,.10);padding:24px 0;display:flex;justify-content:space-between;align-items:center;font-size:12px;color:rgba(244,239,227,.45)}
+  .copy .pays{display:flex;gap:10px;align-items:center}
+  .copy .pays span{padding:4px 10px;border:1px solid rgba(244,239,227,.14);border-radius:4px;font-size:10px;letter-spacing:.1em;font-weight:600}
+  svg{display:block}
+
+  /* ====================== HAMBURGER ====================== */
+  .hamburger{display:none;flex-direction:column;justify-content:center;gap:5px;width:40px;height:40px;padding:8px;cursor:pointer;background:none;border:0;border-radius:6px}
+  .hamburger span{display:block;width:100%;height:1.5px;background:var(--ink);border-radius:2px;transition:transform .25s,opacity .2s}
+  .hamburger.open span:nth-child(1){transform:translateY(6.5px) rotate(45deg)}
+  .hamburger.open span:nth-child(2){opacity:0}
+  .hamburger.open span:nth-child(3){transform:translateY(-6.5px) rotate(-45deg)}
+  .mobile-nav{display:none;position:fixed;inset:0;top:70px;background:rgba(250,247,242,.97);backdrop-filter:blur(10px);z-index:40;flex-direction:column;padding:32px 24px;gap:0;overflow-y:auto}
+  .mobile-nav.open{display:flex}
+  .mobile-nav a.nav-link{font-family:'Playfair Display',serif;font-size:26px;font-weight:500;color:var(--ink);padding:16px 0;border-bottom:1px solid var(--rule);display:flex;justify-content:space-between;align-items:center}
+  .mobile-nav a.nav-link::after{content:"→";font-family:'Inter',sans-serif;font-size:16px;color:var(--gold)}
+  .mobile-nav .m-actions{display:flex;gap:12px;margin-top:32px}
+  .mobile-nav .m-actions a{font-size:14px;font-family:'Inter',sans-serif;font-weight:600;padding:14px 20px;border-radius:999px;flex:1;justify-content:center;border:0;text-align:center}
+  .mobile-nav .m-actions .btn-gold{background:var(--gold);color:#1F1409}
+  .mobile-nav .m-actions .btn-outline{border:1.5px solid var(--brown);color:var(--brown-deep)}
+
+  /* ====================== RESPONSIVE ====================== */
+  @media(max-width:900px){
+    .wrap{padding:0 28px}
+    /* Header */
+    .header-inner{grid-template-columns:1fr auto;height:70px}
+    .nav,.login{display:none}
+    .hamburger{display:flex}
+    /* PDP layout stack */
+    .pdp{padding:32px 0 60px}
+    .pdp-grid{grid-template-columns:1fr;gap:36px}
+    .gallery{max-width:560px;margin:0 auto;width:100%}
+    /* Info */
+    .info h1{font-size:38px}
+    .price-now{font-size:36px}
+    /* Full description */
+    .full-desc{padding:60px 0}
+    .fd-grid{grid-template-columns:1fr;gap:36px}
+    .fd-left h2{font-size:34px}
+    /* Related */
+    .related{padding:60px 0 80px}
+    .related-head{flex-direction:column;gap:12px;align-items:flex-start;margin-bottom:28px}
+    .related-head h2{font-size:32px}
+    .related-grid{grid-template-columns:repeat(2,1fr);gap:20px}
+    /* Footer */
+    .foot-grid{grid-template-columns:1fr 1fr;gap:36px}
+    .foot-brand{grid-column:1/-1}
+    .copy{flex-direction:column;gap:10px;text-align:center}
+  }
+
+  @media(max-width:600px){
+    .wrap{padding:0 18px}
+    .header-inner{height:64px}
+    .brand img{height:42px}
+    .mobile-nav{top:64px}
+    /* Breadcrumb */
+    .breadcrumb-inner{font-size:11px;gap:6px}
+    /* PDP */
+    .pdp{padding:24px 0 48px}
+    .info h1{font-size:30px}
+    .price-now{font-size:30px}
+    .price-block{flex-wrap:wrap;gap:10px;margin-top:20px;padding-top:20px}
+    .price-tax{margin-left:0;text-align:left;font-size:10px}
+    /* CTA row: stepper full width then button */
+    .cta-row{grid-template-columns:1fr;gap:10px}
+    .stepper{width:100%}
+    .stepper button{flex:1}
+    /* Ingredient block */
+    .ingredient{grid-template-columns:auto 1fr;gap:14px}
+    .ing-meta{display:none}
+    /* Paired */
+    .paired-list{grid-template-columns:1fr 1fr 1fr}
+    /* Full desc */
+    .full-desc{padding:44px 0}
+    .fd-left h2{font-size:26px}
+    .fd-right p.lead{font-size:15px}
+    .fd-right p.lead::first-letter{font-size:40px}
+    /* Specs: single col */
+    .specs{grid-template-columns:1fr}
+    .spec:nth-child(odd){padding-right:0;border-right:0}
+    .spec:nth-child(even){padding-left:0}
+    /* Related */
+    .related{padding:40px 0 60px}
+    .related-grid{grid-template-columns:1fr;gap:14px}
+    /* Footer */
+    .foot-grid{grid-template-columns:1fr;gap:28px}
+    .foot-brand{grid-column:auto}
+  }
+</style>
+</head>
+<body>
+
+<!-- ====================== HEADER ====================== -->
+<header class="header" data-screen-label="Header">
+  <div class="wrap header-inner">
+    <a class="brand" href="Homepage.html">
+      <img src="assets/logo.png" alt="Farm Puro Chutneys" />
+    </a>
+    <nav class="nav">
+      <a href="Homepage.html">Home</a>
+      <a href="Shop.html" class="active">Shop</a>
+      <a href="#">About</a>
+      <a href="#">Recipes</a>
+      <a href="#">Contact</a>
+    </nav>
+    <div class="header-right">
+      <a href="Login.html" class="login">Sign in</a>
+      <button class="icon-btn" aria-label="Search">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+      </button>
+      <button class="icon-btn cart" aria-label="Cart" onclick="location.href='Checkout.html'">
+        <svg width="18" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6 7h12l-1.2 11a2 2 0 0 1-2 1.8H9.2a2 2 0 0 1-2-1.8L6 7Z"/><path d="M9 7V5a3 3 0 0 1 6 0v2"/></svg>
+        <span class="cart-badge">2</span>
+      </button>
+      <button class="hamburger" id="hamburger" aria-label="Menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<nav class="mobile-nav" id="mobile-nav" aria-label="Mobile navigation">
+  <a href="Homepage v3.html" class="nav-link">Home</a>
+  <a href="Shop.html" class="nav-link">Shop</a>
+  <a href="#" class="nav-link">About</a>
+  <a href="#" class="nav-link">Recipes</a>
+  <a href="#" class="nav-link">Contact</a>
+  <div class="m-actions">
+    <a class="btn-gold" href="Checkout.html">Cart (2) →</a>
+    <a class="btn-outline" href="#">Sign in</a>
+  </div>
+</nav>
+
+<!-- ====================== BREADCRUMB ====================== -->
+<section class="breadcrumb" data-screen-label="Breadcrumb">
+  <div class="wrap breadcrumb-inner">
+    <a href="Homepage.html">Home</a>
+    <span class="sep">›</span>
+    <a href="Shop.html">Shop</a>
+    <span class="sep">›</span>
+    <span class="here">Coriander Mint Chutney</span>
+  </div>
+</section>
+
+<!-- ====================== PDP MAIN ====================== -->
+<section class="pdp" data-screen-label="Product Detail">
+  <div class="wrap pdp-grid">
+
+    <!-- LEFT — gallery -->
+    <div class="gallery">
+      <div class="main-img">
+        <span class="float-pill">04 · Cooling</span>
+        <img src="assets/coriander-mint.jpg" alt="Coriander Mint Chutney" />
+        <button class="nav-thumb prev" aria-label="Previous image">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="m15 6-6 6 6 6"/></svg>
+        </button>
+        <button class="nav-thumb next" aria-label="Next image">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="m9 6 6 6-6 6"/></svg>
+        </button>
+        <span class="zoom">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="M8 11h6M11 8v6M20 20l-3.5-3.5"/></svg>
+          Click to zoom
+        </span>
+      </div>
+      <div class="thumbs">
+        <div class="thumb on"><img src="assets/coriander-mint.jpg" alt="" /></div>
+        <div class="thumb"><img src="assets/coriander-mint.jpg" alt="" style="object-position:left center" /></div>
+        <div class="thumb"><img src="assets/coriander-mint.jpg" alt="" style="object-position:right bottom" /></div>
+        <div class="thumb detail"><div><small>On a plate</small>Pairing<br/><em>shot</em></div></div>
+      </div>
+    </div>
+
+    <!-- RIGHT — info -->
+    <div class="info">
+      <div class="cat"><span class="num">04 ·</span>Cooling Chutney</div>
+      <h1>Coriander Mint <em>Chutney</em></h1>
+
+      <div class="meta-row">
+        <span class="spice-badge"><span class="dot"></span>Medium</span>
+        <span class="stars">
+          <span class="star-row">★★★★★</span>
+          <b>4.9</b>
+          <span>· 412 reviews</span>
+        </span>
+      </div>
+
+      <p class="tagline">"Bright, herby, and instantly refreshing."</p>
+      <p class="desc">Hand-ground fresh coriander and garden mint, lifted with green chilli and a whisper of lime. The colour of early monsoon — vivid green, clean herbal bite, doubles as the world's best sandwich spread.</p>
+
+      <!-- Price -->
+      <div class="price-block">
+        <span class="price-now">₹199</span>
+        <span class="price-was">₹229</span>
+        <span class="price-tax">Inclusive of all taxes<br/>Free shipping above ₹699</span>
+      </div>
+
+      <!-- Weight + Stock -->
+      <div class="weight-row">
+        <span class="pill-w">250g jar</span>
+        <span class="stock">In stock · ships in 24h</span>
+      </div>
+
+      <!-- Stepper + Add to Cart -->
+      <div class="cta-row">
+        <div class="stepper" role="group" aria-label="Quantity">
+          <button id="dec" aria-label="Decrease">−</button>
+          <span class="qty" id="qty">1</span>
+          <button id="inc" aria-label="Increase">+</button>
+        </div>
+        <button class="add-cart" aria-label="Add to cart" onclick="location.href='Checkout.html'">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M6 7h12l-1.2 11a2 2 0 0 1-2 1.8H9.2a2 2 0 0 1-2-1.8L6 7Z"/><path d="M9 7V5a3 3 0 0 1 6 0v2"/></svg>
+          Add to cart
+          <span class="price-tag">₹199</span>
+        </button>
+      </div>
+      <button class="buy-now" onclick="location.href='Checkout.html'">Buy it now — express checkout</button>
+
+      <!-- micro trust -->
+      <div class="micro-trust">
+        <span class="t">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="m9 12 2 2 4-4"/></svg>
+          FSSAI certified
+        </span>
+        <span class="t">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v6M12 22v-3M4 12H2M22 12h-2M5 5l1.5 1.5M19 19l-1.5-1.5M5 19l1.5-1.5M19 5l-1.5 1.5"/></svg>
+          Made fresh weekly
+        </span>
+        <span class="t">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 7 9 18l-5-5"/></svg>
+          7-day returns
+        </span>
+      </div>
+
+      <div class="div-line"></div>
+
+      <!-- Best Paired With -->
+      <div class="paired">
+        <h4>Best paired with</h4>
+        <div class="paired-list">
+          <div class="paired-item">
+            <span class="emoji">🥙</span>
+            <span class="lbl">Seekh &amp; shami kebab platter</span>
+            <span class="sub">Cuts the richness</span>
+          </div>
+          <div class="paired-item">
+            <span class="emoji">🥟</span>
+            <span class="lbl">Dhokla &amp; khandvi snack board</span>
+            <span class="sub">Classic Gujarati</span>
+          </div>
+          <div class="paired-item">
+            <span class="emoji">🌯</span>
+            <span class="lbl">Kathi rolls &amp; frankies</span>
+            <span class="sub">Spread inside</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Hero ingredient highlight -->
+      <div class="ingredient">
+        <div class="ing-icon">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 22V12"/>
+            <path d="M12 12c0-4 2-7 6-8-.5 4-2 7-6 8Z"/>
+            <path d="M12 12c0-4-2-7-6-8 .5 4 2 7 6 8Z"/>
+            <path d="M12 16c0-2 1.5-4 4-5-.5 3-2 5-4 5Z"/>
+          </svg>
+        </div>
+        <div class="ing-body">
+          <div class="lbl">Key Ingredient</div>
+          <div class="name">Fresh <em>Coriander</em> &amp; Mint</div>
+        </div>
+        <div class="ing-meta">
+          <b>Same-day</b>
+          ground after<br/>harvest
+        </div>
+      </div>
+
+      <!-- Freshness strip -->
+      <div class="freshness">
+        <div class="leaf">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M21 3c-9 0-15 4-15 12 0 3 2 6 6 6 8 0 9-9 9-18Z"/>
+            <path d="M6 21c4-7 8-11 14-15"/>
+          </svg>
+        </div>
+        <p><b>Made fresh.</b> No preservatives, no additives, nothing artificial. Cooked in small copper batches and shipped within <b>24 hours</b> of bottling.</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ====================== FULL DESCRIPTION ====================== -->
+<section class="full-desc" data-screen-label="Full Description">
+  <div class="wrap fd-grid">
+    <div class="fd-left">
+      <span class="eyebrow">The Recipe</span>
+      <h2>The colour of <em>early monsoon</em>.</h2>
+      <p class="fd-quote">"We grind it the same morning the coriander arrives. Any later and the green starts to dull — and you can taste it." — Asha, our head cook</p>
+    </div>
+    <div class="fd-right">
+      <p class="lead">Made from coriander and mint picked at peak freshness, hand-ground on a granite sil-batta the same day so nothing goes bitter or grey. A small fistful of green chilli, a pinch of rock salt, a squeeze of lime — that's it. Nothing else. Nothing artificial.</p>
+      <p>Works as a cooling counterpoint to anything rich or spiced. We've watched it disappear faster than the kebabs at family dinners, and it's the only chutney that genuinely doubles as a sandwich spread without anyone complaining.</p>
+
+      <div class="specs">
+        <div class="spec"><span class="k">Net weight</span><span class="v">250g</span></div>
+        <div class="spec"><span class="k">Spice level</span><span class="v">Medium · 2/4</span></div>
+        <div class="spec"><span class="k">Shelf life</span><span class="v">6 months sealed</span></div>
+        <div class="spec"><span class="k">After opening</span><span class="v">14 days refrigerated</span></div>
+        <div class="spec"><span class="k">Origin</span><span class="v">Pune, Maharashtra</span></div>
+        <div class="spec"><span class="k">Allergens</span><span class="v">None</span></div>
+      </div>
+
+      <div class="ingredients-tags">
+        <h5>What's inside</h5>
+        <span class="ing-tag">Fresh coriander 48%</span>
+        <span class="ing-tag">Garden mint 22%</span>
+        <span class="ing-tag">Green chilli</span>
+        <span class="ing-tag">Lime juice</span>
+        <span class="ing-tag">Roasted cumin</span>
+        <span class="ing-tag">Rock salt</span>
+        <span class="ing-tag">Cold-pressed mustard oil</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ====================== YOU MAY ALSO LIKE ====================== -->
+<section class="related" data-screen-label="You May Also Like">
+  <div class="wrap">
+    <div class="related-head">
+      <div>
+        <div class="eyebrow">Pairs beautifully with</div>
+        <h2>You may also <em>like</em></h2>
+      </div>
+      <a href="Shop.html" class="all-link">View all 9 jars →</a>
+    </div>
+
+    <div class="related-grid">
+
+      <article class="product">
+        <div class="pic">
+          <span class="badge b-green">Bestseller</span>
+          <img src="assets/tamarind-date.jpg" alt="Tamarind Date Chutney" />
+        </div>
+        <div class="body">
+          <div class="row-top">
+            <span class="category-tag">Chutney</span>
+            <span class="spice-indicator" data-level="mild"><span class="lvl"><span></span><span></span><span></span><span></span></span>Mild</span>
+          </div>
+          <h3>Tamarind Date Chutney</h3>
+          <p class="pdesc">Slow-reduced Medjool dates and aged Andhra tamarind.</p>
+          <div class="weight">Net wt. 250g</div>
+          <div class="row-bot">
+            <div class="price-mini"><span class="now">₹249</span></div>
+            <button class="add">Add <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
+          </div>
+        </div>
+      </article>
+
+      <article class="product">
+        <div class="pic">
+          <img src="assets/coconut.jpg" alt="Coconut Chutney" />
+        </div>
+        <div class="body">
+          <div class="row-top">
+            <span class="category-tag">Chutney</span>
+            <span class="spice-indicator" data-level="mild"><span class="lvl"><span></span><span></span><span></span><span></span></span>Mild</span>
+          </div>
+          <h3>Coconut Chutney</h3>
+          <p class="pdesc">Fresh-grated Kerala coconut, curry leaves, mustard tempering.</p>
+          <div class="weight">Net wt. 250g</div>
+          <div class="row-bot">
+            <div class="price-mini"><span class="now">₹199</span></div>
+            <button class="add">Add <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
+          </div>
+        </div>
+      </article>
+
+      <article class="product">
+        <div class="pic">
+          <span class="badge b-gold">Limited Batch</span>
+          <img src="assets/garlic-red.jpg" alt="Garlic Red Chutney" />
+        </div>
+        <div class="body">
+          <div class="row-top">
+            <span class="category-tag">Chutney</span>
+            <span class="spice-indicator" data-level="hot"><span class="lvl"><span></span><span></span><span></span><span></span></span>Hot</span>
+          </div>
+          <h3>Garlic Red Chutney</h3>
+          <p class="pdesc">Kashmiri red chillies, roasted garlic, crushed peanuts.</p>
+          <div class="weight">Net wt. 250g</div>
+          <div class="row-bot">
+            <div class="price-mini"><span class="now">₹229</span></div>
+            <button class="add">Add <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
+          </div>
+        </div>
+      </article>
+
+      <article class="product">
+        <div class="pic">
+          <div class="placeholder" style="--ph-a:#F5D9C4;--ph-b:#E8A475;--ph-jar:rgba(255,248,236,.78)">
+            <div class="ph-jar">
+              <div class="ph-label">
+                <span class="ph-eyebrow">South Indian</span>
+                Tomato Onion<br/><em>Chutney</em>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="body">
+          <div class="row-top">
+            <span class="category-tag">Chutney</span>
+            <span class="spice-indicator" data-level="medium"><span class="lvl"><span></span><span></span><span></span><span></span></span>Medium</span>
+          </div>
+          <h3>Tomato Onion Chutney</h3>
+          <p class="pdesc">Slow-roasted tomatoes, sweet onions and dried red chilli.</p>
+          <div class="weight">Net wt. 250g</div>
+          <div class="row-bot">
+            <div class="price-mini"><span class="now">₹219</span></div>
+            <button class="add">Add <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
+          </div>
+        </div>
+      </article>
+
+    </div>
+  </div>
+</section>
+
+<!-- ====================== FOOTER ====================== -->
+<footer data-screen-label="Footer">
+  <div class="wrap">
+    <div class="foot-grid">
+      <div class="foot-brand">
+        <img src="assets/logo.png" alt="Farm Puro" />
+        <p>Authentic Indian chutneys, slow-cooked in small copper batches. Crafted in Pune, shipped pan-India.</p>
+        <div class="socials">
+          <a href="#" aria-label="Instagram"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r=".8" fill="currentColor"/></svg></a>
+          <a href="#" aria-label="Facebook"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M13 22v-8h3l.5-4H13V7.5c0-1.2.4-2 2-2h2V2.2C16.6 2.1 15.4 2 14 2c-3 0-5 1.8-5 5v3H6v4h3v8h4Z"/></svg></a>
+          <a href="#" aria-label="YouTube"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M22 12c0-3-.3-4.5-.8-5.2-.5-.7-1.3-1-2.2-1.1C17 5.5 12 5.5 12 5.5s-5 0-7 .2c-.9 0-1.7.4-2.2 1.1C2.3 7.5 2 9 2 12s.3 4.5.8 5.2c.5.7 1.3 1 2.2 1.1 2 .2 7 .2 7 .2s5 0 7-.2c.9 0 1.7-.4 2.2-1.1.5-.7.8-2.2.8-5.2Zm-12 3V9l5 3-5 3Z"/></svg></a>
+          <a href="#" aria-label="WhatsApp"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M20 4A10 10 0 0 0 4 16l-1 5 5-1A10 10 0 1 0 20 4Zm-8 17a8 8 0 0 1-4.3-1.2l-.3-.2-3 .7.8-3-.2-.3A8 8 0 1 1 12 21Zm4.6-5.6c-.3-.1-1.5-.7-1.7-.8-.2-.1-.4-.1-.6.1-.2.2-.7.8-.8 1-.1.1-.3.2-.5.1-1.5-.7-2.4-1.3-3.4-3-.3-.4.3-.4.7-1.3.1-.2 0-.4 0-.5 0-.1-.6-1.4-.8-1.9-.2-.5-.4-.4-.6-.4h-.5c-.2 0-.4 0-.6.3-.2.2-.8.8-.8 2s.8 2.3.9 2.5c.1.2 1.6 2.4 3.8 3.4 1.4.6 1.9.6 2.6.5.4 0 1.3-.5 1.5-1.1.2-.5.2-1 .1-1.1 0-.1-.2-.2-.5-.3Z"/></svg></a>
+        </div>
+      </div>
+      <div class="foot-col">
+        <h4>Shop</h4>
+        <ul>
+          <li><a href="#">All chutneys</a></li>
+          <li><a href="#">Pickles &amp; pastes</a></li>
+          <li><a href="#">Gift hampers</a></li>
+          <li><a href="#">Subscription box</a></li>
+          <li><a href="#">Sample pack</a></li>
+        </ul>
+      </div>
+      <div class="foot-col">
+        <h4>Company</h4>
+        <ul>
+          <li><a href="#">Our story</a></li>
+          <li><a href="#">The farms</a></li>
+          <li><a href="#">Press &amp; media</a></li>
+          <li><a href="#">Careers</a></li>
+          <li><a href="#">Wholesale</a></li>
+        </ul>
+      </div>
+      <div class="foot-col">
+        <h4>Help</h4>
+        <ul>
+          <li><a href="#">Track your order</a></li>
+          <li><a href="#">Shipping &amp; returns</a></li>
+          <li><a href="#">FAQ</a></li>
+          <li><a href="#">Contact us</a></li>
+          <li><a href="#">Storage &amp; shelf life</a></li>
+        </ul>
+      </div>
+      <div class="foot-col">
+        <h4>Visit</h4>
+        <ul>
+          <li>Farm Puro Foods Pvt Ltd</li>
+          <li>14, Tilak Road,<br/>Sadashiv Peth,<br/>Pune 411030</li>
+          <li><a href="#">hello@farmpuro.in</a></li>
+          <li>+91 20 2447 8800</li>
+        </ul>
+      </div>
+    </div>
+    <div class="copy">
+      <div>© 2026 Farm Puro Foods Pvt Ltd. All rights reserved. · <a href="#">Privacy</a> · <a href="#">Terms</a> · FSSAI Lic. 11521004000123</div>
+      <div class="pays"><span>UPI</span><span>VISA</span><span>RUPAY</span><span>COD</span></div>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // Hamburger
+  const hamburger = document.getElementById('hamburger');
+  const mobileNav = document.getElementById('mobile-nav');
+  hamburger.addEventListener('click', () => {
+    const open = mobileNav.classList.toggle('open');
+    hamburger.classList.toggle('open', open);
+    hamburger.setAttribute('aria-expanded', open);
+    document.body.style.overflow = open ? 'hidden' : '';
+  });
+  mobileNav.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
+    mobileNav.classList.remove('open');
+    hamburger.classList.remove('open');
+    hamburger.setAttribute('aria-expanded','false');
+    document.body.style.overflow = '';
+  }));
+  // Quantity stepper
+  const qtyEl = document.getElementById('qty');
+  document.getElementById('inc').addEventListener('click', () => {
+    const v = Math.min(99, parseInt(qtyEl.textContent, 10) + 1);
+    qtyEl.textContent = v;
+  });
+  document.getElementById('dec').addEventListener('click', () => {
+    const v = Math.max(1, parseInt(qtyEl.textContent, 10) - 1);
+    qtyEl.textContent = v;
+  });
+  // Thumbnail toggle (visual only)
+  document.querySelectorAll('.thumb').forEach(t => t.addEventListener('click', () => {
+    document.querySelectorAll('.thumb').forEach(x => x.classList.remove('on'));
+    t.classList.add('on');
+  }));
+</script>
+
+</body>
+</html>

@@ -1,0 +1,566 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<title>Track Your Order — Farm Puro</title>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400&family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+<style>
+  :root{
+    --green:#2D6A2D;--green-deep:#234E22;--green-soft:#3D7A3D;--green-tint:#EBF2E5;--green-tint-2:#DDE8D2;
+    --brown:#6B3A1F;--brown-deep:#4E2A14;
+    --cream:#FAF7F2;--cream-warm:#F1EBDF;
+    --gold:#C8860A;--gold-soft:#E0A93C;
+    --ink:#1F1A14;--ink-soft:#5B5347;
+    --rule:rgba(31,26,20,.10);--rule-strong:rgba(31,26,20,.18);
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html,body{background:var(--cream);color:var(--ink);font-family:'DM Sans',sans-serif;font-size:15px;line-height:1.55;-webkit-font-smoothing:antialiased}
+  img{display:block;max-width:100%}
+  a{color:inherit;text-decoration:none}
+  button{font-family:inherit;cursor:pointer;border:0;background:none;color:inherit}
+  input{font-family:inherit;font-size:15px;color:var(--ink)}
+  h1,h2,h3,.serif{font-family:'Playfair Display',serif;font-weight:600;letter-spacing:-.01em}
+  .wrap{max-width:1100px;margin:0 auto;padding:0 40px}
+  .eyebrow{font-size:11px;font-weight:600;letter-spacing:.24em;text-transform:uppercase;color:var(--gold)}
+
+  /* ====================== HEADER ====================== */
+  .header{position:sticky;top:0;z-index:50;background:rgba(250,247,242,.92);backdrop-filter:saturate(140%) blur(10px);border-bottom:1px solid var(--rule)}
+  .header-inner{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;height:84px;gap:24px}
+  .brand{display:flex;align-items:center;gap:10px}
+  .brand img{height:54px;width:auto}
+  .nav{display:flex;gap:38px;justify-content:center}
+  .nav a{font-size:14px;font-weight:500;color:var(--ink);letter-spacing:.02em;position:relative;padding:6px 0}
+  .nav a:hover::after{content:"";position:absolute;left:0;right:0;bottom:-2px;height:2px;background:var(--gold)}
+  .header-right{display:flex;justify-content:flex-end;align-items:center;gap:18px}
+  .icon-btn{width:40px;height:40px;border-radius:50%;display:grid;place-items:center;color:var(--ink);transition:background .2s}
+  .icon-btn:hover{background:rgba(45,106,45,.08)}
+  .cart{position:relative}
+  .cart-badge{position:absolute;top:4px;right:4px;background:var(--gold);color:#fff;font-size:10px;font-weight:700;min-width:16px;height:16px;border-radius:8px;display:grid;place-items:center;padding:0 4px}
+  .login-link{font-size:13px;font-weight:500;color:var(--ink-soft)}
+  .login-link:hover{color:var(--green)}
+
+  /* ====================== HAMBURGER ====================== */
+  .hamburger{display:none;flex-direction:column;justify-content:center;gap:5px;width:40px;height:40px;padding:8px;cursor:pointer;border:0;background:none;border-radius:6px}
+  .hamburger span{display:block;width:100%;height:1.5px;background:var(--ink);border-radius:2px;transition:transform .25s,opacity .2s}
+  .hamburger.open span:nth-child(1){transform:translateY(6.5px) rotate(45deg)}
+  .hamburger.open span:nth-child(2){opacity:0}
+  .hamburger.open span:nth-child(3){transform:translateY(-6.5px) rotate(-45deg)}
+  .mobile-nav{display:none;position:fixed;inset:0;top:70px;background:rgba(250,247,242,.97);backdrop-filter:blur(10px);z-index:40;flex-direction:column;padding:32px 24px;gap:0;overflow-y:auto}
+  .mobile-nav.open{display:flex}
+  .mobile-nav a.nav-link{font-family:'Playfair Display',serif;font-size:26px;font-weight:500;color:var(--ink);padding:16px 0;border-bottom:1px solid var(--rule);display:flex;justify-content:space-between;align-items:center}
+  .mobile-nav a.nav-link::after{content:"→";font-family:'DM Sans',sans-serif;font-size:16px;color:var(--gold)}
+  .mobile-nav .m-actions{display:flex;gap:12px;margin-top:32px}
+  .mobile-nav .m-actions a{font-size:14px;font-weight:600;padding:14px 20px;border-radius:999px;flex:1;text-align:center}
+  .mobile-nav .m-gold{background:var(--gold);color:#1F1409}
+  .mobile-nav .m-outline{border:1.5px solid var(--brown);color:var(--brown-deep)}
+
+  /* ====================== PAGE HEADER ====================== */
+  .page-top{background:var(--green);color:#F4EFE3;padding:52px 0 60px;position:relative;overflow:hidden}
+  .page-top-pattern{position:absolute;inset:0;opacity:.07;pointer-events:none}
+  .page-top-inner{position:relative}
+  .crumb{display:flex;align-items:center;gap:10px;font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:rgba(244,239,227,.65);margin-bottom:20px;font-weight:500}
+  .crumb a:hover{color:var(--gold-soft)}
+  .crumb .sep{opacity:.5}
+  .crumb .here{color:var(--gold-soft)}
+  .page-top h1{font-family:'Playfair Display',serif;font-size:56px;font-weight:500;color:#FFF8E7;line-height:1.04;letter-spacing:-.02em}
+  .page-top h1 em{font-style:italic;color:var(--gold-soft)}
+  .page-top p{font-size:16px;color:rgba(244,239,227,.75);margin-top:14px;max-width:520px}
+
+  /* ====================== LOOKUP FORM ====================== */
+  .lookup-section{padding:56px 0}
+  .lookup-card{background:#fff;border:1px solid var(--rule);border-radius:16px;padding:44px 48px;box-shadow:0 20px 48px -28px rgba(31,26,20,.20);max-width:740px;margin:0 auto}
+  .lookup-card .card-head{margin-bottom:32px}
+  .lookup-card .card-head h2{font-size:32px;line-height:1.1;margin:10px 0 8px}
+  .lookup-card .card-head h2 em{font-style:italic;color:var(--green-deep)}
+  .lookup-card .card-head p{font-size:14px;color:var(--ink-soft)}
+  .lookup-row{display:grid;grid-template-columns:1fr 1fr auto;gap:14px;align-items:end}
+  .field{display:flex;flex-direction:column;gap:7px}
+  .field label{font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--brown-deep);font-weight:700}
+  .input{width:100%;background:var(--cream-warm);border:1.5px solid var(--rule);border-radius:10px;padding:14px 16px;font-size:15px;color:var(--ink);transition:border-color .15s, background .15s, box-shadow .15s;outline:none}
+  .input:hover{border-color:var(--rule-strong)}
+  .input:focus{border-color:var(--green);background:#fff;box-shadow:0 0 0 4px rgba(45,106,45,.10)}
+  .input::placeholder{color:#A29A8B}
+  .track-btn{display:inline-flex;align-items:center;gap:10px;background:var(--green);color:#fff;padding:14px 24px;border-radius:10px;font-size:13px;font-weight:700;letter-spacing:.1em;white-space:nowrap;transition:background .15s,transform .15s}
+  .track-btn:hover{background:var(--green-deep);transform:translateY(-1px)}
+  .lookup-note{margin-top:14px;font-size:12px;color:var(--ink-soft);display:flex;align-items:center;gap:8px}
+  .lookup-note svg{color:var(--gold);flex-shrink:0}
+
+  /* ====================== RESULTS SECTION ====================== */
+  .results{padding:0 0 90px;display:none}
+  .results.visible{display:block}
+
+  /* Order banner */
+  .order-banner{background:var(--green-tint);border:1px solid var(--green-tint-2);border-radius:16px;padding:28px 32px;display:flex;align-items:center;justify-content:space-between;gap:24px;margin-bottom:36px}
+  .ob-left .ob-eyebrow{font-size:10px;letter-spacing:.22em;text-transform:uppercase;color:var(--green-deep);font-weight:700;margin-bottom:8px}
+  .ob-left h2{font-family:'Playfair Display',serif;font-size:28px;font-weight:600;color:var(--ink);line-height:1.1}
+  .ob-left p{font-size:13px;color:var(--ink-soft);margin-top:6px}
+  .ob-right{text-align:right;flex-shrink:0}
+  .status-pill{display:inline-flex;align-items:center;gap:9px;padding:10px 18px;border-radius:999px;font-size:13px;font-weight:700;letter-spacing:.06em}
+  .status-pill.dispatched{background:rgba(45,106,45,.12);color:var(--green-deep)}
+  .status-pill .pulse{width:9px;height:9px;border-radius:50%;background:var(--green);animation:pulse 2s infinite}
+  @keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.4;transform:scale(.85)}}
+  .ob-right .eta{font-size:12px;color:var(--ink-soft);margin-top:8px}
+  .ob-right .eta strong{color:var(--brown-deep);font-weight:700}
+
+  /* Main grid */
+  .results-grid{display:grid;grid-template-columns:1.4fr 1fr;gap:32px;align-items:start}
+
+  /* Timeline card */
+  .timeline-card{background:#fff;border:1px solid var(--rule);border-radius:16px;padding:32px;box-shadow:0 12px 32px -20px rgba(31,26,20,.15)}
+  .timeline-card .tc-head{display:flex;align-items:baseline;justify-content:space-between;margin-bottom:28px;padding-bottom:20px;border-bottom:1px solid var(--rule)}
+  .timeline-card .tc-head h3{font-size:22px}
+  .courier-link{display:inline-flex;align-items:center;gap:8px;font-size:12px;font-weight:600;color:var(--green-deep);letter-spacing:.06em;border-bottom:1.5px solid var(--green-tint-2);padding-bottom:2px}
+  .courier-link:hover{color:var(--green)}
+
+  .timeline{display:flex;flex-direction:column;gap:0;position:relative}
+  .timeline::before{content:"";position:absolute;left:17px;top:22px;bottom:22px;width:2px;background:repeating-linear-gradient(180deg,var(--rule-strong) 0 5px,transparent 5px 11px)}
+  .t-step{display:grid;grid-template-columns:36px 1fr;gap:18px;align-items:start;padding:0 0 28px}
+  .t-step:last-child{padding-bottom:0}
+  .t-icon{width:36px;height:36px;border-radius:50%;display:grid;place-items:center;flex-shrink:0;position:relative;z-index:1;border:2px solid var(--rule);background:#fff;color:var(--ink-soft);transition:all .2s}
+  .t-step.done .t-icon{background:var(--green);border-color:var(--green);color:#fff}
+  .t-step.active .t-icon{background:#fff;border-color:var(--green);color:var(--green);box-shadow:0 0 0 5px rgba(45,106,45,.12)}
+  .t-body .t-label{font-size:11px;letter-spacing:.18em;text-transform:uppercase;font-weight:700;color:var(--ink-soft);margin-bottom:4px}
+  .t-step.done .t-label,.t-step.active .t-label{color:var(--green-deep)}
+  .t-body .t-name{font-family:'Playfair Display',serif;font-size:18px;font-weight:600;color:var(--ink-soft);line-height:1.15}
+  .t-step.done .t-name,.t-step.active .t-name{color:var(--ink)}
+  .t-body .t-meta{margin-top:5px;font-size:12px;color:var(--ink-soft)}
+  .t-step.active .t-meta{color:var(--brown-deep);font-weight:500}
+  .t-body .t-detail{margin-top:10px;background:var(--green-tint);border:1px solid var(--green-tint-2);border-radius:8px;padding:12px 14px;font-size:13px;color:var(--green-deep);line-height:1.5;display:none}
+  .t-step.active .t-detail{display:block}
+
+  /* Map placeholder */
+  .map-card{background:var(--cream-warm);border:1px solid var(--rule);border-radius:16px;overflow:hidden;margin-bottom:16px}
+  .map-placeholder{height:180px;background:linear-gradient(160deg,#DDE8D2,#B8CFA6);display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden}
+  .map-placeholder::before{content:"";position:absolute;inset:0;background-image:repeating-linear-gradient(0deg,rgba(45,106,45,.06) 0 1px,transparent 1px 28px),repeating-linear-gradient(90deg,rgba(45,106,45,.06) 0 1px,transparent 1px 28px)}
+  .map-pin{width:48px;height:48px;border-radius:50% 50% 50% 0;background:var(--green);transform:rotate(-45deg);display:grid;place-items:center;box-shadow:0 8px 20px -6px rgba(45,106,45,.6)}
+  .map-pin svg{transform:rotate(45deg);color:#fff}
+  .map-info{padding:18px 20px;display:flex;justify-content:space-between;align-items:center;gap:16px}
+  .map-info .addr{font-size:13px;color:var(--ink-soft);line-height:1.5}
+  .map-info .addr strong{display:block;color:var(--ink);font-weight:600;margin-bottom:2px}
+  .map-info .dist{text-align:right;flex-shrink:0}
+  .map-info .dist .km{font-family:'Playfair Display',serif;font-size:24px;color:var(--green-deep);font-weight:600;line-height:1}
+  .map-info .dist small{font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--ink-soft)}
+
+  /* Order summary card */
+  .summary-card{background:#fff;border:1px solid var(--rule);border-radius:16px;overflow:hidden;box-shadow:0 12px 32px -20px rgba(31,26,20,.15)}
+  .sc-head{padding:22px 24px 16px;border-bottom:1px solid var(--rule);display:flex;justify-content:space-between;align-items:baseline}
+  .sc-head h3{font-size:20px}
+  .sc-head .badge{font-size:10px;letter-spacing:.18em;text-transform:uppercase;font-weight:700;padding:5px 10px;background:var(--green-tint);color:var(--green-deep);border-radius:999px}
+  .sc-items{padding:6px 24px}
+  .sc-item{display:grid;grid-template-columns:52px 1fr auto;gap:14px;padding:16px 0;border-bottom:1px dashed var(--rule);align-items:center}
+  .sc-item:last-child{border-bottom:0}
+  .sc-thumb{width:52px;height:52px;border-radius:8px;overflow:hidden;background:var(--cream-warm);position:relative}
+  .sc-thumb img{width:100%;height:100%;object-fit:cover}
+  .sc-qty{position:absolute;top:-6px;right:-6px;width:20px;height:20px;border-radius:50%;background:var(--brown-deep);color:#FFF8E7;font-size:10px;font-weight:700;display:grid;place-items:center}
+  .sc-body .name{font-family:'Playfair Display',serif;font-size:15px;font-weight:600;line-height:1.2}
+  .sc-body .meta{font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-soft);margin-top:4px}
+  .sc-price{font-family:'Playfair Display',serif;font-size:16px;font-weight:600;color:var(--brown-deep);white-space:nowrap}
+
+  .sc-totals{padding:16px 24px;border-top:1px solid var(--rule);background:var(--cream)}
+  .sc-row{display:flex;justify-content:space-between;font-size:13px;color:var(--ink-soft);padding:5px 0}
+  .sc-row .v{font-weight:500;color:var(--ink)}
+  .sc-row.grand{padding-top:14px;border-top:1px solid var(--rule-strong);margin-top:6px}
+  .sc-row.grand .k{font-family:'Playfair Display',serif;font-size:16px;color:var(--ink);font-weight:600}
+  .sc-row.grand .v{font-family:'Playfair Display',serif;font-size:22px;color:var(--green-deep);font-weight:700}
+
+  .sc-addr{padding:18px 24px;border-top:1px solid var(--rule)}
+  .sc-addr .lbl{font-size:10px;letter-spacing:.22em;text-transform:uppercase;color:var(--ink-soft);font-weight:700;margin-bottom:10px;display:flex;align-items:center;gap:8px}
+  .sc-addr .lbl svg{color:var(--green)}
+  .sc-addr p{font-size:13px;color:var(--ink-soft);line-height:1.65}
+  .sc-addr strong{color:var(--ink);display:block;margin-bottom:2px;font-weight:600}
+
+  /* Actions */
+  .actions-row{display:flex;gap:12px;margin-top:24px;flex-wrap:wrap}
+  .btn-primary{display:inline-flex;align-items:center;gap:9px;background:var(--gold);color:#1F1409;padding:14px 22px;border-radius:10px;font-size:13px;font-weight:700;letter-spacing:.08em;transition:background .15s,transform .15s}
+  .btn-primary:hover{background:#A66E07;transform:translateY(-1px)}
+  .btn-secondary{display:inline-flex;align-items:center;gap:9px;background:#fff;border:1.5px solid var(--rule-strong);color:var(--ink);padding:13px 20px;border-radius:10px;font-size:13px;font-weight:600;letter-spacing:.04em;transition:border-color .15s,background .15s}
+  .btn-secondary:hover{border-color:var(--brown);background:var(--cream-warm)}
+  .btn-ghost{display:inline-flex;align-items:center;gap:8px;color:var(--ink-soft);padding:13px 16px;font-size:13px;font-weight:500;letter-spacing:.04em;border-bottom:1px solid var(--rule);transition:color .15s}
+  .btn-ghost:hover{color:var(--brown-deep)}
+
+  /* Freshness reminder */
+  .freshness-note{margin-top:28px;background:var(--green-tint);border:1px solid var(--green-tint-2);border-radius:12px;padding:18px 20px;display:flex;align-items:flex-start;gap:14px}
+  .fn-ic{flex-shrink:0;width:38px;height:38px;border-radius:50%;background:var(--green);display:grid;place-items:center;color:#FFF8E7}
+  .freshness-note p{font-size:13px;color:var(--brown-deep);line-height:1.55}
+  .freshness-note strong{font-weight:700;color:var(--green-deep)}
+
+  /* ====================== FOOTER ====================== */
+  footer{background:#1A1410;color:rgba(244,239,227,.7);padding:80px 0 0}
+  .foot-grid{display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr 1fr;gap:48px;padding-bottom:60px}
+  .foot-brand img{height:60px;background:#FAF7F2;padding:8px;border-radius:6px}
+  .foot-brand p{margin-top:20px;font-size:13px;line-height:1.7;max-width:280px;color:rgba(244,239,227,.7)}
+  .socials{display:flex;gap:10px;margin-top:24px}
+  .socials a{width:36px;height:36px;border-radius:50%;border:1px solid rgba(244,239,227,.18);display:grid;place-items:center;color:rgba(244,239,227,.7)}
+  .socials a:hover{background:var(--gold);color:#1F1409;border-color:var(--gold)}
+  .foot-col h4{font-size:12px;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:var(--gold-soft);margin-bottom:22px}
+  .foot-col ul{list-style:none;display:flex;flex-direction:column;gap:12px}
+  .foot-col a{font-size:13px;color:rgba(244,239,227,.7)}
+  .foot-col a:hover{color:#FFF8E7}
+  .copy{border-top:1px solid rgba(244,239,227,.10);padding:24px 0;display:flex;justify-content:space-between;align-items:center;font-size:12px;color:rgba(244,239,227,.45)}
+  .copy .pays{display:flex;gap:10px;align-items:center}
+  .copy .pays span{padding:4px 10px;border:1px solid rgba(244,239,227,.14);border-radius:4px;font-size:10px;letter-spacing:.1em;font-weight:600}
+
+  /* ====================== RESPONSIVE ====================== */
+  @media(max-width:900px){
+    .wrap{padding:0 28px}
+    .header-inner{grid-template-columns:1fr auto;height:70px}
+    .nav,.login-link{display:none}
+    .hamburger{display:flex}
+    .mobile-nav{top:70px}
+    /* Page top */
+    .page-top{padding:40px 0 48px}
+    .page-top h1{font-size:40px}
+    /* Lookup */
+    .lookup-card{padding:32px}
+    .lookup-row{grid-template-columns:1fr 1fr;gap:12px}
+    .track-btn{grid-column:1/-1;justify-content:center}
+    /* Results */
+    .results-grid{grid-template-columns:1fr;gap:24px}
+    .order-banner{flex-direction:column;align-items:flex-start;gap:16px}
+    .ob-right{text-align:left}
+    /* Footer */
+    .foot-grid{grid-template-columns:1fr 1fr;gap:36px}
+    .foot-brand{grid-column:1/-1}
+    .copy{flex-direction:column;gap:10px;text-align:center}
+  }
+  @media(max-width:600px){
+    .wrap{padding:0 18px}
+    .header-inner{height:64px}
+    .brand img{height:42px}
+    .mobile-nav{top:64px}
+    .page-top{padding:28px 0 36px}
+    .page-top h1{font-size:28px;line-height:1.1}
+    .page-top p{font-size:14px}
+    .lookup-card{padding:24px 20px;border-radius:12px}
+    .lookup-row{grid-template-columns:1fr}
+    .track-btn{grid-column:auto;width:100%;justify-content:center}
+    .timeline-card{padding:22px 18px}
+    .t-body .t-name{font-size:16px}
+    .actions-row{flex-direction:column}
+    .btn-primary,.btn-secondary{justify-content:center}
+    .map-info{flex-direction:column;align-items:flex-start;gap:10px}
+    .map-info .dist{text-align:left}
+    .sc-head,.sc-items,.sc-totals,.sc-addr{padding-left:18px;padding-right:18px}
+    .foot-grid{grid-template-columns:1fr;gap:28px}
+    .foot-brand{grid-column:auto}
+  }
+  svg{display:block}
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header class="header" data-screen-label="Header">
+  <div class="wrap header-inner">
+    <a class="brand" href="Homepage v3.html">
+      <img src="assets/logo.png" alt="Farm Puro Chutneys" />
+    </a>
+    <nav class="nav">
+      <a href="Homepage v3.html">Home</a>
+      <a href="Shop.html">Shop</a>
+      <a href="#">About</a>
+      <a href="#">Recipes</a>
+      <a href="#">Contact</a>
+    </nav>
+    <div class="header-right">
+      <a href="Login.html" class="login-link">Sign in</a>
+      <button class="icon-btn cart" aria-label="Cart">
+        <svg width="18" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6 7h12l-1.2 11a2 2 0 0 1-2 1.8H9.2a2 2 0 0 1-2-1.8L6 7Z"/><path d="M9 7V5a3 3 0 0 1 6 0v2"/></svg>
+        <span class="cart-badge">2</span>
+      </button>
+      <button class="hamburger" id="hamburger" aria-label="Menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<nav class="mobile-nav" id="mobile-nav">
+  <a href="Homepage v3.html" class="nav-link">Home</a>
+  <a href="Shop.html" class="nav-link">Shop</a>
+  <a href="#" class="nav-link">About</a>
+  <a href="#" class="nav-link">Recipes</a>
+  <a href="#" class="nav-link">Contact</a>
+  <div class="m-actions">
+    <a class="m-gold" href="Shop.html">Shop Now →</a>
+    <a class="m-outline" href="Login.html">Sign in</a>
+  </div>
+</nav>
+
+<!-- PAGE HEADER -->
+<section class="page-top" data-screen-label="Page Header">
+  <svg class="page-top-pattern" viewBox="0 0 1100 280" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <defs>
+      <pattern id="tp" x="0" y="0" width="180" height="180" patternUnits="userSpaceOnUse" patternTransform="rotate(14)">
+        <path d="M28 88 C 28 48,66 28,106 46 C 96 86,66 108,28 88 Z M68 66 L 98 50" fill="none" stroke="#E0A93C" stroke-width="1.2" stroke-linecap="round"/>
+        <circle cx="148" cy="148" r="2" fill="#E0A93C"/>
+      </pattern>
+    </defs>
+    <rect width="1100" height="280" fill="url(#tp)"/>
+  </svg>
+  <div class="wrap page-top-inner">
+    <div class="crumb">
+      <a href="Homepage v3.html">Home</a><span class="sep">›</span>
+      <a href="Login.html">My Account</a><span class="sep">›</span>
+      <span class="here">Track Order</span>
+    </div>
+    <h1>Track your <em>order.</em></h1>
+    <p>Your jar is on its way. Enter your order number and email to see exactly where it is right now.</p>
+  </div>
+</section>
+
+<!-- LOOKUP FORM -->
+<section class="lookup-section" data-screen-label="Lookup Form" id="lookup-section">
+  <div class="wrap">
+    <div class="lookup-card">
+      <div class="card-head">
+        <div class="eyebrow">Order lookup</div>
+        <h2>Find your <em>order</em></h2>
+        <p>Your order number is in the confirmation email we sent when you placed your order.</p>
+      </div>
+      <div class="lookup-row">
+        <div class="field">
+          <label>Order number</label>
+          <input class="input" type="text" id="order-num" placeholder="e.g. FP-2024-8841" value="FP-2024-8841" />
+        </div>
+        <div class="field">
+          <label>Email address</label>
+          <input class="input" type="email" id="order-email" placeholder="you@example.com" value="ananya.k@gmail.com" />
+        </div>
+        <button class="track-btn" id="track-btn">
+          Track Order
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </button>
+      </div>
+      <div class="lookup-note">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M12 8v5l3 2"/></svg>
+        Order FP-2024-8841 is already loaded below as an example. Click Track Order to see results.
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- RESULTS -->
+<section class="results visible" data-screen-label="Order Results" id="results">
+  <div class="wrap">
+
+    <!-- Order banner -->
+    <div class="order-banner">
+      <div class="ob-left">
+        <div class="ob-eyebrow">Order #FP-2024-8841 · Placed 2 Jun 2026</div>
+        <h2>Your jars are out for delivery today.</h2>
+        <p>Delhivery · Tracking ID <strong style="color:var(--brown-deep)">DL49820734IN</strong> · Dispatched from Pune on 3 Jun 2026</p>
+      </div>
+      <div class="ob-right">
+        <div class="status-pill dispatched">
+          <span class="pulse"></span>Out for delivery
+        </div>
+        <div class="eta">Expected by <strong>Today, 4 Jun · Before 8 PM</strong></div>
+      </div>
+    </div>
+
+    <div class="results-grid">
+
+      <!-- LEFT -->
+      <div>
+        <!-- Timeline -->
+        <div class="timeline-card" data-screen-label="Delivery Timeline">
+          <div class="tc-head">
+            <h3>Delivery timeline</h3>
+            <a href="#" class="courier-link">
+              Open in Delhivery
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M7 17 17 7M7 7h10v10"/></svg>
+            </a>
+          </div>
+          <div class="timeline">
+            <div class="t-step done">
+              <div class="t-icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M20 7 9 18l-5-5"/></svg></div>
+              <div class="t-body">
+                <div class="t-label">Step 1</div>
+                <div class="t-name">Order placed</div>
+                <div class="t-meta">2 Jun 2026 · 11:42 AM</div>
+              </div>
+            </div>
+            <div class="t-step done">
+              <div class="t-icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M20 7 9 18l-5-5"/></svg></div>
+              <div class="t-body">
+                <div class="t-label">Step 2</div>
+                <div class="t-name">Order confirmed</div>
+                <div class="t-meta">2 Jun 2026 · 12:15 PM · Payment received</div>
+              </div>
+            </div>
+            <div class="t-step done">
+              <div class="t-icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M20 7 9 18l-5-5"/></svg></div>
+              <div class="t-body">
+                <div class="t-label">Step 3</div>
+                <div class="t-name">Freshly made &amp; packed</div>
+                <div class="t-meta">3 Jun 2026 · 7:20 AM · Small copper batch, Pune facility</div>
+              </div>
+            </div>
+            <div class="t-step done">
+              <div class="t-icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M20 7 9 18l-5-5"/></svg></div>
+              <div class="t-body">
+                <div class="t-label">Step 4</div>
+                <div class="t-name">Dispatched</div>
+                <div class="t-meta">3 Jun 2026 · 2:00 PM · Handed to Delhivery</div>
+              </div>
+            </div>
+            <div class="t-step active">
+              <div class="t-icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 7h14l3 4v6h-2"/><circle cx="7" cy="18" r="2"/><circle cx="17" cy="18" r="2"/><path d="M3 7v11h2"/></svg></div>
+              <div class="t-body">
+                <div class="t-label">Step 5 · Now</div>
+                <div class="t-name">Out for delivery</div>
+                <div class="t-meta">4 Jun 2026 · Since 9:14 AM</div>
+                <div class="t-detail">Your delivery partner Rajan is on the way. You'll receive a call 30 minutes before arrival. If you're not home, the parcel will be left with your building concierge.</div>
+              </div>
+            </div>
+            <div class="t-step">
+              <div class="t-icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 3v3"/><path d="M5 8h14l-1.2 11a2 2 0 0 1-2 1.8H8.2a2 2 0 0 1-2-1.8L5 8Z"/></svg></div>
+              <div class="t-body">
+                <div class="t-label">Step 6</div>
+                <div class="t-name">Delivered</div>
+                <div class="t-meta">Expected: Today before 8 PM</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Map -->
+        <div class="map-card" style="margin-top:16px">
+          <div class="map-placeholder">
+            <div class="map-pin">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M12 2a7 7 0 0 1 7 7c0 5-7 13-7 13S5 14 5 9a7 7 0 0 1 7-7Z"/><circle cx="12" cy="9" r="2.5"/></svg>
+            </div>
+          </div>
+          <div class="map-info">
+            <div class="addr"><strong>Delivering to</strong>B-204, Lotus Heights, Koregaon Park, Pune 411001</div>
+            <div class="dist"><div class="km">3.2</div><small>km away</small></div>
+          </div>
+        </div>
+
+        <!-- Actions -->
+        <div class="actions-row">
+          <a class="btn-primary" href="Shop.html">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M21 12a9 9 0 1 1-3-6.7"/><path d="M21 4v5h-5"/></svg>
+            Reorder these jars
+          </a>
+          <button class="btn-secondary">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+            Download invoice
+          </button>
+          <a class="btn-ghost" href="#">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M21 3c-9 0-15 4-15 12 0 3 2 6 6 6 8 0 9-9 9-18Z"/></svg>
+            Contact support
+          </a>
+        </div>
+
+        <div class="freshness-note">
+          <div class="fn-ic"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M12 3v3"/><path d="M5 8h14l-1.2 11a2 2 0 0 1-2 1.8H8.2a2 2 0 0 1-2-1.8L5 8Z"/><path d="M9 12c1 1.5 5 1.5 6 0"/></svg></div>
+          <p><strong>A note on freshness:</strong> Your jars were made on 3 Jun and have a shelf life of 30 days refrigerated. Please refrigerate immediately on receipt. Batch date is printed on every lid.</p>
+        </div>
+      </div>
+
+      <!-- RIGHT — Order summary -->
+      <aside>
+        <div class="summary-card">
+          <div class="sc-head">
+            <h3>Your order</h3>
+            <span class="badge">3 jars</span>
+          </div>
+          <div class="sc-items">
+            <div class="sc-item">
+              <div class="sc-thumb">
+                <img src="assets/coriander-mint.jpg" alt="Coriander Mint Chutney" />
+                <span class="sc-qty">1</span>
+              </div>
+              <div class="sc-body">
+                <div class="name">Coriander Mint Chutney</div>
+                <div class="meta">250g · Medium</div>
+              </div>
+              <div class="sc-price">₹199</div>
+            </div>
+            <div class="sc-item">
+              <div class="sc-thumb">
+                <img src="assets/tamarind-date.jpg" alt="Tamarind Date Chutney" />
+                <span class="sc-qty">2</span>
+              </div>
+              <div class="sc-body">
+                <div class="name">Tamarind Date Chutney</div>
+                <div class="meta">250g · Mild</div>
+              </div>
+              <div class="sc-price">₹498</div>
+            </div>
+          </div>
+          <div class="sc-totals">
+            <div class="sc-row"><span class="k">Subtotal</span><span class="v">₹697</span></div>
+            <div class="sc-row"><span class="k">Delivery</span><span class="v" style="color:var(--green-deep);font-size:12px;letter-spacing:.1em;text-transform:uppercase;font-weight:700">Free</span></div>
+            <div class="sc-row grand"><span class="k">Total paid</span><span class="v">₹697</span></div>
+          </div>
+          <div class="sc-addr">
+            <div class="lbl">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 2a7 7 0 0 1 7 7c0 5-7 13-7 13S5 14 5 9a7 7 0 0 1 7-7Z"/><circle cx="12" cy="9" r="2.5"/></svg>
+              Delivery address
+            </div>
+            <p><strong>Ananya Krishnan</strong>B-204, Lotus Heights, Koregaon Park<br/>Near North Main Road junction<br/>Pune 411001, Maharashtra</p>
+          </div>
+        </div>
+      </aside>
+
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer data-screen-label="Footer">
+  <div class="wrap">
+    <div class="foot-grid">
+      <div class="foot-brand">
+        <img src="assets/logo.png" alt="Farm Puro" />
+        <p>Authentic Indian chutneys, stone-ground in small batches. Crafted in Pune, shipped pan-India.</p>
+        <div class="socials">
+          <a href="#" aria-label="Instagram"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r=".8" fill="currentColor"/></svg></a>
+          <a href="#" aria-label="Facebook"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M13 22v-8h3l.5-4H13V7.5c0-1.2.4-2 2-2h2V2.2C16.6 2.1 15.4 2 14 2c-3 0-5 1.8-5 5v3H6v4h3v8h4Z"/></svg></a>
+          <a href="#" aria-label="WhatsApp"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M20 4A10 10 0 0 0 4 16l-1 5 5-1A10 10 0 1 0 20 4Zm-8 17a8 8 0 0 1-4.3-1.2l-.3-.2-3 .7.8-3-.2-.3A8 8 0 1 1 12 21Zm4.6-5.6c-.3-.1-1.5-.7-1.7-.8-.2-.1-.4-.1-.6.1-.2.2-.7.8-.8 1-.1.1-.3.2-.5.1-1.5-.7-2.4-1.3-3.4-3-.3-.4.3-.4.7-1.3.1-.2 0-.4 0-.5 0-.1-.6-1.4-.8-1.9-.2-.5-.4-.4-.6-.4h-.5c-.2 0-.4 0-.6.3-.2.2-.8.8-.8 2s.8 2.3.9 2.5c.1.2 1.6 2.4 3.8 3.4 1.4.6 1.9.6 2.6.5.4 0 1.3-.5 1.5-1.1.2-.5.2-1 .1-1.1 0-.1-.2-.2-.5-.3Z"/></svg></a>
+        </div>
+      </div>
+      <div class="foot-col"><h4>Shop</h4><ul><li><a href="Shop.html">All chutneys</a></li><li><a href="#">Gift hampers</a></li><li><a href="#">Sample pack</a></li></ul></div>
+      <div class="foot-col"><h4>Account</h4><ul><li><a href="Login.html">Sign in</a></li><li><a href="Order Tracking.html">Track order</a></li><li><a href="#">My addresses</a></li><li><a href="#">Wishlist</a></li></ul></div>
+      <div class="foot-col"><h4>Help</h4><ul><li><a href="#">FAQ</a></li><li><a href="#">Shipping &amp; returns</a></li><li><a href="#">Contact us</a></li><li><a href="#">Storage guide</a></li></ul></div>
+      <div class="foot-col"><h4>Company</h4><ul><li><a href="#">Our story</a></li><li><a href="#">The farms</a></li><li><a href="#">Press</a></li><li><a href="#">Careers</a></li></ul></div>
+    </div>
+    <div class="copy">
+      <div>© 2026 Farm Puro Foods Pvt Ltd. All rights reserved. · <a href="#">Privacy</a> · <a href="#">Terms</a> · FSSAI Lic. 11521004000123</div>
+      <div class="pays"><span>UPI</span><span>VISA</span><span>RUPAY</span><span>COD</span></div>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // Hamburger
+  const hamburger = document.getElementById('hamburger');
+  const mobileNav = document.getElementById('mobile-nav');
+  hamburger.addEventListener('click', () => {
+    const open = mobileNav.classList.toggle('open');
+    hamburger.classList.toggle('open', open);
+    hamburger.setAttribute('aria-expanded', open);
+    document.body.style.overflow = open ? 'hidden' : '';
+  });
+  mobileNav.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
+    mobileNav.classList.remove('open');
+    hamburger.classList.remove('open');
+    hamburger.setAttribute('aria-expanded','false');
+    document.body.style.overflow = '';
+  }));
+
+  // Track button: show results, scroll to them
+  document.getElementById('track-btn').addEventListener('click', () => {
+    const results = document.getElementById('results');
+    results.classList.add('visible');
+    results.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  });
+</script>
+</body>
+</html>

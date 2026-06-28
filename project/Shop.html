@@ -1,0 +1,775 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<title>Shop — Farm Puro Chutneys</title>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+<style>
+  :root{
+    --green:#2D6A2D;
+    --green-deep:#234E22;
+    --green-soft:#3D7A3D;
+    --brown:#6B3A1F;
+    --brown-deep:#4E2A14;
+    --cream:#FAF7F2;
+    --cream-warm:#F1EBDF;
+    --gold:#C8860A;
+    --gold-soft:#E0A93C;
+    --ink:#1F1A14;
+    --ink-soft:#5B5347;
+    --rule:rgba(31,26,20,.10);
+
+    /* spice indicator colors */
+    --mild:#7FA85B;
+    --medium:#D9A100;
+    --hot:#D26B1F;
+    --very-hot:#B23A1A;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html,body{background:var(--cream);color:var(--ink);font-family:'Inter',sans-serif;font-size:15px;line-height:1.55;-webkit-font-smoothing:antialiased}
+  img{display:block;max-width:100%}
+  a{color:inherit;text-decoration:none}
+  button{font-family:inherit;cursor:pointer;border:0;background:none;color:inherit}
+  select{font-family:inherit;cursor:pointer}
+  .wrap{max-width:1200px;margin:0 auto;padding:0 40px}
+  h1,h2,h3,h4,.serif{font-family:'Playfair Display',serif;font-weight:600;letter-spacing:-.01em;color:var(--ink)}
+  .eyebrow{font-family:'Inter',sans-serif;font-size:12px;font-weight:600;letter-spacing:.22em;text-transform:uppercase;color:var(--gold)}
+
+  /* ====================== HEADER ====================== */
+  .header{position:sticky;top:0;z-index:60;background:rgba(250,247,242,.92);backdrop-filter:saturate(140%) blur(10px);border-bottom:1px solid var(--rule)}
+  .header-inner{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;height:84px;gap:24px}
+  .brand{display:flex;align-items:center;gap:10px}
+  .brand img{height:54px;width:auto}
+  .nav{display:flex;gap:38px;justify-content:center}
+  .nav a{font-size:14px;font-weight:500;color:var(--ink);letter-spacing:.02em;position:relative;padding:6px 0}
+  .nav a.active::after,.nav a:hover::after{content:"";position:absolute;left:0;right:0;bottom:-2px;height:2px;background:var(--gold)}
+  .header-right{display:flex;justify-content:flex-end;align-items:center;gap:18px}
+  .icon-btn{width:40px;height:40px;border-radius:50%;display:grid;place-items:center;color:var(--ink);transition:background .2s}
+  .icon-btn:hover{background:rgba(45,106,45,.08)}
+  .cart{position:relative}
+  .cart-badge{position:absolute;top:4px;right:4px;background:var(--gold);color:#fff;font-size:10px;font-weight:700;min-width:16px;height:16px;border-radius:8px;display:grid;place-items:center;padding:0 4px}
+  .login{font-size:13px;font-weight:500;color:var(--ink-soft)}
+  .login:hover{color:var(--green)}
+
+  /* ====================== PAGE HERO ====================== */
+  .page-hero{background:var(--green);color:#F4EFE3;position:relative;overflow:hidden;padding:64px 0 72px}
+  .page-hero .crumb{display:flex;align-items:center;gap:10px;font-size:12px;letter-spacing:.18em;text-transform:uppercase;color:rgba(244,239,227,.7);margin-bottom:22px}
+  .page-hero .crumb a:hover{color:var(--gold-soft)}
+  .page-hero .crumb .sep{opacity:.5}
+  .page-hero .crumb .here{color:var(--gold-soft)}
+  .page-hero h1{font-family:'Playfair Display',serif;font-weight:500;color:#FFF8E7;font-size:64px;line-height:1.05;letter-spacing:-.02em}
+  .page-hero h1 em{font-style:italic;color:var(--gold-soft);font-weight:500}
+  .page-hero p.sub{font-size:17px;line-height:1.6;color:rgba(244,239,227,.78);margin-top:18px;max-width:580px}
+  .page-hero-row{display:flex;justify-content:space-between;align-items:flex-end;gap:60px}
+  .page-hero-meta{display:flex;align-items:center;gap:28px;color:rgba(244,239,227,.7);font-size:13px;letter-spacing:.04em}
+  .page-hero-meta strong{color:var(--gold-soft);font-family:'Playfair Display',serif;font-size:28px;font-weight:500;display:block;line-height:1;margin-bottom:6px}
+  .page-hero-meta .m-item{text-align:right}
+  .page-hero-pattern{position:absolute;inset:0;opacity:.07;pointer-events:none}
+
+  /* ====================== FILTER BAR ====================== */
+  .filter-bar{position:sticky;top:84px;z-index:50;background:rgba(250,247,242,.96);backdrop-filter:saturate(140%) blur(8px);border-bottom:1px solid var(--rule)}
+  .filter-inner{display:grid;grid-template-columns:auto 1fr auto;align-items:center;gap:40px;padding:18px 0}
+
+  .tabs{display:flex;align-items:center;gap:4px;background:rgba(45,106,45,.06);padding:5px;border-radius:999px}
+  .tabs button{position:relative;padding:9px 20px;border-radius:999px;font-size:13px;font-weight:600;letter-spacing:.04em;color:var(--ink-soft);transition:color .15s, background .15s}
+  .tabs button:hover{color:var(--green)}
+  .tabs button.on{background:var(--green);color:#fff;box-shadow:0 4px 12px -4px rgba(45,106,45,.5)}
+  .tabs button .count{margin-left:6px;font-size:11px;opacity:.75;font-weight:500}
+
+  .spice{display:flex;align-items:center;gap:14px;justify-content:center}
+  .spice-label{font-size:11px;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:var(--ink-soft)}
+  .spice-pills{display:flex;gap:6px}
+  .pill{display:inline-flex;align-items:center;gap:7px;padding:7px 13px 7px 11px;border:1px solid var(--rule);border-radius:999px;font-size:12px;font-weight:600;letter-spacing:.02em;color:var(--ink);background:#fff;transition:border-color .15s, color .15s}
+  .pill:hover{border-color:var(--brown)}
+  .pill.on{border-color:var(--brown);background:var(--brown);color:#FFF8E7}
+  .pill.on .dot{background:#FFF8E7}
+  .pill .dots{display:flex;gap:2px}
+  .pill .dot{width:5px;height:5px;border-radius:50%;background:var(--rule)}
+  .pill[data-level="all"] .dot.on,
+  .pill[data-level="mild"] .dot.on{background:var(--mild)}
+  .pill[data-level="medium"] .dot.on{background:var(--medium)}
+  .pill[data-level="hot"] .dot.on{background:var(--hot)}
+  .pill[data-level="very-hot"] .dot.on{background:var(--very-hot)}
+
+  .sort{display:flex;align-items:center;gap:10px}
+  .sort label{font-size:11px;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:var(--ink-soft)}
+  .select-wrap{position:relative}
+  .select-wrap select{appearance:none;-webkit-appearance:none;border:1px solid var(--rule);background:#fff;padding:10px 38px 10px 16px;border-radius:999px;font-size:13px;font-weight:600;color:var(--ink);min-width:188px}
+  .select-wrap select:hover{border-color:var(--brown)}
+  .select-wrap::after{content:"";position:absolute;right:16px;top:50%;width:8px;height:8px;border-right:1.5px solid var(--ink);border-bottom:1.5px solid var(--ink);transform:translateY(-70%) rotate(45deg);pointer-events:none}
+
+  /* ====================== SHOP SECTION ====================== */
+  .shop{padding:60px 0 110px}
+  .results-row{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:32px}
+  .results-row .count{font-size:13px;color:var(--ink-soft);letter-spacing:.02em}
+  .results-row .count strong{color:var(--brown-deep);font-weight:600}
+  .active-filters{display:flex;gap:8px;align-items:center}
+  .chip{display:inline-flex;align-items:center;gap:8px;padding:6px 8px 6px 12px;border-radius:999px;font-size:12px;background:var(--cream-warm);color:var(--brown-deep);font-weight:500}
+  .chip .x{width:18px;height:18px;border-radius:50%;background:rgba(107,58,31,.12);display:grid;place-items:center;font-size:11px;line-height:1;color:var(--brown)}
+  .clear-link{font-size:12px;color:var(--ink-soft);border-bottom:1px solid var(--rule);padding-bottom:1px;margin-left:4px}
+  .clear-link:hover{color:var(--brown)}
+
+  .product-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:28px}
+  .product{background:#fff;border:1px solid var(--rule);border-radius:6px;overflow:hidden;display:flex;flex-direction:column;transition:transform .25s, box-shadow .25s;position:relative}
+  .product:hover{transform:translateY(-6px);box-shadow:0 22px 44px -18px rgba(31,26,20,.22)}
+  .product .pic{position:relative;aspect-ratio:1/1;background:var(--cream-warm);overflow:hidden}
+  .product .pic img{width:100%;height:100%;object-fit:cover;transition:transform .5s}
+  .product:hover .pic img{transform:scale(1.04)}
+  .product .placeholder{position:absolute;inset:0;display:grid;place-items:center;padding:24px;background:linear-gradient(160deg,var(--ph-a,#F1EBDF),var(--ph-b,#E6DCC8))}
+  .product .placeholder::before{content:"";position:absolute;inset:0;background-image:repeating-linear-gradient(45deg, rgba(31,26,20,.04) 0 8px, transparent 8px 16px);opacity:.7}
+  .product .placeholder .ph-jar{position:relative;width:54%;aspect-ratio:5/7;background:var(--ph-jar,rgba(255,255,255,.55));border-radius:14px 14px 18px 18px;box-shadow:0 12px 24px -10px rgba(31,26,20,.25), inset 0 -22px 40px rgba(31,26,20,.06);display:flex;align-items:center;justify-content:center;padding:30px 14px 14px}
+  .product .placeholder .ph-jar::before{content:"";position:absolute;top:-12px;left:18%;right:18%;height:18px;background:var(--brown-deep);border-radius:3px}
+  .product .placeholder .ph-jar::after{content:"";position:absolute;top:6px;left:30%;right:30%;height:12px;background:var(--gold);border-radius:1px}
+  .product .placeholder .ph-label{position:relative;background:#FFF8E7;padding:14px 8px;border-radius:3px;text-align:center;width:100%;font-family:'Playfair Display',serif;color:var(--brown-deep);font-size:13px;line-height:1.15;border:1px solid rgba(107,58,31,.18);box-shadow:0 1px 0 rgba(31,26,20,.04)}
+  .product .placeholder .ph-label .ph-eyebrow{font-family:'Inter',sans-serif;font-size:8px;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);font-weight:600;margin-bottom:4px;display:block}
+  .product .placeholder .ph-label em{font-style:italic;font-weight:500}
+
+  .heart{position:absolute;top:14px;right:14px;width:34px;height:34px;border-radius:50%;background:rgba(255,255,255,.92);display:grid;place-items:center;color:var(--brown);z-index:2;transition:background .15s, color .15s}
+  .heart:hover{background:var(--brown);color:#FFF8E7}
+  .quick{position:absolute;left:14px;right:14px;bottom:14px;background:rgba(255,255,255,.96);color:var(--ink);padding:10px 14px;border-radius:999px;font-size:12px;font-weight:600;letter-spacing:.06em;text-align:center;opacity:0;transform:translateY(8px);transition:opacity .25s, transform .25s;z-index:2}
+  .product:hover .quick{opacity:1;transform:translateY(0)}
+  .badge{position:absolute;top:14px;left:14px;font-size:9px;letter-spacing:.18em;text-transform:uppercase;font-weight:700;padding:5px 9px;border-radius:3px;z-index:2}
+  .badge.b-green{background:var(--green);color:#fff}
+  .badge.b-gold{background:var(--gold);color:#1F1409}
+  .badge.b-cream{background:#FFF8E7;color:var(--brown-deep)}
+
+  .body{padding:20px 20px 22px;display:flex;flex-direction:column;gap:6px;flex:1}
+  .row-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:2px}
+  .category-tag{font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);font-weight:600}
+  .spice-indicator{display:inline-flex;align-items:center;gap:5px;font-size:10px;letter-spacing:.14em;text-transform:uppercase;font-weight:600;color:var(--ink-soft)}
+  .spice-indicator .lvl{display:flex;gap:3px}
+  .spice-indicator .lvl span{width:6px;height:6px;border-radius:50%;background:rgba(31,26,20,.12)}
+  .spice-indicator[data-level="mild"] .lvl span:nth-child(-n+1){background:var(--mild)}
+  .spice-indicator[data-level="medium"] .lvl span:nth-child(-n+2){background:var(--medium)}
+  .spice-indicator[data-level="hot"] .lvl span:nth-child(-n+3){background:var(--hot)}
+  .spice-indicator[data-level="very-hot"] .lvl span:nth-child(-n+4){background:var(--very-hot)}
+
+  .product h3{font-size:20px;line-height:1.18;font-weight:600;margin-top:4px}
+  .product .desc{font-size:13px;color:var(--ink-soft);line-height:1.5}
+  .weight{font-size:11px;color:var(--ink-soft);letter-spacing:.16em;text-transform:uppercase;font-weight:500;margin-top:2px}
+
+  .row-bot{display:flex;align-items:center;justify-content:space-between;margin-top:14px;padding-top:16px;border-top:1px dashed var(--rule)}
+  .price{display:flex;align-items:baseline;gap:8px}
+  .price .now{font-family:'Playfair Display',serif;font-size:22px;color:var(--brown-deep);font-weight:600}
+  .price .unit{font-size:11px;color:var(--ink-soft)}
+  .add{display:inline-flex;align-items:center;gap:8px;background:var(--green);color:#fff;padding:9px 14px 9px 14px;border-radius:999px;font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;transition:background .15s, transform .15s}
+  .add:hover{background:var(--green-deep);transform:translateX(2px)}
+  .add svg{transition:transform .2s}
+  .add:hover svg{transform:translateX(2px)}
+
+  /* assurance row */
+  .assurance{margin-top:80px;background:var(--cream-warm);border-top:1px solid rgba(107,58,31,.08);border-bottom:1px solid rgba(107,58,31,.08)}
+  .assurance-row{display:grid;grid-template-columns:repeat(4,1fr);align-items:center;padding:32px 0}
+  .as-item{display:flex;align-items:center;gap:14px;padding:0 24px;border-right:1px solid rgba(107,58,31,.14)}
+  .as-item:last-child{border-right:0}
+  .as-ic{flex-shrink:0;width:42px;height:42px;border-radius:50%;background:#fff;display:grid;place-items:center;color:var(--green);border:1px solid rgba(45,106,45,.16)}
+  .as-title{font-family:'Playfair Display',serif;font-size:15px;font-weight:600;color:var(--brown-deep);line-height:1.15}
+  .as-sub{font-size:11px;color:var(--ink-soft);margin-top:2px;letter-spacing:.02em}
+
+  /* ====================== FOOTER ====================== */
+  footer{background:#1A1410;color:rgba(244,239,227,.7);padding:80px 0 0}
+  .foot-grid{display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr 1fr;gap:48px;padding-bottom:60px}
+  .foot-brand img{height:60px;background:#FAF7F2;padding:8px;border-radius:6px}
+  .foot-brand p{margin-top:20px;font-size:13px;line-height:1.7;max-width:280px}
+  .socials{display:flex;gap:10px;margin-top:24px}
+  .socials a{width:36px;height:36px;border-radius:50%;border:1px solid rgba(244,239,227,.18);display:grid;place-items:center;color:rgba(244,239,227,.7)}
+  .socials a:hover{background:var(--gold);color:#1F1409;border-color:var(--gold)}
+  .foot-col h4{font-family:'Inter',sans-serif;font-size:12px;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:var(--gold-soft);margin-bottom:22px}
+  .foot-col ul{list-style:none;display:flex;flex-direction:column;gap:12px}
+  .foot-col a{font-size:13px;color:rgba(244,239,227,.7)}
+  .foot-col a:hover{color:#FFF8E7}
+  .copy{border-top:1px solid rgba(244,239,227,.10);padding:24px 0;display:flex;justify-content:space-between;align-items:center;font-size:12px;color:rgba(244,239,227,.45)}
+  .copy .pays{display:flex;gap:10px;align-items:center}
+  .copy .pays span{padding:4px 10px;border:1px solid rgba(244,239,227,.14);border-radius:4px;font-size:10px;letter-spacing:.1em;font-weight:600}
+
+  svg{display:block}
+
+  /* ====================== HAMBURGER ====================== */
+  .hamburger{display:none;flex-direction:column;justify-content:center;gap:5px;width:40px;height:40px;padding:8px;cursor:pointer;background:none;border:0;border-radius:6px}
+  .hamburger span{display:block;width:100%;height:1.5px;background:var(--ink);border-radius:2px;transition:transform .25s,opacity .2s}
+  .hamburger.open span:nth-child(1){transform:translateY(6.5px) rotate(45deg)}
+  .hamburger.open span:nth-child(2){opacity:0}
+  .hamburger.open span:nth-child(3){transform:translateY(-6.5px) rotate(-45deg)}
+  .mobile-nav{display:none;position:fixed;inset:0;top:70px;background:rgba(250,247,242,.97);backdrop-filter:blur(10px);z-index:40;flex-direction:column;padding:32px 24px;gap:0;overflow-y:auto}
+  .mobile-nav.open{display:flex}
+  .mobile-nav a{font-family:'Playfair Display',serif;font-size:26px;font-weight:500;color:var(--ink);padding:16px 0;border-bottom:1px solid var(--rule);display:flex;justify-content:space-between;align-items:center}
+  .mobile-nav a::after{content:"→";font-family:'Inter',sans-serif;font-size:16px;color:var(--gold)}
+  .mobile-nav .m-actions{display:flex;gap:12px;margin-top:32px}
+  .mobile-nav .m-actions a{font-size:14px;font-family:'Inter',sans-serif;font-weight:600;padding:14px 20px;border-radius:999px;flex:1;justify-content:center;border:0}
+  .mobile-nav .m-actions .btn-gold{background:var(--gold);color:#1F1409}
+  .mobile-nav .m-actions .btn-outline{border:1.5px solid var(--brown);color:var(--brown-deep)}
+
+  /* ====================== RESPONSIVE ====================== */
+  @media(max-width:900px){
+    .wrap{padding:0 28px}
+    /* Header */
+    .header-inner{grid-template-columns:1fr auto;height:70px}
+    .nav,.login{display:none}
+    .hamburger{display:flex}
+    .filter-bar{top:70px}
+    /* Page hero */
+    .page-hero{padding:44px 0 52px}
+    .page-hero-row{flex-direction:column;gap:28px;align-items:flex-start}
+    .page-hero h1{font-size:44px}
+    .page-hero p.sub{font-size:15px}
+    .page-hero-meta{flex-direction:row;gap:32px;justify-content:flex-start}
+    .page-hero-meta .m-item{text-align:left}
+    /* Filter bar */
+    .filter-inner{grid-template-columns:1fr;gap:14px;padding:14px 0}
+    .tabs{overflow-x:auto;scrollbar-width:none;justify-content:flex-start;border-radius:12px}
+    .spice{flex-wrap:wrap;justify-content:flex-start;gap:10px}
+    .spice-pills{flex-wrap:wrap;gap:6px}
+    .sort{justify-content:flex-start}
+    .select-wrap select{min-width:0;width:100%}
+    .sort{flex:1}
+    .select-wrap{flex:1}
+    /* Products */
+    .product-grid{grid-template-columns:repeat(2,1fr);gap:20px}
+    /* Assurance */
+    .assurance-row{grid-template-columns:repeat(2,1fr);padding:0}
+    .as-item{padding:20px 16px;border-right:0;border-bottom:1px solid rgba(107,58,31,.14)}
+    .as-item:nth-child(odd){border-right:1px solid rgba(107,58,31,.14)}
+    .as-item:nth-last-child(-n+2){border-bottom:0}
+    /* Footer */
+    .foot-grid{grid-template-columns:1fr 1fr;gap:36px}
+    .foot-brand{grid-column:1/-1}
+    .copy{flex-direction:column;gap:10px;text-align:center}
+  }
+
+  @media(max-width:600px){
+    .wrap{padding:0 18px}
+    .header-inner{height:64px}
+    .brand img{height:42px}
+    .mobile-nav{top:64px}
+    /* Page hero */
+    .page-hero{padding:32px 0 40px}
+    .page-hero h1{font-size:30px;line-height:1.08}
+    .page-hero p.sub{font-size:14px;margin-top:12px}
+    .page-hero-meta{gap:20px}
+    .page-hero-meta strong{font-size:22px}
+    /* Filter */
+    .filter-inner{gap:12px;padding:12px 0}
+    .tabs button{padding:8px 14px;font-size:12px}
+    .results-row{flex-direction:column;gap:12px;align-items:flex-start}
+    .shop{padding:36px 0 72px}
+    /* Products */
+    .product-grid{grid-template-columns:1fr;gap:14px}
+    /* Assurance */
+    .assurance-row{grid-template-columns:1fr}
+    .as-item:nth-child(odd){border-right:0}
+    .as-item:nth-last-child(-n+2){border-bottom:1px solid rgba(107,58,31,.14)}
+    .as-item:last-child{border-bottom:0}
+    /* Footer */
+    .foot-grid{grid-template-columns:1fr;gap:28px}
+    .foot-brand{grid-column:auto}
+  }
+</style>
+</head>
+<body>
+
+<!-- ====================== HEADER ====================== -->
+<header class="header" data-screen-label="Header">
+  <div class="wrap header-inner">
+    <a class="brand" href="Homepage.html">
+      <img src="assets/logo.png" alt="Farm Puro Chutneys" />
+    </a>
+    <nav class="nav">
+      <a href="Homepage.html">Home</a>
+      <a href="Shop.html" class="active">Shop</a>
+      <a href="#">About</a>
+      <a href="#">Recipes</a>
+      <a href="#">Contact</a>
+    </nav>
+    <div class="header-right">
+      <a href="Login.html" class="login">Sign in</a>
+      <button class="icon-btn" aria-label="Search">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+      </button>
+      <button class="icon-btn cart" aria-label="Cart" onclick="location.href='Checkout.html'">
+        <svg width="18" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6 7h12l-1.2 11a2 2 0 0 1-2 1.8H9.2a2 2 0 0 1-2-1.8L6 7Z"/><path d="M9 7V5a3 3 0 0 1 6 0v2"/></svg>
+        <span class="cart-badge">2</span>
+      </button>
+      <button class="hamburger" id="hamburger" aria-label="Menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<nav class="mobile-nav" id="mobile-nav" aria-label="Mobile navigation">
+  <a href="Homepage v3.html" class="nav-link">Home</a>
+  <a href="Shop.html" class="nav-link">Shop</a>
+  <a href="#" class="nav-link">About</a>
+  <a href="#" class="nav-link">Recipes</a>
+  <a href="#" class="nav-link">Contact</a>
+  <div class="m-actions">
+    <a class="btn-gold" href="Checkout.html">Cart (2) →</a>
+    <a class="btn-outline" href="Login.html">Sign in</a>
+  </div>
+</nav>
+
+<!-- ====================== PAGE HERO ====================== -->
+<section class="page-hero" data-screen-label="Page Hero">
+  <svg class="page-hero-pattern" viewBox="0 0 1200 320" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <defs>
+      <pattern id="leaves-hero" x="0" y="0" width="200" height="200" patternUnits="userSpaceOnUse" patternTransform="rotate(12)">
+        <path d="M30 100 C 30 55, 80 30, 130 50 C 120 100, 80 125, 30 100 Z M80 75 L 115 60" fill="none" stroke="#E0A93C" stroke-width="1.3" stroke-linecap="round"/>
+        <circle cx="170" cy="170" r="2" fill="#E0A93C"/>
+        <circle cx="20" cy="180" r="1.5" fill="#E0A93C"/>
+      </pattern>
+    </defs>
+    <rect width="1200" height="320" fill="url(#leaves-hero)"/>
+  </svg>
+  <div class="wrap">
+    <div class="crumb">
+      <a href="Homepage.html">Home</a>
+      <span class="sep">›</span>
+      <span class="here">Shop</span>
+    </div>
+    <div class="page-hero-row">
+      <div>
+        <h1>Our <em>chutneys</em>, pickles &amp; pastes.</h1>
+        <p class="sub">Nine small-batch recipes, hand-ground on stone and cold-filled into glass within four hours of cooking. Choose your jar — or all of them.</p>
+      </div>
+      <div class="page-hero-meta">
+        <div class="m-item"><strong>9</strong><div>Jars in stock</div></div>
+        <div class="m-item"><strong>250g</strong><div>Every jar</div></div>
+        <div class="m-item"><strong>0</strong><div>Preservatives</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ====================== FILTER BAR ====================== -->
+<section class="filter-bar" data-screen-label="Filter Bar">
+  <div class="wrap filter-inner">
+    <div class="tabs" role="tablist">
+      <button class="on">All <span class="count">9</span></button>
+      <button>Chutneys <span class="count">7</span></button>
+      <button>Pastes <span class="count">1</span></button>
+      <button>Thecha <span class="count">1</span></button>
+    </div>
+
+    <div class="spice">
+      <span class="spice-label">Spice</span>
+      <div class="spice-pills">
+        <button class="pill on" data-level="all">All</button>
+        <button class="pill" data-level="mild"><span class="dots"><span class="dot on"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span></span>Mild</button>
+        <button class="pill" data-level="medium"><span class="dots"><span class="dot on"></span><span class="dot on"></span><span class="dot"></span><span class="dot"></span></span>Medium</button>
+        <button class="pill" data-level="hot"><span class="dots"><span class="dot on"></span><span class="dot on"></span><span class="dot on"></span><span class="dot"></span></span>Hot</button>
+        <button class="pill" data-level="very-hot"><span class="dots"><span class="dot on"></span><span class="dot on"></span><span class="dot on"></span><span class="dot on"></span></span>Very Hot</button>
+      </div>
+    </div>
+
+    <div class="sort">
+      <label for="sort-select">Sort</label>
+      <div class="select-wrap">
+        <select id="sort-select">
+          <option>Featured</option>
+          <option>Price: Low to High</option>
+          <option>Price: High to Low</option>
+          <option>Best-selling</option>
+          <option>Newest</option>
+        </select>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ====================== SHOP GRID ====================== -->
+<section class="shop" data-screen-label="Shop Grid">
+  <div class="wrap">
+
+    <div class="results-row">
+      <div class="count">Showing <strong>9 of 9</strong> products · all 250g jars</div>
+      <div class="active-filters">
+        <span class="chip">All categories <span class="x">×</span></span>
+        <a href="#" class="clear-link">Clear filters</a>
+      </div>
+    </div>
+
+    <div class="product-grid">
+
+      <!-- 1. Tamarind Date Chutney -->
+      <article class="product">
+        <div class="pic">
+          <span class="badge b-green">Bestseller</span>
+          <button class="heart" aria-label="Save">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-7-4.5-9.5-9A5.5 5.5 0 0 1 12 6a5.5 5.5 0 0 1 9.5 6c-2.5 4.5-9.5 9-9.5 9Z"/></svg>
+          </button>
+          <img src="assets/tamarind-date.jpg" alt="Tamarind Date Chutney" />
+          <button class="quick">Quick view</button>
+        </div>
+        <div class="body">
+          <div class="row-top">
+            <span class="category-tag">Chutney</span>
+            <span class="spice-indicator" data-level="mild" title="Mild"><span class="lvl"><span></span><span></span><span></span><span></span></span>Mild</span>
+          </div>
+          <h3><a href="Product.html" style="color:inherit">Tamarind Date Chutney</a></h3>
+          <p class="desc">Slow-reduced Medjool dates and aged Andhra tamarind, lifted with roasted cumin and black salt.</p>
+          <div class="weight">Net wt. 250g</div>
+          <div class="row-bot">
+            <div class="price"><span class="now">₹249</span></div>
+            <button class="add">Add <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
+          </div>
+        </div>
+      </article>
+
+      <!-- 2. Coconut Chutney -->
+      <article class="product">
+        <div class="pic">
+          <button class="heart" aria-label="Save">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-7-4.5-9.5-9A5.5 5.5 0 0 1 12 6a5.5 5.5 0 0 1 9.5 6c-2.5 4.5-9.5 9-9.5 9Z"/></svg>
+          </button>
+          <img src="assets/coconut.jpg" alt="Coconut Chutney" />
+          <button class="quick">Quick view</button>
+        </div>
+        <div class="body">
+          <div class="row-top">
+            <span class="category-tag">Chutney</span>
+            <span class="spice-indicator" data-level="mild" title="Mild"><span class="lvl"><span></span><span></span><span></span><span></span></span>Mild</span>
+          </div>
+          <h3><a href="Product.html" style="color:inherit">Coconut Chutney</a></h3>
+          <p class="desc">Fresh-grated Kerala coconut, curry leaves, with a tempering of mustard seed and urad dal.</p>
+          <div class="weight">Net wt. 250g</div>
+          <div class="row-bot">
+            <div class="price"><span class="now">₹199</span></div>
+            <button class="add">Add <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
+          </div>
+        </div>
+      </article>
+
+      <!-- 3. Garlic Red Chutney -->
+      <article class="product">
+        <div class="pic">
+          <span class="badge b-gold">Limited Batch</span>
+          <button class="heart" aria-label="Save">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-7-4.5-9.5-9A5.5 5.5 0 0 1 12 6a5.5 5.5 0 0 1 9.5 6c-2.5 4.5-9.5 9-9.5 9Z"/></svg>
+          </button>
+          <img src="assets/garlic-red.jpg" alt="Garlic Red Chutney" />
+          <button class="quick">Quick view</button>
+        </div>
+        <div class="body">
+          <div class="row-top">
+            <span class="category-tag">Chutney</span>
+            <span class="spice-indicator" data-level="hot" title="Hot"><span class="lvl"><span></span><span></span><span></span><span></span></span>Hot</span>
+          </div>
+          <h3><a href="Product.html" style="color:inherit">Garlic Red Chutney</a></h3>
+          <p class="desc">Kashmiri red chillies, roasted garlic and crushed peanuts — bold, smoky and unapologetically warming.</p>
+          <div class="weight">Net wt. 250g</div>
+          <div class="row-bot">
+            <div class="price"><span class="now">₹229</span></div>
+            <button class="add">Add <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
+          </div>
+        </div>
+      </article>
+
+      <!-- 4. Coriander Mint Chutney -->
+      <article class="product">
+        <div class="pic">
+          <span class="badge b-green">Bestseller</span>
+          <button class="heart" aria-label="Save">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-7-4.5-9.5-9A5.5 5.5 0 0 1 12 6a5.5 5.5 0 0 1 9.5 6c-2.5 4.5-9.5 9-9.5 9Z"/></svg>
+          </button>
+          <img src="assets/coriander-mint.jpg" alt="Coriander Mint Chutney" />
+          <button class="quick">Quick view</button>
+        </div>
+        <div class="body">
+          <div class="row-top">
+            <span class="category-tag">Chutney</span>
+            <span class="spice-indicator" data-level="medium" title="Medium"><span class="lvl"><span></span><span></span><span></span><span></span></span>Medium</span>
+          </div>
+          <h3><a href="Product.html" style="color:inherit">Coriander Mint Chutney</a></h3>
+          <p class="desc">Hand-ground fresh coriander, garden mint and green chilli — the classic everyday companion.</p>
+          <div class="weight">Net wt. 250g</div>
+          <div class="row-bot">
+            <div class="price"><span class="now">₹199</span></div>
+            <button class="add">Add <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
+          </div>
+        </div>
+      </article>
+
+      <!-- 5. Ginger-Garlic Paste -->
+      <article class="product">
+        <div class="pic">
+          <span class="badge b-cream">Pantry Staple</span>
+          <button class="heart" aria-label="Save">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-7-4.5-9.5-9A5.5 5.5 0 0 1 12 6a5.5 5.5 0 0 1 9.5 6c-2.5 4.5-9.5 9-9.5 9Z"/></svg>
+          </button>
+          <div class="placeholder" style="--ph-a:#F4ECD8;--ph-b:#E8D7A8;--ph-jar:rgba(255,251,235,.75)">
+            <div class="ph-jar">
+              <div class="ph-label">
+                <span class="ph-eyebrow">Farm Puro</span>
+                Ginger–Garlic<br/><em>Paste</em>
+              </div>
+            </div>
+          </div>
+          <button class="quick">Quick view</button>
+        </div>
+        <div class="body">
+          <div class="row-top">
+            <span class="category-tag">Paste</span>
+            <span class="spice-indicator" data-level="mild" title="Mild"><span class="lvl"><span></span><span></span><span></span><span></span></span>Mild</span>
+          </div>
+          <h3><a href="Product.html" style="color:inherit">Ginger-Garlic Paste</a></h3>
+          <p class="desc">Stone-ground fresh ginger and garlic, no oil, no preservatives — the foundation every curry begins with.</p>
+          <div class="weight">Net wt. 250g</div>
+          <div class="row-bot">
+            <div class="price"><span class="now">₹179</span></div>
+            <button class="add">Add <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
+          </div>
+        </div>
+      </article>
+
+      <!-- 6. Tomato Onion Chutney -->
+      <article class="product">
+        <div class="pic">
+          <button class="heart" aria-label="Save">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-7-4.5-9.5-9A5.5 5.5 0 0 1 12 6a5.5 5.5 0 0 1 9.5 6c-2.5 4.5-9.5 9-9.5 9Z"/></svg>
+          </button>
+          <div class="placeholder" style="--ph-a:#F5D9C4;--ph-b:#E8A475;--ph-jar:rgba(255,248,236,.78)">
+            <div class="ph-jar">
+              <div class="ph-label">
+                <span class="ph-eyebrow">South Indian</span>
+                Tomato Onion<br/><em>Chutney</em>
+              </div>
+            </div>
+          </div>
+          <button class="quick">Quick view</button>
+        </div>
+        <div class="body">
+          <div class="row-top">
+            <span class="category-tag">Chutney</span>
+            <span class="spice-indicator" data-level="medium" title="Medium"><span class="lvl"><span></span><span></span><span></span><span></span></span>Medium</span>
+          </div>
+          <h3><a href="Product.html" style="color:inherit">Tomato Onion Chutney</a></h3>
+          <p class="desc">Slow-roasted tomatoes, sweet onions and dried red chilli — built for idli, dosa and stuffed paratha mornings.</p>
+          <div class="weight">Net wt. 250g</div>
+          <div class="row-bot">
+            <div class="price"><span class="now">₹219</span></div>
+            <button class="add">Add <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
+          </div>
+        </div>
+      </article>
+
+      <!-- 7. Curry Leaf Chutney -->
+      <article class="product">
+        <div class="pic">
+          <button class="heart" aria-label="Save">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-7-4.5-9.5-9A5.5 5.5 0 0 1 12 6a5.5 5.5 0 0 1 9.5 6c-2.5 4.5-9.5 9-9.5 9Z"/></svg>
+          </button>
+          <div class="placeholder" style="--ph-a:#DDE4B6;--ph-b:#9DB668;--ph-jar:rgba(255,251,235,.75)">
+            <div class="ph-jar">
+              <div class="ph-label">
+                <span class="ph-eyebrow">Tamil Nadu</span>
+                Curry Leaf<br/><em>Chutney</em>
+              </div>
+            </div>
+          </div>
+          <button class="quick">Quick view</button>
+        </div>
+        <div class="body">
+          <div class="row-top">
+            <span class="category-tag">Chutney</span>
+            <span class="spice-indicator" data-level="medium" title="Medium"><span class="lvl"><span></span><span></span><span></span><span></span></span>Medium</span>
+          </div>
+          <h3><a href="Product.html" style="color:inherit">Curry Leaf Chutney</a></h3>
+          <p class="desc">Pan-toasted curry leaves, urad dal and tamarind — earthy, herbaceous, deeply Southern.</p>
+          <div class="weight">Net wt. 250g</div>
+          <div class="row-bot">
+            <div class="price"><span class="now">₹219</span></div>
+            <button class="add">Add <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
+          </div>
+        </div>
+      </article>
+
+      <!-- 8. Green Chilli Thecha -->
+      <article class="product">
+        <div class="pic">
+          <span class="badge b-green">New</span>
+          <button class="heart" aria-label="Save">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-7-4.5-9.5-9A5.5 5.5 0 0 1 12 6a5.5 5.5 0 0 1 9.5 6c-2.5 4.5-9.5 9-9.5 9Z"/></svg>
+          </button>
+          <div class="placeholder" style="--ph-a:#C8D998;--ph-b:#7FA85B;--ph-jar:rgba(255,251,235,.78)">
+            <div class="ph-jar">
+              <div class="ph-label">
+                <span class="ph-eyebrow">Maharashtrian</span>
+                Green Chilli<br/><em>Thecha</em>
+              </div>
+            </div>
+          </div>
+          <button class="quick">Quick view</button>
+        </div>
+        <div class="body">
+          <div class="row-top">
+            <span class="category-tag">Thecha</span>
+            <span class="spice-indicator" data-level="very-hot" title="Very Hot"><span class="lvl"><span></span><span></span><span></span><span></span></span>Very Hot</span>
+          </div>
+          <h3><a href="Product.html" style="color:inherit">Green Chilli Thecha</a></h3>
+          <p class="desc">Fiery hand-pounded green chilli, garlic and roasted peanuts — the classic Kolhapuri jolt for hot bhakri.</p>
+          <div class="weight">Net wt. 250g</div>
+          <div class="row-bot">
+            <div class="price"><span class="now">₹229</span></div>
+            <button class="add">Add <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
+          </div>
+        </div>
+      </article>
+
+      <!-- 9. Peanut Garlic Chutney -->
+      <article class="product">
+        <div class="pic">
+          <button class="heart" aria-label="Save">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-7-4.5-9.5-9A5.5 5.5 0 0 1 12 6a5.5 5.5 0 0 1 9.5 6c-2.5 4.5-9.5 9-9.5 9Z"/></svg>
+          </button>
+          <div class="placeholder" style="--ph-a:#EBC9A1;--ph-b:#C8865A;--ph-jar:rgba(255,251,235,.78)">
+            <div class="ph-jar">
+              <div class="ph-label">
+                <span class="ph-eyebrow">Maharashtrian</span>
+                Peanut Garlic<br/><em>Chutney</em>
+              </div>
+            </div>
+          </div>
+          <button class="quick">Quick view</button>
+        </div>
+        <div class="body">
+          <div class="row-top">
+            <span class="category-tag">Chutney</span>
+            <span class="spice-indicator" data-level="hot" title="Hot"><span class="lvl"><span></span><span></span><span></span><span></span></span>Hot</span>
+          </div>
+          <h3><a href="Product.html" style="color:inherit">Peanut Garlic Chutney</a></h3>
+          <p class="desc">Dry-roasted Vidarbha peanuts, garlic and red chilli — the gritty, crunchy companion every vada pao deserves.</p>
+          <div class="weight">Net wt. 250g</div>
+          <div class="row-bot">
+            <div class="price"><span class="now">₹229</span></div>
+            <button class="add">Add <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
+          </div>
+        </div>
+      </article>
+
+    </div>
+  </div>
+
+  <!-- assurance row -->
+  <div class="assurance">
+    <div class="wrap assurance-row">
+      <div class="as-item">
+        <div class="as-ic">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7h14l3 4v6h-2"/><circle cx="7" cy="18" r="2"/><circle cx="17" cy="18" r="2"/><path d="M3 7v11h2"/></svg>
+        </div>
+        <div><div class="as-title">Free shipping</div><div class="as-sub">On orders above ₹699</div></div>
+      </div>
+      <div class="as-item">
+        <div class="as-ic">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="m9 12 2 2 4-4"/></svg>
+        </div>
+        <div><div class="as-title">100% pure</div><div class="as-sub">FSSAI certified, zero additives</div></div>
+      </div>
+      <div class="as-item">
+        <div class="as-ic">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v3"/><path d="M5 8h14l-1.2 11a2 2 0 0 1-2 1.8H8.2a2 2 0 0 1-2-1.8L5 8Z"/><path d="M9 12c1 1.5 5 1.5 6 0"/></svg>
+        </div>
+        <div><div class="as-title">Cooked weekly</div><div class="as-sub">Shipped within 4 hours of bottling</div></div>
+      </div>
+      <div class="as-item">
+        <div class="as-ic">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+        </div>
+        <div><div class="as-title">Easy returns</div><div class="as-sub">7-day no-questions guarantee</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ====================== FOOTER ====================== -->
+<footer data-screen-label="Footer">
+  <div class="wrap">
+    <div class="foot-grid">
+      <div class="foot-brand">
+        <img src="assets/logo.png" alt="Farm Puro" />
+        <p>Authentic Indian chutneys, slow-cooked in small copper batches. Crafted in Pune, shipped pan-India.</p>
+        <div class="socials">
+          <a href="#" aria-label="Instagram"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r=".8" fill="currentColor"/></svg></a>
+          <a href="#" aria-label="Facebook"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M13 22v-8h3l.5-4H13V7.5c0-1.2.4-2 2-2h2V2.2C16.6 2.1 15.4 2 14 2c-3 0-5 1.8-5 5v3H6v4h3v8h4Z"/></svg></a>
+          <a href="#" aria-label="YouTube"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M22 12c0-3-.3-4.5-.8-5.2-.5-.7-1.3-1-2.2-1.1C17 5.5 12 5.5 12 5.5s-5 0-7 .2c-.9 0-1.7.4-2.2 1.1C2.3 7.5 2 9 2 12s.3 4.5.8 5.2c.5.7 1.3 1 2.2 1.1 2 .2 7 .2 7 .2s5 0 7-.2c.9 0 1.7-.4 2.2-1.1.5-.7.8-2.2.8-5.2Zm-12 3V9l5 3-5 3Z"/></svg></a>
+          <a href="#" aria-label="WhatsApp"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M20 4A10 10 0 0 0 4 16l-1 5 5-1A10 10 0 1 0 20 4Zm-8 17a8 8 0 0 1-4.3-1.2l-.3-.2-3 .7.8-3-.2-.3A8 8 0 1 1 12 21Zm4.6-5.6c-.3-.1-1.5-.7-1.7-.8-.2-.1-.4-.1-.6.1-.2.2-.7.8-.8 1-.1.1-.3.2-.5.1-1.5-.7-2.4-1.3-3.4-3-.3-.4.3-.4.7-1.3.1-.2 0-.4 0-.5 0-.1-.6-1.4-.8-1.9-.2-.5-.4-.4-.6-.4h-.5c-.2 0-.4 0-.6.3-.2.2-.8.8-.8 2s.8 2.3.9 2.5c.1.2 1.6 2.4 3.8 3.4 1.4.6 1.9.6 2.6.5.4 0 1.3-.5 1.5-1.1.2-.5.2-1 .1-1.1 0-.1-.2-.2-.5-.3Z"/></svg></a>
+        </div>
+      </div>
+      <div class="foot-col">
+        <h4>Shop</h4>
+        <ul>
+          <li><a href="#">All chutneys</a></li>
+          <li><a href="#">Pickles &amp; pastes</a></li>
+          <li><a href="#">Gift hampers</a></li>
+          <li><a href="#">Subscription box</a></li>
+          <li><a href="#">Sample pack</a></li>
+        </ul>
+      </div>
+      <div class="foot-col">
+        <h4>Company</h4>
+        <ul>
+          <li><a href="#">Our story</a></li>
+          <li><a href="#">The farms</a></li>
+          <li><a href="#">Press &amp; media</a></li>
+          <li><a href="#">Careers</a></li>
+          <li><a href="#">Wholesale</a></li>
+        </ul>
+      </div>
+      <div class="foot-col">
+        <h4>Help</h4>
+        <ul>
+          <li><a href="#">Track your order</a></li>
+          <li><a href="#">Shipping &amp; returns</a></li>
+          <li><a href="#">FAQ</a></li>
+          <li><a href="#">Contact us</a></li>
+          <li><a href="#">Storage &amp; shelf life</a></li>
+        </ul>
+      </div>
+      <div class="foot-col">
+        <h4>Visit</h4>
+        <ul>
+          <li>Farm Puro Foods Pvt Ltd</li>
+          <li>14, Tilak Road,<br/>Sadashiv Peth,<br/>Pune 411030</li>
+          <li><a href="#">hello@farmpuro.in</a></li>
+          <li>+91 20 2447 8800</li>
+        </ul>
+      </div>
+    </div>
+    <div class="copy">
+      <div>© 2026 Farm Puro Foods Pvt Ltd. All rights reserved. · <a href="#">Privacy</a> · <a href="#">Terms</a> · FSSAI Lic. 11521004000123</div>
+      <div class="pays"><span>UPI</span><span>VISA</span><span>RUPAY</span><span>COD</span></div>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // Hamburger
+  const hamburger = document.getElementById('hamburger');
+  const mobileNav = document.getElementById('mobile-nav');
+  hamburger.addEventListener('click', () => {
+    const open = mobileNav.classList.toggle('open');
+    hamburger.classList.toggle('open', open);
+    hamburger.setAttribute('aria-expanded', open);
+    document.body.style.overflow = open ? 'hidden' : '';
+  });
+  mobileNav.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
+    mobileNav.classList.remove('open');
+    hamburger.classList.remove('open');
+    hamburger.setAttribute('aria-expanded','false');
+    document.body.style.overflow = '';
+  }));
+  // simple interactive: tabs + spice pills toggle on-state (visual only)
+  document.querySelectorAll('.tabs button').forEach(b => b.addEventListener('click', e => {
+    document.querySelectorAll('.tabs button').forEach(x => x.classList.remove('on'));
+    b.classList.add('on');
+  }));
+  document.querySelectorAll('.spice-pills .pill').forEach(b => b.addEventListener('click', e => {
+    document.querySelectorAll('.spice-pills .pill').forEach(x => x.classList.remove('on'));
+    b.classList.add('on');
+  }));
+</script>
+
+</body>
+</html>

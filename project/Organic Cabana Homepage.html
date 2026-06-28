@@ -1,0 +1,735 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<title>Organic Cabana — Start Organic Living | 100% Pure & Organic</title>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Nunito:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+<style>
+  :root{
+    --green:#5A9E2F;
+    --green-deep:#2D5A16;
+    --green-soft:#72B848;
+    --green-tint:#EEF5E4;
+    --green-tint-2:#D4E9BF;
+    --red:#C0272D;
+    --red-deep:#96181D;
+    --red-soft:#D94A50;
+    --red-tint:#FBEAEA;
+    --cream:#F7F2E8;
+    --cream-warm:#EDE5D0;
+    --white:#FFFFFF;
+    --ink:#2C1F0F;
+    --ink-soft:#6B5744;
+    --rule:rgba(44,31,15,.09);
+    --rule-strong:rgba(44,31,15,.16);
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html,body{background:var(--cream);color:var(--ink);font-family:'Nunito',sans-serif;font-size:15px;line-height:1.6;-webkit-font-smoothing:antialiased}
+  img{display:block;max-width:100%}
+  a{color:inherit;text-decoration:none}
+  button{font-family:inherit;cursor:pointer;border:0;background:none;color:inherit}
+  .wrap{max-width:1200px;margin:0 auto;padding:0 40px}
+  h1,h2,h3,h4,.serif{font-family:'Lora',serif;font-weight:600;letter-spacing:.01em;color:var(--ink)}
+  .eyebrow{font-family:'Nunito',sans-serif;font-size:12px;font-weight:800;letter-spacing:.24em;text-transform:uppercase;color:var(--green)}
+
+  /* ====================== HEADER ====================== */
+  .header{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.95);backdrop-filter:saturate(160%) blur(12px);border-bottom:2px solid var(--green-tint)}
+  .header-inner{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;height:80px;gap:24px}
+  .brand img{height:56px;width:auto}
+  .nav{display:flex;gap:36px;justify-content:center}
+  .nav a{font-size:14px;font-weight:700;color:var(--ink);letter-spacing:.02em;position:relative;padding:6px 0}
+  .nav a.active::after,.nav a:hover::after{content:"";position:absolute;left:0;right:0;bottom:-2px;height:2.5px;background:var(--red);border-radius:2px}
+  .header-right{display:flex;justify-content:flex-end;align-items:center;gap:16px}
+  .icon-btn{width:40px;height:40px;border-radius:8px;display:grid;place-items:center;color:var(--ink);transition:background .2s}
+  .icon-btn:hover{background:var(--green-tint)}
+  .cart{position:relative}
+  .cart-badge{position:absolute;top:4px;right:4px;background:var(--red);color:#fff;font-size:10px;font-weight:800;min-width:16px;height:16px;border-radius:8px;display:grid;place-items:center;padding:0 3px}
+  .login{font-size:13px;font-weight:700;color:var(--green-deep)}
+  .login:hover{color:var(--red)}
+
+  /* ====================== HAMBURGER ====================== */
+  .hamburger{display:none;flex-direction:column;justify-content:center;gap:5px;width:40px;height:40px;padding:8px;cursor:pointer;border:0;background:none;border-radius:8px}
+  .hamburger span{display:block;width:100%;height:2px;background:var(--ink);border-radius:2px;transition:transform .25s,opacity .2s}
+  .hamburger.open span:nth-child(1){transform:translateY(7px) rotate(45deg)}
+  .hamburger.open span:nth-child(2){opacity:0}
+  .hamburger.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
+  .mobile-nav{display:none;position:fixed;inset:0;top:80px;background:rgba(247,242,232,.98);backdrop-filter:blur(12px);z-index:40;flex-direction:column;padding:32px 24px;gap:0;overflow-y:auto}
+  .mobile-nav.open{display:flex}
+  .mobile-nav a.nav-link{font-family:'Lora',serif;font-size:26px;font-weight:600;color:var(--ink);padding:16px 0;border-bottom:1px solid var(--rule);display:flex;justify-content:space-between;align-items:center}
+  .mobile-nav a.nav-link::after{content:"→";font-family:'Nunito',sans-serif;font-size:16px;color:var(--green)}
+  .mobile-nav .m-actions{display:flex;gap:12px;margin-top:32px}
+  .mobile-nav .m-actions a{font-size:14px;font-weight:800;padding:14px 20px;border-radius:8px;flex:1;text-align:center;letter-spacing:.06em;text-transform:uppercase}
+  .m-red{background:var(--red);color:#fff}
+  .m-outline{border:2px solid var(--green-deep);color:var(--green-deep)}
+
+  /* ====================== HERO — LIGHT BG ====================== */
+  .hero{position:relative;min-height:calc(100vh - 80px);background:var(--green-tint);overflow:hidden;display:flex;align-items:center}
+  /* organic circle blobs */
+  .hero-blobs{position:absolute;inset:0;overflow:hidden;pointer-events:none}
+  .blob{position:absolute;border-radius:50%;filter:blur(60px)}
+  .blob-1{width:600px;height:600px;background:rgba(90,158,47,.18);top:-120px;right:-80px}
+  .blob-2{width:400px;height:400px;background:rgba(192,39,45,.08);bottom:-60px;left:120px}
+  .blob-3{width:300px;height:300px;background:rgba(90,158,47,.12);bottom:80px;right:400px}
+  .hero-leaf-pattern{position:absolute;inset:0;opacity:.05;pointer-events:none}
+  .hero-grid{position:relative;display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:center;width:100%;padding:70px 0}
+  .hero-kicker{display:inline-flex;align-items:center;gap:10px;background:#fff;border:1px solid var(--green-tint-2);border-radius:999px;padding:8px 18px 8px 10px;margin-bottom:28px}
+  .hero-kicker .leaf{width:28px;height:28px;background:var(--green);border-radius:50%;display:grid;place-items:center;flex-shrink:0}
+  .hero-kicker span{font-size:12px;font-weight:800;letter-spacing:.18em;text-transform:uppercase;color:var(--green-deep)}
+  .hero h1{font-family:'Lora',serif;font-weight:700;color:var(--green-deep);font-size:72px;line-height:1.05;letter-spacing:-.01em}
+  .hero h1 .red{color:var(--red);font-style:italic}
+  .hero p.lede{font-size:17px;line-height:1.65;color:var(--ink-soft);margin:24px 0 36px;max-width:500px;font-weight:500}
+  .ctas{display:flex;gap:14px;align-items:center;flex-wrap:wrap}
+  .btn{display:inline-flex;align-items:center;gap:10px;padding:15px 28px;border-radius:8px;font-weight:800;font-size:13px;letter-spacing:.08em;text-transform:uppercase;transition:transform .15s,background .2s,box-shadow .2s}
+  .btn-red{background:var(--red);color:#fff;box-shadow:0 4px 18px -6px rgba(192,39,45,.5)}
+  .btn-red:hover{background:var(--red-deep);transform:translateY(-2px);box-shadow:0 10px 28px -8px rgba(192,39,45,.55)}
+  .btn-green{background:var(--green-deep);color:#fff;box-shadow:0 4px 18px -6px rgba(45,90,22,.4)}
+  .btn-green:hover{background:#1E3D0E;transform:translateY(-2px)}
+  .btn .arrow{transition:transform .2s}
+  .btn:hover .arrow{transform:translateX(3px)}
+  .hero-stats{display:flex;gap:32px;margin-top:52px;padding-top:28px;border-top:2px dashed var(--green-tint-2);max-width:520px}
+  .hero-stats .s-num{font-family:'Lora',serif;font-size:36px;color:var(--red);line-height:1;font-weight:700}
+  .hero-stats .s-label{font-size:12px;font-weight:700;letter-spacing:.10em;text-transform:uppercase;color:var(--ink-soft);margin-top:5px}
+
+  /* Hero visual */
+  .hero-visual{position:relative;display:grid;place-items:center;height:580px}
+  .hero-pack-glow{position:absolute;width:380px;height:380px;border-radius:50%;background:radial-gradient(circle,rgba(90,158,47,.22),transparent 70%);filter:blur(30px)}
+  .hero-pack img{position:relative;max-height:560px;width:auto;filter:drop-shadow(0 24px 48px rgba(44,31,15,.28));z-index:1}
+  .cert-badges{position:absolute;left:0;bottom:40px;display:flex;flex-direction:column;gap:10px;z-index:2}
+  .cert{background:#fff;border:1px solid var(--green-tint-2);border-radius:10px;padding:9px 14px;display:flex;align-items:center;gap:9px;box-shadow:0 4px 14px -6px rgba(44,31,15,.15)}
+  .cert .ic{width:28px;height:28px;border-radius:6px;background:var(--green-tint);display:grid;place-items:center;flex-shrink:0;color:var(--green-deep)}
+  .cert .ct{font-size:11px;font-weight:800;color:var(--green-deep);letter-spacing:.06em;text-transform:uppercase;line-height:1.2}
+  .cert .cs{font-size:10px;color:var(--ink-soft);font-weight:600;margin-top:1px}
+  .hero-badge{position:absolute;top:24px;right:0;background:var(--red);color:#fff;width:110px;height:110px;border-radius:50%;display:grid;place-items:center;text-align:center;font-family:'Nunito',sans-serif;font-size:11px;font-weight:700;transform:rotate(10deg);box-shadow:0 8px 24px rgba(192,39,45,.4);z-index:2;padding:14px;line-height:1.3}
+  .hero-badge strong{display:block;font-size:20px;font-weight:900;line-height:1}
+
+  /* ====================== TRUST BAR ====================== */
+  .trust{background:var(--white);border-top:1px solid var(--green-tint-2);border-bottom:1px solid var(--green-tint-2)}
+  .trust-row{display:grid;grid-template-columns:repeat(4,1fr);align-items:stretch;padding:0}
+  .trust-item{display:flex;align-items:center;gap:16px;padding:28px 22px;border-right:1px solid var(--rule);transition:background .2s}
+  .trust-item:hover{background:var(--green-tint)}
+  .trust-item:last-child{border-right:0}
+  .trust-ic{flex-shrink:0;width:46px;height:46px;border-radius:10px;background:var(--green-tint);display:grid;place-items:center;color:var(--green-deep)}
+  .trust-title{font-family:'Lora',serif;font-size:16px;font-weight:600;color:var(--green-deep);line-height:1.2}
+  .trust-sub{font-size:12px;color:var(--ink-soft);margin-top:3px;font-weight:600}
+
+  /* ====================== SECTIONS ====================== */
+  section.pad{padding:100px 0}
+  .section-head{text-align:center;margin-bottom:56px}
+  .section-head h2{font-size:48px;line-height:1.08;margin:14px 0 14px}
+  .section-head p{color:var(--ink-soft);font-size:16px;max-width:560px;margin:0 auto;font-weight:500}
+  .ornament{display:flex;align-items:center;justify-content:center;gap:14px}
+  .ornament .line{width:36px;height:1.5px;background:var(--green)}
+
+  /* ====================== PRODUCTS ====================== */
+  .products-bg{background:var(--cream)}
+  .product-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:24px}
+  .product{background:var(--white);border:1px solid var(--rule);border-radius:12px;overflow:hidden;display:flex;flex-direction:column;transition:transform .25s,box-shadow .25s}
+  .product:hover{transform:translateY(-5px);box-shadow:0 20px 48px -18px rgba(44,31,15,.2)}
+  .product .pic{position:relative;aspect-ratio:1/1.05;background:var(--cream-warm);overflow:hidden}
+  .product .pic img{width:100%;height:100%;object-fit:cover;transition:transform .5s}
+  .product:hover .pic img{transform:scale(1.05)}
+  .tag{position:absolute;top:12px;left:12px;font-size:10px;letter-spacing:.14em;text-transform:uppercase;font-weight:800;padding:5px 10px;border-radius:6px;line-height:1}
+  .tag.organic{background:var(--green);color:#fff}
+  .tag.usda{background:var(--red);color:#fff}
+  .tag.gf{background:var(--green-deep);color:#fff}
+  .tag.new{background:#F59E0B;color:#fff}
+  .heart{position:absolute;top:12px;right:12px;width:34px;height:34px;border-radius:8px;background:rgba(255,255,255,.92);display:grid;place-items:center;color:var(--red);transition:background .15s}
+  .heart:hover{background:#fff}
+  .product .body{padding:20px;display:flex;flex-direction:column;gap:7px;flex:1}
+  .product .cat{font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--green);font-weight:800}
+  .product h3{font-size:19px;line-height:1.2;font-weight:600}
+  .product .desc{font-size:13px;color:var(--ink-soft);line-height:1.5;flex:1;font-weight:500}
+  .product .stars{display:flex;gap:2px;align-items:center;font-size:12px;color:var(--green);margin-top:4px}
+  .product .stars span{color:var(--ink-soft);margin-left:6px;font-weight:600}
+  .product .row{display:flex;align-items:center;justify-content:space-between;margin-top:12px;padding-top:16px;border-top:1px solid var(--rule)}
+  .price .now{font-family:'Lora',serif;font-size:22px;color:var(--red);font-weight:700}
+  .price .was{font-size:13px;color:var(--ink-soft);text-decoration:line-through;margin-left:6px;font-weight:600}
+  .add{display:inline-flex;align-items:center;gap:7px;background:var(--green);color:#fff;padding:10px 16px;border-radius:8px;font-size:11px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;transition:background .15s,transform .15s}
+  .add:hover{background:var(--green-deep);transform:translateY(-1px)}
+  .view-all{text-align:center;margin-top:48px}
+  .view-all a{display:inline-flex;align-items:center;gap:10px;background:var(--red);color:#fff;padding:15px 32px;border-radius:8px;font-size:13px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;transition:background .15s,transform .15s;box-shadow:0 4px 18px -6px rgba(192,39,45,.4)}
+  .view-all a:hover{background:var(--red-deep);transform:translateY(-2px)}
+
+  /* ====================== BRAND STORY ====================== */
+  .story{background:var(--white)}
+  .story-grid{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center}
+  .story-img{position:relative;aspect-ratio:4/5;border-radius:16px;overflow:hidden;box-shadow:0 24px 60px -24px rgba(44,31,15,.28)}
+  .story-img img{width:100%;height:100%;object-fit:cover}
+  .story-frame{position:absolute;inset:14px;border-radius:10px;border:2px solid rgba(90,158,47,.35);pointer-events:none}
+  .story-stamp{position:absolute;bottom:-28px;right:-28px;width:150px;height:150px;border-radius:50%;background:var(--red);color:#fff;display:grid;place-items:center;text-align:center;padding:24px;z-index:2;box-shadow:0 12px 32px rgba(192,39,45,.4)}
+  .story-stamp .yr{font-family:'Lora',serif;font-size:36px;line-height:1;color:#fff;font-weight:700}
+  .story-stamp .lbl{font-size:9px;letter-spacing:.2em;text-transform:uppercase;color:rgba(255,255,255,.85);margin-top:6px;font-weight:700}
+  .story-content .kicker{display:inline-flex;align-items:center;gap:8px;margin-bottom:16px}
+  .story-content .kicker .dot{width:10px;height:10px;background:var(--green);border-radius:50%}
+  .story-content h2{font-size:44px;line-height:1.08;margin-bottom:26px}
+  .story-content h2 em{font-style:italic;color:var(--red)}
+  .story-content p{color:var(--ink-soft);font-size:15px;margin-bottom:16px;line-height:1.75;font-weight:500}
+  .story-content p:first-of-type::first-letter{font-family:'Lora',serif;font-size:52px;float:left;line-height:.9;padding:7px 10px 0 0;color:var(--green);font-weight:700}
+  .certs-row{display:flex;gap:12px;flex-wrap:wrap;margin-top:20px}
+  .cert-pill{display:inline-flex;align-items:center;gap:7px;background:var(--green-tint);border:1px solid var(--green-tint-2);border-radius:6px;padding:8px 14px;font-size:11px;font-weight:800;color:var(--green-deep);letter-spacing:.08em;text-transform:uppercase}
+  .cert-pill svg{color:var(--green)}
+  .story-link{display:inline-flex;align-items:center;gap:10px;margin-top:22px;background:var(--green-deep);color:#fff;padding:14px 24px;border-radius:8px;font-size:13px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;transition:background .15s,transform .15s}
+  .story-link:hover{background:var(--green);transform:translateY(-1px)}
+
+  /* ====================== WHY ====================== */
+  .why{background:var(--green-tint)}
+  .why-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+  .why-card{background:var(--white);border:1px solid var(--green-tint-2);padding:40px 32px;border-radius:14px;position:relative;transition:box-shadow .2s,transform .2s}
+  .why-card:hover{box-shadow:0 16px 40px -18px rgba(44,31,15,.2);transform:translateY(-3px)}
+  .why-card .num{position:absolute;top:22px;right:24px;font-family:'Lora',serif;font-size:48px;color:rgba(90,158,47,.10);font-style:italic;font-weight:700}
+  .why-ic{width:54px;height:54px;border-radius:12px;background:var(--green-tint);color:var(--green-deep);display:grid;place-items:center;margin-bottom:24px}
+  .why-card h3{font-size:22px;line-height:1.2;margin-bottom:12px;color:var(--green-deep)}
+  .why-card p{color:var(--ink-soft);font-size:14px;line-height:1.7;font-weight:500}
+
+  /* ====================== TESTIMONIALS ====================== */
+  .test{background:var(--green-deep);color:#F7F2E8;position:relative;overflow:hidden}
+  .test::before{content:"";position:absolute;inset:0;background:url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%235A9E2F' fill-opacity='0.08'%3E%3Ccircle cx='30' cy='30' r='4'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")}
+  .test .section-head h2{color:#FFF8E7}
+  .test .section-head p{color:rgba(247,242,232,.7);font-weight:500}
+  .test .ornament .line{background:var(--green-soft)}
+  .test .eyebrow{color:var(--green-soft)}
+  .test-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;position:relative}
+  .quote{background:rgba(255,255,255,.05);border:1px solid rgba(247,242,232,.14);border-radius:14px;padding:34px 30px;position:relative;transition:background .2s}
+  .quote:hover{background:rgba(255,255,255,.08)}
+  .quote .mark{font-family:'Lora',serif;font-size:80px;line-height:1;color:var(--green-soft);position:absolute;top:8px;left:22px;opacity:.5}
+  .quote .stars{color:var(--green-soft);font-size:15px;margin-bottom:16px;position:relative;letter-spacing:3px}
+  .quote blockquote{font-family:'Lora',serif;font-style:italic;font-size:18px;line-height:1.55;color:#FFF8E7;margin-bottom:26px;position:relative}
+  .who{display:flex;align-items:center;gap:12px;padding-top:18px;border-top:1px solid rgba(247,242,232,.14)}
+  .ava{width:40px;height:40px;border-radius:10px;background:var(--green);color:#fff;display:grid;place-items:center;font-weight:800;font-family:'Lora',serif;font-size:16px}
+  .who-name{font-size:14px;font-weight:700;color:#FFF8E7}
+  .who-city{font-size:12px;color:rgba(247,242,232,.65);margin-top:2px;font-weight:600}
+
+  /* ====================== NEWSLETTER ====================== */
+  .news{background:var(--red);color:#fff;padding:84px 0;position:relative;overflow:hidden}
+  .news::after{content:"";position:absolute;right:-80px;top:-80px;width:400px;height:400px;border-radius:50%;background:rgba(255,255,255,.06);pointer-events:none}
+  .news-inner{display:grid;grid-template-columns:1.1fr .9fr;gap:56px;align-items:center;position:relative}
+  .news .eyebrow{color:rgba(255,255,255,.8);margin-bottom:12px}
+  .news h2{color:#fff;font-size:42px;line-height:1.08;margin-bottom:14px}
+  .news p{color:rgba(255,255,255,.82);font-size:15px;max-width:480px;font-weight:500}
+  .news-form{display:flex;background:rgba(255,255,255,.95);border-radius:10px;padding:7px;align-items:center;margin-top:28px}
+  .news-form input{flex:1;border:0;background:transparent;padding:13px 20px;font-family:inherit;font-size:14px;color:var(--ink);outline:none;font-weight:600}
+  .news-form input::placeholder{color:var(--ink-soft)}
+  .news-form button{background:var(--green-deep);color:#fff;padding:13px 24px;border-radius:7px;font-weight:800;font-size:12px;letter-spacing:.12em;text-transform:uppercase;display:inline-flex;align-items:center;gap:8px;transition:background .15s}
+  .news-form button:hover{background:var(--green)}
+  .news .fine{font-size:11px;color:rgba(255,255,255,.55);margin-top:12px;font-weight:600}
+  .news-side{text-align:right}
+  .news-side img{height:280px;width:auto;filter:drop-shadow(0 20px 40px rgba(0,0,0,.3));margin-left:auto;transform:rotate(3deg)}
+
+  /* ====================== FOOTER ====================== */
+  footer{background:#1A0F07;color:rgba(247,242,232,.7);padding:80px 0 0}
+  .foot-grid{display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr 1fr;gap:44px;padding-bottom:56px}
+  .foot-brand img{height:52px;background:var(--cream);padding:6px 10px;border-radius:8px}
+  .foot-brand p{margin-top:18px;font-size:13px;line-height:1.7;max-width:270px;color:rgba(247,242,232,.7);font-weight:500}
+  .socials{display:flex;gap:10px;margin-top:22px}
+  .socials a{width:36px;height:36px;border-radius:8px;border:1px solid rgba(247,242,232,.18);display:grid;place-items:center;color:rgba(247,242,232,.7);transition:background .15s,color .15s,border-color .15s}
+  .socials a:hover{background:var(--green);color:#fff;border-color:var(--green)}
+  .foot-col h4{font-size:11px;font-weight:800;letter-spacing:.24em;text-transform:uppercase;color:var(--green-soft);margin-bottom:20px}
+  .foot-col ul{list-style:none;display:flex;flex-direction:column;gap:11px}
+  .foot-col a{font-size:13px;color:rgba(247,242,232,.7);font-weight:500}
+  .foot-col a:hover{color:#FFF8E7}
+  .copy{border-top:1px solid rgba(247,242,232,.10);padding:22px 0;display:flex;justify-content:space-between;align-items:center;font-size:12px;color:rgba(247,242,232,.45);font-weight:600}
+  .copy a:hover{color:#FFF8E7}
+  .copy .certs{display:flex;gap:10px;align-items:center}
+  .copy .certs span{padding:4px 10px;border:1px solid rgba(247,242,232,.16);border-radius:5px;font-size:10px;letter-spacing:.12em;font-weight:800}
+
+  /* ====================== RESPONSIVE ====================== */
+  @media(max-width:900px){
+    .wrap{padding:0 28px}
+    section.pad{padding:72px 0}
+    .header-inner{grid-template-columns:1fr auto;height:72px}
+    .nav,.login{display:none}
+    .hamburger{display:flex}
+    .mobile-nav{top:72px}
+    .hero-grid{grid-template-columns:1fr;gap:0;padding:52px 0 36px}
+    .hero h1{font-size:48px}
+    .hero p.lede{font-size:15px;margin:18px 0 24px}
+    .hero-visual{height:360px;margin-top:36px}
+    .hero-stats{gap:24px;margin-top:36px;padding-top:22px}
+    .hero-stats .s-num{font-size:28px}
+    .cert-badges{display:none}
+    .trust-row{grid-template-columns:repeat(2,1fr)}
+    .trust-item{border-bottom:1px solid var(--rule)}
+    .trust-item:nth-child(odd){border-right:1px solid var(--rule)}
+    .trust-item:nth-child(even){border-right:0}
+    .trust-item:nth-last-child(-n+2){border-bottom:0}
+    .product-grid{grid-template-columns:repeat(2,1fr);gap:18px}
+    .story-grid{grid-template-columns:1fr;gap:52px}
+    .story-img{aspect-ratio:16/9;border-radius:12px}
+    .story-stamp{bottom:-20px;right:-14px;width:120px;height:120px;padding:18px}
+    .story-stamp .yr{font-size:28px}
+    .story-content h2{font-size:34px}
+    .why-grid{grid-template-columns:repeat(2,1fr)}
+    .why-card:last-child{grid-column:1/-1}
+    .test-grid{grid-template-columns:repeat(2,1fr)}
+    .test-grid .quote:last-child{grid-column:1/-1}
+    .news-inner{grid-template-columns:1fr;gap:32px}
+    .news-side{display:none}
+    .news h2{font-size:30px}
+    .foot-grid{grid-template-columns:1fr 1fr;gap:36px}
+    .foot-brand{grid-column:1/-1}
+    .copy{flex-direction:column;gap:10px;text-align:center}
+    .section-head h2{font-size:36px}
+  }
+  @media(max-width:600px){
+    .wrap{padding:0 18px}
+    section.pad{padding:52px 0}
+    .header-inner{height:64px}
+    .brand img{height:44px}
+    .mobile-nav{top:64px}
+    .hero-grid{padding:36px 0 28px}
+    .hero h1{font-size:34px;line-height:1.08}
+    .hero-kicker{padding:6px 14px 6px 8px}
+    .hero-kicker span{font-size:10px}
+    .hero p.lede{font-size:14px;margin:16px 0 22px}
+    .ctas{flex-direction:column;align-items:stretch}
+    .btn{justify-content:center}
+    .hero-visual{height:260px;margin-top:28px}
+    .hero-badge{width:88px;height:88px;font-size:10px;top:8px;right:6px}
+    .hero-badge strong{font-size:17px}
+    .hero-stats{flex-direction:column;gap:14px;margin-top:28px}
+    .hero-stats>div{display:flex;align-items:center;gap:14px}
+    .hero-stats .s-num{font-size:28px;min-width:56px}
+    .hero-stats .s-label{margin-top:0;font-size:11px}
+    .trust-row{grid-template-columns:1fr}
+    .trust-item{border-right:0;border-bottom:1px solid var(--rule)}
+    .trust-item:nth-child(odd){border-right:0}
+    .trust-item:last-child{border-bottom:0}
+    .product-grid{grid-template-columns:1fr;gap:14px}
+    .story-img{aspect-ratio:4/3}
+    .story-stamp{width:96px;height:96px;padding:14px;bottom:-14px;right:-8px}
+    .story-stamp .yr{font-size:24px}
+    .story-content h2{font-size:26px;margin-bottom:18px}
+    .story-content p{font-size:14px}
+    .certs-row{gap:8px}
+    .why-grid{grid-template-columns:1fr}
+    .why-card:last-child{grid-column:auto}
+    .why-card{padding:28px 22px}
+    .test-grid{grid-template-columns:1fr}
+    .test-grid .quote:last-child{grid-column:auto}
+    .quote blockquote{font-size:16px}
+    .news{padding:52px 0}
+    .news h2{font-size:24px}
+    .news-form{flex-direction:column;border-radius:10px;padding:8px;gap:6px}
+    .news-form input{padding:12px 16px}
+    .news-form button{width:100%;justify-content:center;border-radius:7px}
+    .foot-grid{grid-template-columns:1fr;gap:28px}
+    .foot-brand{grid-column:auto}
+    .section-head{margin-bottom:36px}
+    .section-head h2{font-size:26px}
+    .section-head p{font-size:14px}
+  }
+  svg{display:block}
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header class="header" data-screen-label="Header">
+  <div class="wrap header-inner">
+    <a class="brand" href="#">
+      <img src="assets/organiccabana/logo.png" alt="Organic Cabana — Start Organic Living" />
+    </a>
+    <nav class="nav">
+      <a href="#" class="active">Home</a>
+      <a href="#">Shop</a>
+      <a href="#">About</a>
+      <a href="#">Recipes</a>
+      <a href="#">Contact</a>
+    </nav>
+    <div class="header-right">
+      <a href="#" class="login">Sign in</a>
+      <button class="icon-btn" aria-label="Search">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+      </button>
+      <button class="icon-btn cart" aria-label="Cart">
+        <svg width="18" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 7h12l-1.2 11a2 2 0 0 1-2 1.8H9.2a2 2 0 0 1-2-1.8L6 7Z"/><path d="M9 7V5a3 3 0 0 1 6 0v2"/></svg>
+        <span class="cart-badge">3</span>
+      </button>
+      <button class="hamburger" id="hamburger" aria-label="Menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<nav class="mobile-nav" id="mobile-nav">
+  <a href="#" class="nav-link">Home</a>
+  <a href="#" class="nav-link">Shop</a>
+  <a href="#" class="nav-link">About</a>
+  <a href="#" class="nav-link">Recipes</a>
+  <a href="#" class="nav-link">Contact</a>
+  <div class="m-actions">
+    <a class="m-red" href="#">Shop Now →</a>
+    <a class="m-outline" href="#">Sign in</a>
+  </div>
+</nav>
+
+<!-- HERO — light sage background -->
+<section class="hero" data-screen-label="Hero">
+  <div class="hero-blobs">
+    <div class="blob blob-1"></div>
+    <div class="blob blob-2"></div>
+    <div class="blob blob-3"></div>
+  </div>
+  <svg class="hero-leaf-pattern" viewBox="0 0 1200 800" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <defs>
+      <pattern id="leaves" x="0" y="0" width="200" height="200" patternUnits="userSpaceOnUse" patternTransform="rotate(20)">
+        <path d="M50 100 C 50 60,85 40,120 55 C 110 95,80 115,50 100Z" fill="none" stroke="#5A9E2F" stroke-width="1.4" stroke-linecap="round"/>
+        <path d="M85 75 L110 60" stroke="#5A9E2F" stroke-width="1" stroke-linecap="round"/>
+        <circle cx="170" cy="170" r="2.5" fill="#5A9E2F"/>
+        <circle cx="20" cy="30" r="2" fill="#C0272D"/>
+      </pattern>
+    </defs>
+    <rect width="1200" height="800" fill="url(#leaves)"/>
+  </svg>
+
+  <div class="wrap hero-grid">
+    <div class="hero-copy">
+      <div class="hero-kicker">
+        <span class="leaf"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.5" stroke-linecap="round"><path d="M12 3c-3 5-3 9-3 12a3 3 0 0 0 6 0c0-3 0-7-3-12Z"/><path d="M6 16c-1.5 1-4 1-5 2"/><path d="M18 16c1.5 1 4 1 5 2"/></svg></span>
+        <span>100% Pure · 100% Organic · USDA Certified</span>
+      </div>
+      <h1>Nurture by nature.<br/><span class="red">Trusted by you.</span></h1>
+      <p class="lede">Premium organic staples — stone-ground flours, whole grains, lentils and superfoods. Grown clean, processed pure, delivered honest. No pesticides, no additives, no compromise.</p>
+      <div class="ctas">
+        <a class="btn btn-red" href="#">Shop Now <span class="arrow">→</span></a>
+        <a class="btn btn-green" href="#">Our Story</a>
+      </div>
+      <div class="hero-stats">
+        <div><div class="s-num">9+</div><div class="s-label">Organic products</div></div>
+        <div><div class="s-num">USDA</div><div class="s-label">Certified organic</div></div>
+        <div><div class="s-num">Zero</div><div class="s-label">Chemicals, ever</div></div>
+      </div>
+    </div>
+    <div class="hero-visual">
+      <div class="hero-badge"><strong>100%</strong>No Pesticides Ever</div>
+      <div class="hero-pack-glow"></div>
+      <div class="hero-pack">
+        <img src="assets/organiccabana/wheat-atta.jpg" alt="Organic Cabana Whole Wheat Atta 5kg" />
+      </div>
+      <div class="cert-badges">
+        <div class="cert">
+          <div class="ic"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10Z"/><path d="m9 12 2 2 4-4"/></svg></div>
+          <div><div class="ct">USDA Organic</div><div class="cs">Internationally certified</div></div>
+        </div>
+        <div class="cert">
+          <div class="ic"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M12 3c-3 5-3 9-3 12a3 3 0 0 0 6 0c0-3 0-7-3-12Z"/></svg></div>
+          <div><div class="ct">Jaivik Bharat</div><div class="cs">India Organic certified</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TRUST BAR -->
+<section class="trust" data-screen-label="Trust Bar">
+  <div class="wrap trust-row">
+    <div class="trust-item">
+      <div class="trust-ic">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10Z"/><path d="m9 12 2 2 4-4"/></svg>
+      </div>
+      <div>
+        <div class="trust-title">100% Organic</div>
+        <div class="trust-sub">USDA &amp; Jaivik Bharat certified</div>
+      </div>
+    </div>
+    <div class="trust-item">
+      <div class="trust-ic">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="m6 6 12 12"/></svg>
+      </div>
+      <div>
+        <div class="trust-title">Chemical Free</div>
+        <div class="trust-sub">No pesticides, no additives</div>
+      </div>
+    </div>
+    <div class="trust-item">
+      <div class="trust-ic">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M12 3v2M12 19v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M3 12h2M19 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>
+      </div>
+      <div>
+        <div class="trust-title">Stone Ground</div>
+        <div class="trust-sub">Nutrients preserved naturally</div>
+      </div>
+    </div>
+    <div class="trust-item">
+      <div class="trust-ic">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7h14l3 4v6h-2"/><circle cx="7" cy="18" r="2"/><circle cx="17" cy="18" r="2"/><path d="M3 7v11h2"/></svg>
+      </div>
+      <div>
+        <div class="trust-title">Pan-India Delivery</div>
+        <div class="trust-sub">Fresh from farm to your door</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FEATURED PRODUCTS -->
+<section class="pad products-bg" data-screen-label="Featured Products">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="ornament"><span class="line"></span><span class="eyebrow">Bestsellers</span><span class="line"></span></div>
+      <h2>Pure. Organic. Delicious.</h2>
+      <p>From stone-ground attas to ancient grain flours and protein-rich dals — every product is 100% organic, chemical-free and honestly labelled.</p>
+    </div>
+    <div class="product-grid">
+
+      <article class="product">
+        <div class="pic">
+          <span class="tag organic">Bestseller</span>
+          <button class="heart" aria-label="Save"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-7-4.5-9.5-9A5.5 5.5 0 0 1 12 6a5.5 5.5 0 0 1 9.5 6c-2.5 4.5-9.5 9-9.5 9Z"/></svg></button>
+          <img src="assets/organiccabana/wheat-atta.jpg" alt="Organic Whole Wheat Atta 5kg" />
+        </div>
+        <div class="body">
+          <div class="cat">Atta · 5 kg</div>
+          <h3>Organic Whole Wheat Atta</h3>
+          <p class="desc">Rich in fibre, stone ground. 100% whole wheat — soft rotis, every time. No blending, no maida, no compromise.</p>
+          <div class="stars">★★★★★ <span>(734)</span></div>
+          <div class="row">
+            <div class="price"><span class="now">₹349</span><span class="was">₹399</span></div>
+            <button class="add">Add →</button>
+          </div>
+        </div>
+      </article>
+
+      <article class="product">
+        <div class="pic">
+          <span class="tag organic">Bestseller</span>
+          <button class="heart" aria-label="Save"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-7-4.5-9.5-9A5.5 5.5 0 0 1 12 6a5.5 5.5 0 0 1 9.5 6c-2.5 4.5-9.5 9-9.5 9Z"/></svg></button>
+          <img src="assets/organiccabana/multigrain-atta.jpg" alt="Organic Multigrain Atta 5kg" />
+        </div>
+        <div class="body">
+          <div class="cat">Atta · 5 kg</div>
+          <h3>Organic Multigrain Atta</h3>
+          <p class="desc">7 super grains — wheat, jowar, bajra, ragi, oats, chana &amp; soyabean. High fibre, protein rich, stone ground.</p>
+          <div class="stars">★★★★★ <span>(521)</span></div>
+          <div class="row">
+            <div class="price"><span class="now">₹399</span><span class="was">₹449</span></div>
+            <button class="add">Add →</button>
+          </div>
+        </div>
+      </article>
+
+      <article class="product">
+        <div class="pic">
+          <span class="tag usda">USDA Organic</span>
+          <button class="heart" aria-label="Save"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-7-4.5-9.5-9A5.5 5.5 0 0 1 12 6a5.5 5.5 0 0 1 9.5 6c-2.5 4.5-9.5 9-9.5 9Z"/></svg></button>
+          <img src="assets/organiccabana/basmati-rice.jpg" alt="Organic Basmati Rice 1kg" />
+        </div>
+        <div class="body">
+          <div class="cat">Rice · 1 kg</div>
+          <h3>Organic Basmati Rice</h3>
+          <p class="desc">Aromatic, long grain, aged naturally. Sortex cleaned, BPA-free packaging. Sustainably grown, chemical free.</p>
+          <div class="stars">★★★★★ <span>(389)</span></div>
+          <div class="row">
+            <div class="price"><span class="now">₹279</span><span class="was">₹319</span></div>
+            <button class="add">Add →</button>
+          </div>
+        </div>
+      </article>
+
+      <article class="product">
+        <div class="pic">
+          <span class="tag gf">Gluten Free</span>
+          <button class="heart" aria-label="Save"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-7-4.5-9.5-9A5.5 5.5 0 0 1 12 6a5.5 5.5 0 0 1 9.5 6c-2.5 4.5-9.5 9-9.5 9Z"/></svg></button>
+          <img src="assets/organiccabana/ragi-flour.jpg" alt="Organic Ragi Flour 1kg" />
+        </div>
+        <div class="body">
+          <div class="cat">Ancient Grain · 1 kg</div>
+          <h3>Organic Ragi Flour</h3>
+          <p class="desc">Nutrient rich, high in calcium. Supports strong bones. Stone ground, no preservatives, naturally gluten free.</p>
+          <div class="stars">★★★★★ <span>(447)</span></div>
+          <div class="row">
+            <div class="price"><span class="now">₹179</span><span class="was">₹209</span></div>
+            <button class="add">Add →</button>
+          </div>
+        </div>
+      </article>
+
+    </div>
+    <div class="view-all"><a href="#">View All Products →</a></div>
+  </div>
+</section>
+
+<!-- BRAND STORY -->
+<section class="pad story" data-screen-label="Brand Story">
+  <div class="wrap story-grid">
+    <div class="story-img">
+      <img src="assets/organiccabana/toor-dal.jpg" alt="Organic Cabana Toor Dal — rich in protein, naturally nutritious" />
+      <div class="story-frame"></div>
+      <div class="story-stamp">
+        <div><div class="yr">9+</div><div class="lbl">Organic products</div></div>
+      </div>
+    </div>
+    <div class="story-content">
+      <div class="kicker"><span class="dot"></span><span class="eyebrow">Our story</span></div>
+      <h2>Grown clean. Processed pure. <em>Delivered honest.</em></h2>
+      <p>Organic Cabana started from one belief: the food on your plate should be exactly what the label says — nothing added, nothing hidden, nothing compromised. We saw the gap between what families deserved and what was available, and decided to fill it ourselves.</p>
+      <p>Every product in our range is sourced from certified organic farms, processed without synthetic chemicals, and packed fresh. Our range spans wheat atta and multigrain blends, long-grain basmati, Sona Masoori rice, protein-rich dals — toor, moong — and ancient grain flours like ragi and quinoa. Start Organic Living isn't just a tagline. It's a daily choice we make on your behalf.</p>
+      <div class="certs-row">
+        <div class="cert-pill"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10Z"/><path d="m9 12 2 2 4-4"/></svg>USDA Organic</div>
+        <div class="cert-pill"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M12 3c-3 5-3 9-3 12a3 3 0 0 0 6 0c0-3 0-7-3-12Z"/></svg>Jaivik Bharat</div>
+        <div class="cert-pill"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="m9 12 2 2 4-4"/></svg>India Organic</div>
+        <div class="cert-pill">100% Veg</div>
+      </div>
+      <a class="story-link" href="#">Read Our Full Story →</a>
+    </div>
+  </div>
+</section>
+
+<!-- WHY ORGANIC CABANA -->
+<section class="pad why" data-screen-label="Why Organic Cabana">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="ornament"><span class="line"></span><span class="eyebrow">The Organic Cabana promise</span><span class="line"></span></div>
+      <h2>Why choose organic?</h2>
+      <p>Three reasons our families switched — and never looked back.</p>
+    </div>
+    <div class="why-grid">
+      <div class="why-card">
+        <div class="num">01</div>
+        <div class="why-ic">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10Z"/><path d="m9 12 2 2 4-4"/></svg>
+        </div>
+        <h3>No pesticides. No shortcuts.</h3>
+        <p>Our farms are certified organic — no synthetic pesticides, no chemical fertilisers, no genetically modified seeds. What grows clean tastes better and does more for your body. Every product is tested before it reaches you.</p>
+      </div>
+      <div class="why-card">
+        <div class="num">02</div>
+        <div class="why-ic">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M12 3v2M12 19v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M3 12h2M19 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>
+        </div>
+        <h3>Stone-ground for nutrition</h3>
+        <p>Industrial roller milling strips away the bran and germ to extend shelf life. Our cold-press stone mills run slow, preserving natural oils, fibre and micronutrients that your body was always meant to have from whole grains.</p>
+      </div>
+      <div class="why-card">
+        <div class="num">03</div>
+        <div class="why-ic">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16"/><path d="M4 12h16"/><path d="M4 20h10"/><path d="M18 16l2 2 4-4"/></svg>
+        </div>
+        <h3>What the label says — nothing more</h3>
+        <p>Our ingredient list is the shortest in the category. One ingredient. No blends, no anti-caking agents, no natural flavours (which aren't natural). We print everything large because we have nothing to hide and everything to be proud of.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section class="pad test" data-screen-label="Testimonials">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="ornament"><span class="line"></span><span class="eyebrow">Happy families</span><span class="line"></span></div>
+      <h2>Trusted in kitchens across India</h2>
+      <p>Organic living starts with one switch. Here's what happened when families made it.</p>
+    </div>
+    <div class="test-grid">
+      <div class="quote">
+        <span class="mark">"</span>
+        <div class="stars">★★★★★</div>
+        <blockquote>"Switched to the Organic Whole Wheat Atta six months ago. The rotis are softer, the taste is wholesome, and I feel good knowing exactly what's in it. My children eat more chapattis now — that says everything."</blockquote>
+        <div class="who"><div class="ava">NK</div><div><div class="who-name">Nisha Kulkarni</div><div class="who-city">Pune</div></div></div>
+      </div>
+      <div class="quote">
+        <span class="mark">"</span>
+        <div class="stars">★★★★★</div>
+        <blockquote>"The Organic Toor Dal is visibly different — unpolished, full-grain, earthy smell. It cooks well, tastes the way dal used to taste when I was growing up. My diabetic father noticed the difference in how he feels after meals."</blockquote>
+        <div class="who"><div class="ava">AS</div><div><div class="who-name">Ajay Subramaniam</div><div class="who-city">Chennai</div></div></div>
+      </div>
+      <div class="quote">
+        <span class="mark">"</span>
+        <div class="stars">★★★★★</div>
+        <blockquote>"I ordered the Quinoa and Ragi Flour together. The quality is visible — clean, properly ground, no smell of chemicals. The USDA and Jaivik Bharat certifications give me confidence. Organic Cabana is now my default pantry."</blockquote>
+        <div class="who"><div class="ava">RM</div><div><div class="who-name">Ritu Mehrotra</div><div class="who-city">Delhi</div></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- NEWSLETTER -->
+<section class="news" data-screen-label="Newsletter">
+  <div class="wrap news-inner">
+    <div>
+      <div class="eyebrow">Join the Organic Family</div>
+      <h2>Recipes, farm stories &amp; ₹100 off your first order.</h2>
+      <p>One honest letter a month — seasonal produce news, organic cooking tips, new product launches, and exclusive offers for subscribers. No spam, ever.</p>
+      <form class="news-form" onsubmit="event.preventDefault()">
+        <input type="email" placeholder="your@email.com" />
+        <button type="submit">Subscribe →</button>
+      </form>
+      <div class="fine">By subscribing you agree to receive marketing emails. Unsubscribe any time.</div>
+    </div>
+    <div class="news-side">
+      <img src="assets/organiccabana/quinoa.jpg" alt="Organic Quinoa" />
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer data-screen-label="Footer">
+  <div class="wrap">
+    <div class="foot-grid">
+      <div class="foot-brand">
+        <img src="assets/organiccabana/logo.png" alt="Organic Cabana" />
+        <p>100% pure, 100% organic staples. USDA &amp; Jaivik Bharat certified. Nurture by Nature, Trusted by You.</p>
+        <div class="socials">
+          <a href="#" aria-label="Instagram"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r=".8" fill="currentColor"/></svg></a>
+          <a href="#" aria-label="Facebook"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M13 22v-8h3l.5-4H13V7.5c0-1.2.4-2 2-2h2V2.2C16.6 2.1 15.4 2 14 2c-3 0-5 1.8-5 5v3H6v4h3v8h4Z"/></svg></a>
+          <a href="#" aria-label="YouTube"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M22 12c0-3-.3-4.5-.8-5.2-.5-.7-1.3-1-2.2-1.1C17 5.5 12 5.5 12 5.5s-5 0-7 .2c-.9 0-1.7.4-2.2 1.1C2.3 7.5 2 9 2 12s.3 4.5.8 5.2c.5.7 1.3 1 2.2 1.1 2 .2 7 .2 7 .2s5 0 7-.2c.9 0 1.7-.4 2.2-1.1.5-.7.8-2.2.8-5.2Zm-12 3V9l5 3-5 3Z"/></svg></a>
+          <a href="#" aria-label="WhatsApp"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M20 4A10 10 0 0 0 4 16l-1 5 5-1A10 10 0 1 0 20 4Zm-8 17a8 8 0 0 1-4.3-1.2l-.3-.2-3 .7.8-3-.2-.3A8 8 0 1 1 12 21Zm4.6-5.6c-.3-.1-1.5-.7-1.7-.8-.2-.1-.4-.1-.6.1-.2.2-.7.8-.8 1-.1.1-.3.2-.5.1-1.5-.7-2.4-1.3-3.4-3-.3-.4.3-.4.7-1.3.1-.2 0-.4 0-.5 0-.1-.6-1.4-.8-1.9-.2-.5-.4-.4-.6-.4h-.5c-.2 0-.4 0-.6.3-.2.2-.8.8-.8 2s.8 2.3.9 2.5c.1.2 1.6 2.4 3.8 3.4 1.4.6 1.9.6 2.6.5.4 0 1.3-.5 1.5-1.1.2-.5.2-1 .1-1.1 0-.1-.2-.2-.5-.3Z"/></svg></a>
+        </div>
+      </div>
+      <div class="foot-col"><h4>Shop</h4><ul>
+        <li><a href="#">All products</a></li>
+        <li><a href="#">Atta &amp; Flours</a></li>
+        <li><a href="#">Organic Rice</a></li>
+        <li><a href="#">Dals &amp; Lentils</a></li>
+        <li><a href="#">Superfoods</a></li>
+      </ul></div>
+      <div class="foot-col"><h4>Company</h4><ul>
+        <li><a href="#">Our story</a></li>
+        <li><a href="#">Our farms</a></li>
+        <li><a href="#">Certifications</a></li>
+        <li><a href="#">Press &amp; media</a></li>
+        <li><a href="#">Careers</a></li>
+      </ul></div>
+      <div class="foot-col"><h4>Help</h4><ul>
+        <li><a href="#">Track your order</a></li>
+        <li><a href="#">Shipping &amp; returns</a></li>
+        <li><a href="#">FAQ</a></li>
+        <li><a href="#">Contact us</a></li>
+        <li><a href="#">Bulk &amp; wholesale</a></li>
+      </ul></div>
+      <div class="foot-col"><h4>Contact</h4><ul>
+        <li>Organic Cabana Foods</li>
+        <li>FSSAI Lic. 11417010000412</li>
+        <li><a href="#">hello@organiccabana.in</a></li>
+        <li>+91 98XXXX XXXX</li>
+      </ul></div>
+    </div>
+    <div class="copy">
+      <div>© 2026 Organic Cabana Foods. All rights reserved. · <a href="#">Privacy</a> · <a href="#">Terms</a> · 100% Veg · Non-GMO</div>
+      <div class="certs"><span>USDA</span><span>JAIVIK BHARAT</span><span>INDIA ORGANIC</span></div>
+    </div>
+  </div>
+</footer>
+
+<script>
+  const hamburger = document.getElementById('hamburger');
+  const mobileNav = document.getElementById('mobile-nav');
+  hamburger.addEventListener('click', () => {
+    const open = mobileNav.classList.toggle('open');
+    hamburger.classList.toggle('open', open);
+    hamburger.setAttribute('aria-expanded', open);
+    document.body.style.overflow = open ? 'hidden' : '';
+  });
+  mobileNav.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
+    mobileNav.classList.remove('open');
+    hamburger.classList.remove('open');
+    hamburger.setAttribute('aria-expanded','false');
+    document.body.style.overflow = '';
+  }));
+</script>
+</body>
+</html>

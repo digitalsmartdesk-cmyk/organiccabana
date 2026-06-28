@@ -1,0 +1,348 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<title>Organic Whole Wheat Atta 5kg — Organic Cabana</title>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Nunito:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+<style>
+  :root{--green:#5A9E2F;--green-deep:#2D5A16;--green-soft:#72B848;--green-tint:#EEF5E4;--green-tint-2:#D4E9BF;--red:#C0272D;--red-deep:#96181D;--cream:#F7F2E8;--cream-warm:#EDE5D0;--white:#FFFFFF;--ink:#2C1F0F;--ink-soft:#6B5744;--rule:rgba(44,31,15,.09);--rule-strong:rgba(44,31,15,.16)}
+  *{box-sizing:border-box;margin:0;padding:0}
+  html,body{background:var(--cream);color:var(--ink);font-family:'Nunito',sans-serif;font-size:15px;line-height:1.6;-webkit-font-smoothing:antialiased}
+  img{display:block;max-width:100%}
+  a{color:inherit;text-decoration:none}
+  button{font-family:inherit;cursor:pointer;border:0;background:none;color:inherit}
+  input{font-family:inherit;font-size:15px;color:var(--ink)}
+  h1,h2,h3,.serif{font-family:'Lora',serif;font-weight:600;letter-spacing:.01em}
+  .wrap{max-width:1200px;margin:0 auto;padding:0 40px}
+
+  /* HEADER */
+  .header{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.95);backdrop-filter:blur(12px);border-bottom:2px solid var(--green-tint)}
+  .header-inner{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;height:80px;gap:24px}
+  .brand img{height:52px;width:auto}
+  .nav{display:flex;gap:36px;justify-content:center}
+  .nav a{font-size:14px;font-weight:700;color:var(--ink);position:relative;padding:6px 0}
+  .nav a.active::after,.nav a:hover::after{content:"";position:absolute;left:0;right:0;bottom:-2px;height:2.5px;background:var(--red);border-radius:2px}
+  .header-right{display:flex;justify-content:flex-end;align-items:center;gap:16px}
+  .icon-btn{width:40px;height:40px;border-radius:8px;display:grid;place-items:center;color:var(--ink)}
+  .icon-btn:hover{background:var(--green-tint)}
+  .cart{position:relative}
+  .cart-badge{position:absolute;top:4px;right:4px;background:var(--red);color:#fff;font-size:10px;font-weight:800;min-width:16px;height:16px;border-radius:8px;display:grid;place-items:center;padding:0 3px}
+  .login{font-size:13px;font-weight:700;color:var(--green-deep)}
+  .login:hover{color:var(--red)}
+  .hamburger{display:none;flex-direction:column;justify-content:center;gap:5px;width:40px;height:40px;padding:8px;cursor:pointer;border:0;background:none;border-radius:8px}
+  .hamburger span{display:block;width:100%;height:2px;background:var(--ink);border-radius:2px;transition:transform .25s,opacity .2s}
+  .hamburger.open span:nth-child(1){transform:translateY(7px) rotate(45deg)}
+  .hamburger.open span:nth-child(2){opacity:0}
+  .hamburger.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
+  .mobile-nav{display:none;position:fixed;inset:0;top:80px;background:rgba(247,242,232,.98);z-index:40;flex-direction:column;padding:32px 24px;gap:0}
+  .mobile-nav.open{display:flex}
+  .mobile-nav a.nav-link{font-family:'Lora',serif;font-size:26px;font-weight:600;color:var(--ink);padding:16px 0;border-bottom:1px solid var(--rule);display:flex;justify-content:space-between;align-items:center}
+  .mobile-nav a.nav-link::after{content:"→";font-family:'Nunito',sans-serif;font-size:16px;color:var(--green)}
+  .mobile-nav .m-actions{display:flex;gap:12px;margin-top:28px}
+  .mobile-nav .m-actions a{font-size:13px;font-weight:800;padding:13px 20px;border-radius:8px;flex:1;text-align:center;text-transform:uppercase;letter-spacing:.08em}
+  .m-red{background:var(--red);color:#fff}
+  .m-outline{border:2px solid var(--green-deep);color:var(--green-deep)}
+
+  /* BREADCRUMB */
+  .breadcrumb{background:var(--white);border-bottom:1px solid var(--rule)}
+  .bc-inner{display:flex;align-items:center;gap:10px;padding:14px 0;font-size:12px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-soft)}
+  .bc-inner a:hover{color:var(--green-deep)}
+  .bc-inner .here{color:var(--green-deep)}
+  .bc-inner .sep{opacity:.5}
+
+  /* PDP */
+  .pdp{padding:32px 0 64px}
+  .pdp-grid{display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:start}
+
+  /* GALLERY */
+  .gallery{position:sticky;top:104px}
+  .main-img{aspect-ratio:1/1;background:var(--cream-warm);border-radius:14px;overflow:hidden;position:relative}
+  .main-img img{width:100%;height:100%;object-fit:cover}
+  .cert-overlay{position:absolute;bottom:14px;left:14px;display:flex;gap:8px}
+  .cert-badge{background:rgba(255,255,255,.94);border:1px solid var(--green-tint-2);border-radius:7px;padding:7px 12px;font-size:10px;font-weight:800;color:var(--green-deep);letter-spacing:.10em;text-transform:uppercase}
+  .thumbs{display:flex;gap:10px;margin-top:12px}
+  .thumb{width:72px;height:72px;border-radius:9px;overflow:hidden;background:var(--cream-warm);border:2px solid transparent;cursor:pointer;flex-shrink:0;transition:border-color .15s}
+  .thumb.on{border-color:var(--green)}
+  .thumb img{width:100%;height:100%;object-fit:cover}
+
+  /* INFO */
+  .info .cat{font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:var(--green);font-weight:800;margin-bottom:10px}
+  .info h1{font-family:'Lora',serif;font-size:40px;font-weight:700;line-height:1.06;margin-bottom:14px}
+  .info .stars-row{display:flex;align-items:center;gap:12px;margin-bottom:20px}
+  .info .stars{font-size:16px;color:var(--green);letter-spacing:2px}
+  .info .rating-num{font-size:14px;font-weight:700;color:var(--ink)}
+  .info .review-count{font-size:13px;color:var(--ink-soft);font-weight:600}
+  .info .review-count a{color:var(--green-deep);border-bottom:1px solid var(--green-tint-2)}
+  .price-block{display:flex;align-items:baseline;gap:12px;padding:20px 0;border-top:1px solid var(--rule);border-bottom:1px solid var(--rule);margin-bottom:20px}
+  .price-block .now{font-family:'Lora',serif;font-size:38px;color:var(--red);font-weight:700;line-height:1}
+  .price-block .was{font-size:18px;color:var(--ink-soft);text-decoration:line-through;font-weight:600}
+  .price-block .save{font-size:13px;font-weight:800;background:var(--green-tint);color:var(--green-deep);padding:5px 10px;border-radius:6px;letter-spacing:.08em}
+  .info .desc{font-size:15px;color:var(--ink-soft);line-height:1.7;margin-bottom:24px;font-weight:500}
+  /* size */
+  .size-row{margin-bottom:22px}
+  .size-label{font-size:11px;letter-spacing:.18em;text-transform:uppercase;font-weight:800;color:var(--green-deep);margin-bottom:10px}
+  .sizes{display:flex;gap:8px}
+  .sz{padding:9px 20px;border-radius:8px;border:1.5px solid var(--rule-strong);font-size:13px;font-weight:700;cursor:pointer;transition:all .15s}
+  .sz.on{border-color:var(--green);background:var(--green-tint);color:var(--green-deep)}
+  .sz:hover{border-color:var(--green)}
+  /* stepper + CTA */
+  .cta-row{display:grid;grid-template-columns:auto 1fr;gap:12px;margin-bottom:18px}
+  .stepper{display:flex;align-items:center;border:1.5px solid var(--rule-strong);border-radius:8px;overflow:hidden}
+  .stepper button{width:42px;height:48px;font-size:18px;font-weight:700;color:var(--ink);transition:background .15s}
+  .stepper button:hover{background:var(--green-tint)}
+  .stepper .qty{width:44px;text-align:center;font-size:16px;font-weight:800;border:0;outline:none;background:var(--white)}
+  .add-to-cart{display:flex;align-items:center;justify-content:center;gap:10px;background:var(--red);color:#fff;border-radius:8px;padding:14px;font-size:12px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;box-shadow:0 8px 24px -10px rgba(192,39,45,.45);transition:background .15s,transform .15s}
+  .add-to-cart:hover{background:var(--red-deep);transform:translateY(-1px)}
+  .wishlist-btn{display:flex;align-items:center;justify-content:center;gap:8px;padding:14px;border-radius:8px;border:1.5px solid var(--rule-strong);font-size:12px;font-weight:800;color:var(--ink);letter-spacing:.08em;text-transform:uppercase;width:100%;transition:all .15s;margin-bottom:20px}
+  .wishlist-btn:hover{border-color:var(--red);color:var(--red);background:var(--red-tint)}
+  /* highlights */
+  .highlights{display:flex;flex-direction:column;gap:10px;margin-bottom:22px}
+  .hl{display:flex;align-items:center;gap:12px;font-size:14px;font-weight:600;color:var(--ink-soft)}
+  .hl svg{color:var(--green-deep);flex-shrink:0}
+  /* cert row */
+  .cert-row{display:flex;gap:10px;flex-wrap:wrap;padding-top:16px;border-top:1px solid var(--rule)}
+  .cp{display:inline-flex;align-items:center;gap:6px;background:var(--green-tint);border:1px solid var(--green-tint-2);border-radius:6px;padding:7px 12px;font-size:10px;font-weight:800;color:var(--green-deep);letter-spacing:.10em;text-transform:uppercase}
+
+  /* FULL DESCRIPTION */
+  .full-desc{background:var(--white);padding:72px 0}
+  .fd-grid{display:grid;grid-template-columns:1fr 1.4fr;gap:72px;align-items:start}
+  .fd-left{position:sticky;top:104px}
+  .fd-left .eyebrow{font-size:11px;font-weight:800;letter-spacing:.24em;text-transform:uppercase;color:var(--green);margin-bottom:14px}
+  .fd-left h2{font-size:40px;line-height:1.08;margin-bottom:20px}
+  .fd-left h2 em{font-style:italic;color:var(--red)}
+  .fd-right p.lead{font-size:17px;color:var(--ink-soft);line-height:1.75;margin-bottom:20px;font-weight:500}
+  .fd-right p.lead::first-letter{font-family:'Lora',serif;font-size:52px;float:left;line-height:.9;padding:7px 10px 0 0;color:var(--green);font-weight:700}
+  .fd-right p{font-size:15px;color:var(--ink-soft);line-height:1.7;margin-bottom:14px;font-weight:500}
+  .specs{display:grid;grid-template-columns:1fr 1fr;margin-top:32px;padding-top:24px;border-top:1px solid var(--rule);gap:0}
+  .spec{padding:14px 0;border-bottom:1px solid var(--rule)}
+  .spec:nth-child(odd){padding-right:24px;border-right:1px solid var(--rule)}
+  .spec:nth-child(even){padding-left:24px}
+  .spec .sk{font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--ink-soft);font-weight:800;margin-bottom:4px}
+  .spec .sv{font-size:14px;font-weight:700;color:var(--green-deep)}
+
+  /* RELATED */
+  .related{padding:64px 0 80px}
+  .related-head{display:flex;align-items:baseline;justify-content:space-between;margin-bottom:28px}
+  .related-head h2{font-size:36px}
+  .related-head a{font-size:13px;font-weight:800;color:var(--green-deep);border-bottom:1.5px solid var(--green-tint-2)}
+  .related-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:20px}
+  .r-card{background:var(--white);border:1px solid var(--rule);border-radius:10px;overflow:hidden;transition:transform .2s,box-shadow .2s}
+  .r-card:hover{transform:translateY(-4px);box-shadow:0 16px 36px -18px rgba(44,31,15,.2)}
+  .r-card .pic{aspect-ratio:1/1;background:var(--cream-warm);overflow:hidden}
+  .r-card .pic img{width:100%;height:100%;object-fit:cover}
+  .r-card .body{padding:16px}
+  .r-card .cat{font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--green);font-weight:800;margin-bottom:5px}
+  .r-card h3{font-family:'Lora',serif;font-size:16px;font-weight:600;line-height:1.2;margin-bottom:10px}
+  .r-card .row{display:flex;align-items:center;justify-content:space-between}
+  .r-card .price{font-family:'Lora',serif;font-size:17px;color:var(--red);font-weight:700}
+  .r-add{display:inline-flex;align-items:center;gap:5px;background:var(--green);color:#fff;padding:8px 12px;border-radius:7px;font-size:11px;font-weight:800;letter-spacing:.08em;text-transform:uppercase}
+  .r-add:hover{background:var(--green-deep)}
+
+  /* FOOTER */
+  footer{background:#1A0F07;color:rgba(247,242,232,.7);padding:72px 0 0}
+  .foot-grid{display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr 1fr;gap:40px;padding-bottom:50px}
+  .foot-brand img{height:48px;background:var(--cream);padding:6px 10px;border-radius:8px}
+  .foot-brand p{margin-top:16px;font-size:13px;line-height:1.7;max-width:260px;color:rgba(247,242,232,.7);font-weight:500}
+  .foot-col h4{font-size:11px;font-weight:800;letter-spacing:.22em;text-transform:uppercase;color:var(--green-soft);margin-bottom:18px}
+  .foot-col ul{list-style:none;display:flex;flex-direction:column;gap:10px}
+  .foot-col a{font-size:13px;color:rgba(247,242,232,.7);font-weight:500}
+  .foot-col a:hover{color:#FFF8E7}
+  .copy{border-top:1px solid rgba(247,242,232,.10);padding:20px 0;display:flex;justify-content:space-between;font-size:12px;color:rgba(247,242,232,.45);font-weight:600}
+
+  @media(max-width:900px){
+    .wrap{padding:0 28px}
+    .header-inner{grid-template-columns:1fr auto;height:72px}
+    .nav,.login{display:none}
+    .hamburger{display:flex}
+    .mobile-nav{top:72px}
+    .pdp{padding:22px 0 48px}
+    .pdp-grid{grid-template-columns:1fr;gap:36px}
+    .gallery{position:static;max-width:520px;margin:0 auto;width:100%}
+    .info h1{font-size:32px}
+    .price-block .now{font-size:30px}
+    .fd-grid{grid-template-columns:1fr;gap:36px}
+    .fd-left{position:static}
+    .fd-left h2{font-size:32px}
+    .related-grid{grid-template-columns:repeat(2,1fr)}
+    .foot-grid{grid-template-columns:1fr 1fr;gap:30px}
+    .foot-brand{grid-column:1/-1}
+    .copy{flex-direction:column;gap:8px;text-align:center}
+  }
+  @media(max-width:600px){
+    .wrap{padding:0 18px}
+    .header-inner{height:64px}
+    .brand img{height:40px}
+    .mobile-nav{top:64px}
+    .info h1{font-size:26px}
+    .price-block .now{font-size:26px}
+    .price-block{flex-wrap:wrap;gap:8px}
+    .cta-row{grid-template-columns:1fr}
+    .stepper{width:100%;justify-content:space-between}
+    .thumbs{gap:6px}
+    .thumb{width:60px;height:60px}
+    .specs{grid-template-columns:1fr}
+    .spec:nth-child(odd){padding-right:0;border-right:0}
+    .spec:nth-child(even){padding-left:0}
+    .related-grid{grid-template-columns:1fr}
+    .fd-left h2{font-size:26px}
+    .foot-grid{grid-template-columns:1fr;gap:26px}
+    .foot-brand{grid-column:auto}
+  }
+  svg{display:block}
+</style>
+</head>
+<body>
+<header class="header">
+  <div class="wrap header-inner">
+    <a class="brand" href="Homepage.html"><img src="assets/logo.png" alt="Organic Cabana" /></a>
+    <nav class="nav">
+      <a href="Homepage.html">Home</a>
+      <a href="Shop.html" class="active">Shop</a>
+      <a href="#">About</a>
+      <a href="#">Recipes</a>
+      <a href="#">Contact</a>
+    </nav>
+    <div class="header-right">
+      <a href="Login.html" class="login">Sign in</a>
+      <button class="icon-btn cart" aria-label="Cart"><svg width="18" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 7h12l-1.2 11a2 2 0 0 1-2 1.8H9.2a2 2 0 0 1-2-1.8L6 7Z"/><path d="M9 7V5a3 3 0 0 1 6 0v2"/></svg><span class="cart-badge">3</span></button>
+      <button class="hamburger" id="hamburger"><span></span><span></span><span></span></button>
+    </div>
+  </div>
+</header>
+<nav class="mobile-nav" id="mobile-nav">
+  <a href="Homepage.html" class="nav-link">Home</a>
+  <a href="Shop.html" class="nav-link">Shop</a>
+  <a href="#" class="nav-link">About</a>
+  <a href="#" class="nav-link">Recipes</a>
+  <a href="#" class="nav-link">Contact</a>
+  <div class="m-actions"><a class="m-red" href="Checkout.html">Cart (3) →</a><a class="m-outline" href="Login.html">Sign in</a></div>
+</nav>
+
+<div class="breadcrumb"><div class="wrap bc-inner"><a href="Homepage.html">Home</a><span class="sep">›</span><a href="Shop.html">Shop</a><span class="sep">›</span><a href="#">Atta &amp; Flours</a><span class="sep">›</span><span class="here">Organic Whole Wheat Atta</span></div></div>
+
+<section class="pdp">
+  <div class="wrap pdp-grid">
+
+    <div class="gallery">
+      <div class="main-img">
+        <img src="assets/wheat-atta.jpg" alt="Organic Whole Wheat Atta 5kg" id="main-img" />
+        <div class="cert-overlay">
+          <span class="cert-badge">USDA Organic</span>
+          <span class="cert-badge">Jaivik Bharat</span>
+        </div>
+      </div>
+      <div class="thumbs">
+        <div class="thumb on" onclick="swapImg(this,'assets/wheat-atta.jpg')"><img src="assets/wheat-atta.jpg" alt="" /></div>
+        <div class="thumb" onclick="swapImg(this,'assets/multigrain-atta.jpg')"><img src="assets/multigrain-atta.jpg" alt="" /></div>
+        <div class="thumb" onclick="swapImg(this,'assets/ragi-flour.jpg')"><img src="assets/ragi-flour.jpg" alt="" /></div>
+        <div class="thumb" onclick="swapImg(this,'assets/besan.jpg')"><img src="assets/besan.jpg" alt="" /></div>
+      </div>
+    </div>
+
+    <div class="info">
+      <div class="cat">Atta &amp; Flours · 100% Organic</div>
+      <h1>Organic Whole Wheat Atta</h1>
+      <div class="stars-row">
+        <div class="stars">★★★★★</div>
+        <span class="rating-num">4.9</span>
+        <span class="review-count"><a href="#">734 reviews</a></span>
+      </div>
+      <div class="price-block">
+        <span class="now">₹349</span>
+        <span class="was">₹399</span>
+        <span class="save">Save 13%</span>
+      </div>
+      <p class="desc">Stone-ground from select organic wheat grains. Rich in fibre, source of protein — delivers soft, pliable rotis every single time. 100% whole wheat with no maida blending, no additives, no preservatives.</p>
+      <div class="size-row">
+        <div class="size-label">Select size</div>
+        <div class="sizes">
+          <button class="sz on">5 kg · ₹349</button>
+          <button class="sz">10 kg · ₹649</button>
+          <button class="sz">2 kg · ₹159</button>
+        </div>
+      </div>
+      <div class="highlights">
+        <div class="hl"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10Z"/><path d="m9 12 2 2 4-4"/></svg>USDA Organic &amp; Jaivik Bharat certified</div>
+        <div class="hl"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><circle cx="12" cy="12" r="3"/><path d="M12 3v2M12 19v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M3 12h2M19 12h2"/></svg>Cold-press stone milled for maximum nutrition</div>
+        <div class="hl"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="m6 6 12 12"/></svg>No maida, no preservatives, no additives</div>
+        <div class="hl"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M12 3c-3 5-3 9-3 12a3 3 0 0 0 6 0c0-3 0-7-3-12Z"/></svg>Single ingredient: Organic Whole Wheat</div>
+      </div>
+      <div class="cta-row">
+        <div class="stepper"><button onclick="changeQty(-1)">−</button><input type="number" class="qty" id="qty" value="1" min="1" max="10" /><button onclick="changeQty(1)">+</button></div>
+        <button class="add-to-cart">Add to Cart <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M6 7h12l-1.2 11a2 2 0 0 1-2 1.8H9.2a2 2 0 0 1-2-1.8L6 7Z"/><path d="M9 7V5a3 3 0 0 1 6 0v2"/></svg></button>
+      </div>
+      <button class="wishlist-btn"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-7-4.5-9.5-9A5.5 5.5 0 0 1 12 6a5.5 5.5 0 0 1 9.5 6c-2.5 4.5-9.5 9-9.5 9Z"/></svg>Save to Wishlist</button>
+      <div class="cert-row">
+        <div class="cp"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10Z"/><path d="m9 12 2 2 4-4"/></svg>USDA Organic</div>
+        <div class="cp">Jaivik Bharat</div>
+        <div class="cp">India Organic</div>
+        <div class="cp">100% Veg</div>
+        <div class="cp">Non-GMO</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="full-desc">
+  <div class="wrap fd-grid">
+    <div class="fd-left">
+      <div class="eyebrow">About this product</div>
+      <h2>The real taste of <em>whole wheat.</em></h2>
+      <p style="font-size:15px;color:var(--ink-soft);line-height:1.7;margin-top:12px;font-weight:500">Grown without pesticides, milled without compromise. This is atta the way it was always meant to be.</p>
+    </div>
+    <div class="fd-right">
+      <p class="lead">Organic Cabana Whole Wheat Atta begins with select organic wheat grains sourced from certified farms where no synthetic pesticides or chemical fertilisers have touched the soil. Every grain is verified before it enters our stone mills.</p>
+      <p>Our cold-press stone mills run slow, generating minimal heat. The result is flour that retains its natural wheat germ oil, bran, and endosperm intact — the nutritional profile that high-speed industrial roller mills routinely destroy to extend shelf life on supermarket shelves.</p>
+      <p>One ingredient. Organic whole wheat. Nothing else — no additives, no anti-caking agents, no maida blending, no preservatives. Our ingredient list is the shortest in the category because we have nothing to hide.</p>
+      <div class="specs">
+        <div class="spec"><div class="sk">Weight</div><div class="sv">5 kg</div></div>
+        <div class="spec"><div class="sk">Ingredients</div><div class="sv">100% Organic Whole Wheat</div></div>
+        <div class="spec"><div class="sk">Certification</div><div class="sv">USDA, Jaivik Bharat</div></div>
+        <div class="spec"><div class="sk">Milling</div><div class="sv">Cold-press stone milled</div></div>
+        <div class="spec"><div class="sk">Shelf life</div><div class="sv">6 months sealed · 2 months open</div></div>
+        <div class="spec"><div class="sk">Storage</div><div class="sv">Cool, dry place · Airtight container</div></div>
+        <div class="spec"><div class="sk">Protein</div><div class="sv">12g per 100g</div></div>
+        <div class="spec"><div class="sk">Fibre</div><div class="sv">10g per 100g</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="related">
+  <div class="wrap">
+    <div class="related-head"><h2>You might also like</h2><a href="Shop.html">View all →</a></div>
+    <div class="related-grid">
+      <div class="r-card"><div class="pic"><img src="assets/multigrain-atta.jpg" alt="Multigrain Atta" /></div><div class="body"><div class="cat">Atta</div><h3>Organic Multigrain Atta</h3><div class="row"><span class="price">₹399</span><button class="r-add">Add →</button></div></div></div>
+      <div class="r-card"><div class="pic"><img src="assets/ragi-flour.jpg" alt="Ragi Flour" /></div><div class="body"><div class="cat">Ancient Grain</div><h3>Organic Ragi Flour</h3><div class="row"><span class="price">₹179</span><button class="r-add">Add →</button></div></div></div>
+      <div class="r-card"><div class="pic"><img src="assets/besan.jpg" alt="Besan" /></div><div class="body"><div class="cat">Flour</div><h3>Organic Besan</h3><div class="row"><span class="price">₹149</span><button class="r-add">Add →</button></div></div></div>
+      <div class="r-card"><div class="pic"><img src="assets/toor-dal.jpg" alt="Toor Dal" /></div><div class="body"><div class="cat">Dal</div><h3>Organic Toor Dal</h3><div class="row"><span class="price">₹199</span><button class="r-add">Add →</button></div></div></div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="foot-grid">
+      <div class="foot-brand"><img src="assets/logo.png" alt="Organic Cabana" /><p>100% pure, 100% organic. USDA & Jaivik Bharat certified. Start Organic Living.</p></div>
+      <div class="foot-col"><h4>Shop</h4><ul><li><a href="Shop.html">All products</a></li><li><a href="#">Atta & Flours</a></li><li><a href="#">Organic Rice</a></li><li><a href="#">Dals</a></li><li><a href="#">Superfoods</a></li></ul></div>
+      <div class="foot-col"><h4>Company</h4><ul><li><a href="#">Our story</a></li><li><a href="#">Our farms</a></li><li><a href="#">Certifications</a></li><li><a href="#">Press</a></li></ul></div>
+      <div class="foot-col"><h4>Help</h4><ul><li><a href="Order Tracking.html">Track order</a></li><li><a href="#">Shipping</a></li><li><a href="#">Returns</a></li><li><a href="#">FAQ</a></li></ul></div>
+      <div class="foot-col"><h4>Account</h4><ul><li><a href="Login.html">Sign in</a></li><li><a href="Account.html">My orders</a></li><li><a href="#">Wishlist</a></li></ul></div>
+    </div>
+    <div class="copy"><div>© 2026 Organic Cabana Foods · FSSAI Lic. 11417010000412 · 100% Veg · Non-GMO</div></div>
+  </div>
+</footer>
+
+<script>
+  const hamburger=document.getElementById('hamburger'),mobileNav=document.getElementById('mobile-nav');
+  hamburger.addEventListener('click',()=>{const open=mobileNav.classList.toggle('open');hamburger.classList.toggle('open',open);document.body.style.overflow=open?'hidden':'';});
+  mobileNav.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>{mobileNav.classList.remove('open');hamburger.classList.remove('open');document.body.style.overflow='';}));
+  function changeQty(d){const inp=document.getElementById('qty');inp.value=Math.max(1,Math.min(10,parseInt(inp.value||1)+d));}
+  function swapImg(el,src){document.getElementById('main-img').src=src;document.querySelectorAll('.thumb').forEach(t=>t.classList.remove('on'));el.classList.add('on');}
+  document.querySelectorAll('.sz').forEach(b=>b.addEventListener('click',()=>{document.querySelectorAll('.sz').forEach(x=>x.classList.remove('on'));b.classList.add('on');}));
+</script>
+</body>
+</html>

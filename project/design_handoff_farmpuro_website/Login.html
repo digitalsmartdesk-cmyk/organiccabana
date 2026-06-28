@@ -1,0 +1,418 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<title>Sign In — Farm Puro</title>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400&family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+<style>
+  :root{
+    --green:#2D6A2D;--green-deep:#234E22;--green-soft:#3D7A3D;--green-tint:#EBF2E5;--green-tint-2:#DDE8D2;
+    --brown:#6B3A1F;--brown-deep:#4E2A14;
+    --cream:#FAF7F2;--cream-warm:#F1EBDF;
+    --gold:#C8860A;--gold-soft:#E0A93C;
+    --ink:#1F1A14;--ink-soft:#5B5347;
+    --rule:rgba(31,26,20,.10);--rule-strong:rgba(31,26,20,.18);
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html,body{background:var(--cream);color:var(--ink);font-family:'DM Sans',sans-serif;font-size:15px;line-height:1.55;-webkit-font-smoothing:antialiased;min-height:100vh}
+  img{display:block;max-width:100%}
+  a{color:inherit;text-decoration:none}
+  button{font-family:inherit;cursor:pointer;border:0;background:none;color:inherit}
+  input{font-family:inherit;font-size:15px;color:var(--ink)}
+  h1,h2,h3,.serif{font-family:'Playfair Display',serif;font-weight:600;letter-spacing:-.01em}
+  .wrap{max-width:1200px;margin:0 auto;padding:0 40px}
+
+  /* ====================== HEADER ====================== */
+  .header{position:sticky;top:0;z-index:50;background:rgba(250,247,242,.92);backdrop-filter:saturate(140%) blur(10px);border-bottom:1px solid var(--rule)}
+  .header-inner{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;height:84px;gap:24px}
+  .brand{display:flex;align-items:center;gap:10px}
+  .brand img{height:54px;width:auto}
+  .nav{display:flex;gap:38px;justify-content:center}
+  .nav a{font-size:14px;font-weight:500;color:var(--ink);letter-spacing:.02em;position:relative;padding:6px 0}
+  .nav a:hover::after{content:"";position:absolute;left:0;right:0;bottom:-2px;height:2px;background:var(--gold)}
+  .header-right{display:flex;justify-content:flex-end;align-items:center;gap:18px}
+  .icon-btn{width:40px;height:40px;border-radius:50%;display:grid;place-items:center;color:var(--ink);transition:background .2s}
+  .icon-btn:hover{background:rgba(45,106,45,.08)}
+  .cart{position:relative}
+  .cart-badge{position:absolute;top:4px;right:4px;background:var(--gold);color:#fff;font-size:10px;font-weight:700;min-width:16px;height:16px;border-radius:8px;display:grid;place-items:center;padding:0 4px}
+  .login-link{font-size:13px;font-weight:500;color:var(--ink-soft)}
+  .login-link:hover{color:var(--green)}
+
+  /* ====================== HAMBURGER ====================== */
+  .hamburger{display:none;flex-direction:column;justify-content:center;gap:5px;width:40px;height:40px;padding:8px;cursor:pointer;border:0;background:none;border-radius:6px}
+  .hamburger span{display:block;width:100%;height:1.5px;background:var(--ink);border-radius:2px;transition:transform .25s,opacity .2s}
+  .hamburger.open span:nth-child(1){transform:translateY(6.5px) rotate(45deg)}
+  .hamburger.open span:nth-child(2){opacity:0}
+  .hamburger.open span:nth-child(3){transform:translateY(-6.5px) rotate(-45deg)}
+  .mobile-nav{display:none;position:fixed;inset:0;top:70px;background:rgba(250,247,242,.97);backdrop-filter:blur(10px);z-index:40;flex-direction:column;padding:32px 24px;gap:0;overflow-y:auto}
+  .mobile-nav.open{display:flex}
+  .mobile-nav a.nav-link{font-family:'Playfair Display',serif;font-size:26px;font-weight:500;color:var(--ink);padding:16px 0;border-bottom:1px solid var(--rule);display:flex;justify-content:space-between;align-items:center}
+  .mobile-nav a.nav-link::after{content:"→";font-family:'DM Sans',sans-serif;font-size:16px;color:var(--gold)}
+  .mobile-nav .m-actions{display:flex;gap:12px;margin-top:32px}
+  .mobile-nav .m-actions a{font-size:14px;font-weight:600;padding:14px 20px;border-radius:999px;flex:1;text-align:center}
+  .mobile-nav .m-gold{background:var(--gold);color:#1F1409}
+  .mobile-nav .m-outline{border:1.5px solid var(--brown);color:var(--brown-deep)}
+
+  /* ====================== PAGE LAYOUT ====================== */
+  .page{display:grid;grid-template-columns:1fr 1fr;min-height:calc(100vh - 84px)}
+
+  /* LEFT — brand panel */
+  .brand-panel{background:var(--green);color:#F4EFE3;padding:72px 60px;display:flex;flex-direction:column;justify-content:space-between;position:relative;overflow:hidden}
+  .bp-pattern{position:absolute;inset:0;opacity:.08;pointer-events:none}
+  .bp-content{position:relative;z-index:1}
+  .bp-eyebrow{font-size:11px;letter-spacing:.26em;text-transform:uppercase;font-weight:600;color:var(--gold-soft);margin-bottom:20px;display:flex;align-items:center;gap:10px}
+  .bp-eyebrow::before{content:"";width:28px;height:1px;background:var(--gold-soft)}
+  .bp-content h2{font-family:'Playfair Display',serif;font-size:52px;line-height:1.04;font-weight:500;color:#FFF8E7;letter-spacing:-.02em}
+  .bp-content h2 em{font-style:italic;color:var(--gold-soft)}
+  .bp-content p{margin-top:20px;font-size:16px;line-height:1.65;color:rgba(244,239,227,.75);max-width:380px}
+  .bp-stats{position:relative;z-index:1;display:flex;gap:36px;padding-top:40px;border-top:1px solid rgba(244,239,227,.15);margin-top:60px}
+  .bp-stats .s-num{font-family:'Playfair Display',serif;font-size:34px;color:var(--gold-soft);line-height:1}
+  .bp-stats .s-lbl{font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:rgba(244,239,227,.6);margin-top:5px}
+  .bp-bottom{position:relative;z-index:1}
+  .bp-quote{font-family:'Playfair Display',serif;font-style:italic;font-size:17px;line-height:1.55;color:rgba(244,239,227,.78);padding-left:18px;border-left:2px solid var(--gold-soft)}
+  .bp-jar{position:absolute;bottom:-40px;right:-30px;width:280px;opacity:.18;pointer-events:none;filter:drop-shadow(0 20px 40px rgba(0,0,0,.4))}
+
+  /* RIGHT — form panel */
+  .form-panel{display:flex;align-items:center;justify-content:center;padding:60px 48px;background:var(--cream)}
+  .form-box{width:100%;max-width:420px}
+
+  /* Tabs */
+  .tabs{display:flex;background:rgba(45,106,45,.06);border-radius:999px;padding:5px;margin-bottom:36px}
+  .tabs button{flex:1;padding:11px 20px;border-radius:999px;font-size:14px;font-weight:600;letter-spacing:.02em;color:var(--ink-soft);transition:color .15s, background .15s}
+  .tabs button.on{background:#fff;color:var(--green-deep);box-shadow:0 2px 12px -4px rgba(31,26,20,.18)}
+
+  /* Form heading */
+  .form-heading{margin-bottom:28px}
+  .form-heading .eyebrow{font-size:11px;letter-spacing:.24em;text-transform:uppercase;font-weight:600;color:var(--gold);margin-bottom:10px}
+  .form-heading h1{font-family:'Playfair Display',serif;font-size:34px;font-weight:500;line-height:1.1;letter-spacing:-.01em}
+  .form-heading h1 em{font-style:italic;color:var(--green-deep)}
+  .form-heading p{font-size:14px;color:var(--ink-soft);margin-top:8px}
+  .form-heading p a{color:var(--brown-deep);font-weight:600;border-bottom:1px solid var(--gold)}
+
+  /* Google button */
+  .google-btn{width:100%;display:flex;align-items:center;justify-content:center;gap:12px;padding:14px 20px;background:#fff;border:1.5px solid var(--rule-strong);border-radius:12px;font-size:14px;font-weight:600;color:var(--ink);transition:border-color .15s, box-shadow .15s;margin-bottom:20px}
+  .google-btn:hover{border-color:var(--brown);box-shadow:0 4px 14px -8px rgba(31,26,20,.2)}
+  .google-ic{width:20px;height:20px;flex-shrink:0}
+
+  .divider{display:flex;align-items:center;gap:14px;margin-bottom:20px}
+  .divider::before,.divider::after{content:"";flex:1;height:1px;background:var(--rule)}
+  .divider span{font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--ink-soft);font-weight:600;white-space:nowrap}
+
+  /* Fields */
+  .field{display:flex;flex-direction:column;gap:7px;margin-bottom:16px}
+  .field label{font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--brown-deep);font-weight:700;display:flex;justify-content:space-between;align-items:center}
+  .field label a{font-family:'DM Sans',sans-serif;font-size:11px;letter-spacing:.04em;text-transform:none;color:var(--ink-soft);font-weight:500;border-bottom:1px solid var(--rule)}
+  .field label a:hover{color:var(--brown-deep)}
+  .input-wrap{position:relative}
+  .input{width:100%;background:var(--cream-warm);border:1.5px solid var(--rule);border-radius:10px;padding:14px 16px;font-size:15px;color:var(--ink);transition:border-color .15s, background .15s, box-shadow .15s;outline:none}
+  .input:hover{border-color:var(--rule-strong)}
+  .input:focus{border-color:var(--green);background:#fff;box-shadow:0 0 0 4px rgba(45,106,45,.10)}
+  .input::placeholder{color:#A29A8B}
+  .eye-btn{position:absolute;right:14px;top:50%;transform:translateY(-50%);color:var(--ink-soft);padding:4px;border-radius:4px}
+  .eye-btn:hover{color:var(--green-deep)}
+
+  /* Remember me */
+  .remember{display:flex;align-items:center;gap:10px;margin-bottom:22px}
+  .remember input[type="checkbox"]{width:18px;height:18px;accent-color:var(--green);cursor:pointer}
+  .remember label{font-size:13px;color:var(--ink-soft);cursor:pointer}
+
+  /* Submit */
+  .submit{width:100%;display:flex;align-items:center;justify-content:center;gap:12px;background:var(--gold);color:#1F1409;border-radius:12px;padding:17px 22px;font-size:13px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;box-shadow:0 16px 32px -14px rgba(200,134,10,.6),inset 0 -3px 0 rgba(31,20,9,.18);transition:transform .15s, background .15s, box-shadow .15s;position:relative;overflow:hidden}
+  .submit::before{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(255,255,255,.16),transparent 40%);pointer-events:none}
+  .submit:hover{background:#A66E07;transform:translateY(-1px);box-shadow:0 20px 40px -14px rgba(200,134,10,.7),inset 0 -3px 0 rgba(31,20,9,.22)}
+
+  /* Register form (hidden by default) */
+  .form-body{transition:opacity .2s}
+  .form-body.hidden{display:none}
+
+  /* Name row for register */
+  .name-row{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+
+  /* Bottom note */
+  .form-note{margin-top:20px;font-size:12px;color:var(--ink-soft);text-align:center;line-height:1.55}
+  .form-note a{color:var(--brown-deep);font-weight:500;border-bottom:1px solid rgba(107,58,31,.3)}
+
+  /* Trust mini strip */
+  .trust-strip{display:flex;justify-content:center;gap:24px;margin-top:28px;padding-top:22px;border-top:1px solid var(--rule)}
+  .trust-strip .t{display:inline-flex;align-items:center;gap:7px;font-size:11px;color:var(--ink-soft);letter-spacing:.04em}
+  .trust-strip svg{color:var(--green)}
+
+  /* ====================== FOOTER (mini) ====================== */
+  footer.mini{background:#1A1410;color:rgba(244,239,227,.55);padding:26px 0}
+  .mini-inner{display:flex;align-items:center;justify-content:space-between;font-size:12px}
+  .mini-inner .links{display:flex;gap:24px}
+  .mini-inner a:hover{color:#FFF8E7}
+  .mini-inner .l{display:inline-flex;align-items:center;gap:8px;color:rgba(244,239,227,.75)}
+  .mini-inner .l svg{color:var(--gold-soft)}
+
+  /* ====================== RESPONSIVE ====================== */
+  @media(max-width:900px){
+    .wrap{padding:0 28px}
+    .header-inner{grid-template-columns:1fr auto;height:70px}
+    .nav,.login-link{display:none}
+    .hamburger{display:flex}
+    .mobile-nav{top:70px}
+    .page{grid-template-columns:1fr;min-height:auto}
+    .brand-panel{padding:48px 36px 40px;display:none}
+    .form-panel{padding:48px 36px}
+    .mini-inner{flex-direction:column;gap:14px;text-align:center}
+    .mini-inner .links{justify-content:center}
+  }
+  @media(max-width:600px){
+    .wrap{padding:0 18px}
+    .header-inner{height:64px}
+    .brand img{height:42px}
+    .mobile-nav{top:64px}
+    .form-panel{padding:32px 20px}
+    .form-box{max-width:100%}
+    .form-heading h1{font-size:28px}
+    .name-row{grid-template-columns:1fr}
+  }
+  svg{display:block}
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header class="header" data-screen-label="Header">
+  <div class="wrap header-inner">
+    <a class="brand" href="Homepage.html">
+      <img src="assets/logo.png" alt="Farm Puro Chutneys" />
+    </a>
+    <nav class="nav">
+      <a href="Homepage.html">Home</a>
+      <a href="Shop.html">Shop</a>
+      <a href="#">About</a>
+      <a href="#">Recipes</a>
+      <a href="#">Contact</a>
+    </nav>
+    <div class="header-right">
+      <a href="Account.html" class="login-link">Sign in</a>
+      <button class="icon-btn cart" aria-label="Cart">
+        <svg width="18" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6 7h12l-1.2 11a2 2 0 0 1-2 1.8H9.2a2 2 0 0 1-2-1.8L6 7Z"/><path d="M9 7V5a3 3 0 0 1 6 0v2"/></svg>
+        <span class="cart-badge">2</span>
+      </button>
+      <button class="hamburger" id="hamburger" aria-label="Menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<nav class="mobile-nav" id="mobile-nav">
+  <a href="Homepage.html" class="nav-link">Home</a>
+  <a href="Shop.html" class="nav-link">Shop</a>
+  <a href="#" class="nav-link">About</a>
+  <a href="#" class="nav-link">Recipes</a>
+  <a href="#" class="nav-link">Contact</a>
+  <div class="m-actions">
+    <a class="m-gold" href="Shop.html">Shop Now →</a>
+    <a class="m-outline" href="#">Sign in</a>
+  </div>
+</nav>
+
+<!-- PAGE -->
+<main class="page" data-screen-label="Login Page">
+
+  <!-- LEFT — brand panel -->
+  <div class="brand-panel">
+    <svg class="bp-pattern" viewBox="0 0 600 900" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+      <defs>
+        <pattern id="lp" x="0" y="0" width="180" height="180" patternUnits="userSpaceOnUse" patternTransform="rotate(18)">
+          <path d="M30 90 C 30 50,70 28,110 48 C 100 88,70 110,30 90 Z M70 68 L100 52" fill="none" stroke="#E0A93C" stroke-width="1.3" stroke-linecap="round"/>
+          <circle cx="150" cy="150" r="2" fill="#E0A93C"/>
+        </pattern>
+      </defs>
+      <rect width="600" height="900" fill="url(#lp)"/>
+    </svg>
+    <div class="bp-content">
+      <div class="bp-eyebrow">Farm Puro account</div>
+      <h2>Your jars, your history, your <em>kitchen.</em></h2>
+      <p>Sign in to track orders, reorder your favourites in one tap, save delivery addresses, and get early access to new batches before they sell out.</p>
+      <div class="bp-stats">
+        <div><div class="s-num">9</div><div class="s-lbl">Recipes available</div></div>
+        <div><div class="s-num">48h</div><div class="s-lbl">Avg. dispatch time</div></div>
+        <div><div class="s-num">0</div><div class="s-lbl">Preservatives, ever</div></div>
+      </div>
+    </div>
+    <div class="bp-bottom">
+      <p class="bp-quote">"Open a jar and smell your mother's kitchen."</p>
+    </div>
+    <img class="bp-jar" src="assets/coriander-mint.jpg" alt="" aria-hidden="true" />
+  </div>
+
+  <!-- RIGHT — form panel -->
+  <div class="form-panel">
+    <div class="form-box">
+
+      <!-- Tabs -->
+      <div class="tabs" role="tablist">
+        <button class="on" id="tab-signin" role="tab" aria-selected="true">Sign In</button>
+        <button id="tab-register" role="tab" aria-selected="false">Create Account</button>
+      </div>
+
+      <!-- SIGN IN FORM -->
+      <div class="form-body" id="body-signin">
+        <div class="form-heading">
+          <div class="eyebrow">Welcome back</div>
+          <h1>Good to see you <em>again.</em></h1>
+          <p>New to Farm Puro? <a href="#" id="go-register">Create a free account</a></p>
+        </div>
+
+        <button class="google-btn" type="button">
+          <svg class="google-ic" viewBox="0 0 24 24"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l3.66-2.84z" fill="#FBBC05"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/></svg>
+          Continue with Google
+        </button>
+
+        <div class="divider"><span>or sign in with email</span></div>
+
+        <form onsubmit="event.preventDefault(); window.location.href='Account.html'">
+          <div class="field">
+            <label>Email address</label>
+            <div class="input-wrap">
+              <input class="input" type="email" placeholder="you@example.com" value="ananya.k@gmail.com" />
+            </div>
+          </div>
+          <div class="field">
+            <label>
+              Password
+              <a href="#">Forgot password?</a>
+            </label>
+            <div class="input-wrap">
+              <input class="input" type="password" id="pw-signin" placeholder="Your password" value="••••••••••" style="padding-right:46px" />
+              <button type="button" class="eye-btn" id="eye-signin" aria-label="Show password">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z"/><circle cx="12" cy="12" r="3"/></svg>
+              </button>
+            </div>
+          </div>
+          <div class="remember">
+            <input type="checkbox" id="remember" checked />
+            <label for="remember">Keep me signed in for 30 days</label>
+          </div>
+          <button class="submit" type="submit">
+            Sign In
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+          </button>
+        </form>
+
+        <div class="trust-strip">
+          <span class="t"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg>256-bit SSL</span>
+          <span class="t"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="m9 12 2 2 4-4"/><circle cx="12" cy="12" r="9"/></svg>We never share your data</span>
+        </div>
+      </div>
+
+      <!-- CREATE ACCOUNT FORM -->
+      <div class="form-body hidden" id="body-register">
+        <div class="form-heading">
+          <div class="eyebrow">Join Farm Puro</div>
+          <h1>Create your <em>account.</em></h1>
+          <p>Already have an account? <a href="#" id="go-signin">Sign in instead</a></p>
+        </div>
+
+        <button class="google-btn" type="button">
+          <svg class="google-ic" viewBox="0 0 24 24"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l3.66-2.84z" fill="#FBBC05"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/></svg>
+          Continue with Google
+        </button>
+
+        <div class="divider"><span>or register with email</span></div>
+
+        <form onsubmit="event.preventDefault()">
+          <div class="name-row">
+            <div class="field">
+              <label>First name</label>
+              <input class="input" type="text" placeholder="Ananya" />
+            </div>
+            <div class="field">
+              <label>Last name</label>
+              <input class="input" type="text" placeholder="Krishnan" />
+            </div>
+          </div>
+          <div class="field">
+            <label>Email address</label>
+            <input class="input" type="email" placeholder="you@example.com" />
+          </div>
+          <div class="field">
+            <label>Password</label>
+            <div class="input-wrap">
+              <input class="input" type="password" id="pw-reg" placeholder="Min. 8 characters" style="padding-right:46px" />
+              <button type="button" class="eye-btn" id="eye-reg" aria-label="Show password">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z"/><circle cx="12" cy="12" r="3"/></svg>
+              </button>
+            </div>
+          </div>
+          <button class="submit" type="submit" style="margin-top:6px">
+            Create Account
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+          </button>
+        </form>
+
+        <div class="form-note">By creating an account you agree to Farm Puro's <a href="#">Terms of Service</a> and <a href="#">Privacy Policy</a>.</div>
+      </div>
+
+    </div>
+  </div>
+</main>
+
+<!-- MINI FOOTER -->
+<footer class="mini">
+  <div class="wrap mini-inner">
+    <div class="l">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg>
+      Your information is protected with 256-bit SSL encryption
+    </div>
+    <div class="links">
+      <a href="#">Help</a>
+      <a href="#">Privacy</a>
+      <a href="#">Terms</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // Hamburger
+  const hamburger = document.getElementById('hamburger');
+  const mobileNav = document.getElementById('mobile-nav');
+  hamburger.addEventListener('click', () => {
+    const open = mobileNav.classList.toggle('open');
+    hamburger.classList.toggle('open', open);
+    hamburger.setAttribute('aria-expanded', open);
+    document.body.style.overflow = open ? 'hidden' : '';
+  });
+  mobileNav.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
+    mobileNav.classList.remove('open');
+    hamburger.classList.remove('open');
+    hamburger.setAttribute('aria-expanded','false');
+    document.body.style.overflow = '';
+  }));
+
+  // Tab switching
+  function showTab(tab) {
+    const isSignin = tab === 'signin';
+    document.getElementById('tab-signin').classList.toggle('on', isSignin);
+    document.getElementById('tab-register').classList.toggle('on', !isSignin);
+    document.getElementById('body-signin').classList.toggle('hidden', !isSignin);
+    document.getElementById('body-register').classList.toggle('hidden', isSignin);
+  }
+  document.getElementById('tab-signin').addEventListener('click', () => showTab('signin'));
+  document.getElementById('tab-register').addEventListener('click', () => showTab('register'));
+  document.getElementById('go-register').addEventListener('click', e => { e.preventDefault(); showTab('register'); });
+  document.getElementById('go-signin').addEventListener('click', e => { e.preventDefault(); showTab('signin'); });
+
+  // Password show/hide
+  function togglePw(inputId, btnId) {
+    const input = document.getElementById(inputId);
+    const btn = document.getElementById(btnId);
+    btn.addEventListener('click', () => {
+      const show = input.type === 'password';
+      input.type = show ? 'text' : 'password';
+      btn.style.color = show ? 'var(--green)' : '';
+    });
+  }
+  togglePw('pw-signin','eye-signin');
+  togglePw('pw-reg','eye-reg');
+</script>
+</body>
+</html>

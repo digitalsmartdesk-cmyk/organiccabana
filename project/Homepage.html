@@ -1,0 +1,592 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<title>Farm Puro Chutneys — Authentic Indian Chutneys, Made Fresh</title>
+<meta name="viewport" content="width=1280" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+<style>
+  :root{
+    --green:#2D6A2D;
+    --green-deep:#234E22;
+    --green-soft:#3D7A3D;
+    --brown:#6B3A1F;
+    --brown-deep:#4E2A14;
+    --cream:#FAF7F2;
+    --cream-warm:#F1EBDF;
+    --gold:#C8860A;
+    --gold-soft:#E0A93C;
+    --ink:#1F1A14;
+    --ink-soft:#5B5347;
+    --rule:rgba(31,26,20,.10);
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html,body{background:var(--cream);color:var(--ink);font-family:'Inter',sans-serif;font-size:15px;line-height:1.55;-webkit-font-smoothing:antialiased}
+  img{display:block;max-width:100%}
+  a{color:inherit;text-decoration:none}
+  button{font-family:inherit;cursor:pointer;border:0;background:none;color:inherit}
+  .wrap{max-width:1200px;margin:0 auto;padding:0 40px}
+  h1,h2,h3,h4,.serif{font-family:'Playfair Display',serif;font-weight:600;letter-spacing:-.01em;color:var(--ink)}
+  .eyebrow{font-family:'Inter',sans-serif;font-size:12px;font-weight:600;letter-spacing:.22em;text-transform:uppercase;color:var(--gold)}
+
+  /* ====================== HEADER ====================== */
+  .header{position:sticky;top:0;z-index:50;background:rgba(250,247,242,.92);backdrop-filter:saturate(140%) blur(10px);border-bottom:1px solid var(--rule)}
+  .header-inner{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;height:84px;gap:24px}
+  .brand{display:flex;align-items:center;gap:10px}
+  .brand img{height:54px;width:auto}
+  .nav{display:flex;gap:38px;justify-content:center}
+  .nav a{font-size:14px;font-weight:500;color:var(--ink);letter-spacing:.02em;position:relative;padding:6px 0}
+  .nav a.active::after,.nav a:hover::after{content:"";position:absolute;left:0;right:0;bottom:-2px;height:2px;background:var(--gold)}
+  .header-right{display:flex;justify-content:flex-end;align-items:center;gap:18px}
+  .icon-btn{width:40px;height:40px;border-radius:50%;display:grid;place-items:center;color:var(--ink);transition:background .2s}
+  .icon-btn:hover{background:rgba(45,106,45,.08)}
+  .cart{position:relative}
+  .cart-badge{position:absolute;top:4px;right:4px;background:var(--gold);color:#fff;font-size:10px;font-weight:700;min-width:16px;height:16px;border-radius:8px;display:grid;place-items:center;padding:0 4px}
+  .login{font-size:13px;font-weight:500;color:var(--ink-soft)}
+  .login:hover{color:var(--green)}
+
+  /* ====================== HERO ====================== */
+  .hero{position:relative;min-height:calc(100vh - 84px);background:var(--green);color:#F4EFE3;overflow:hidden;display:flex;align-items:center}
+  .hero-pattern{position:absolute;inset:0;opacity:.08;pointer-events:none}
+  .hero-grid{position:relative;display:grid;grid-template-columns:1.05fr .95fr;gap:64px;align-items:center;width:100%;padding:80px 0}
+  .hero-eyebrow{display:inline-flex;align-items:center;gap:10px;font-size:12px;letter-spacing:.24em;text-transform:uppercase;font-weight:600;color:var(--gold-soft);margin-bottom:24px}
+  .hero-eyebrow .dot{width:6px;height:6px;background:var(--gold-soft);border-radius:50%}
+  .hero h1{font-family:'Playfair Display',serif;font-weight:500;color:#FFF8E7;font-size:80px;line-height:1.04;letter-spacing:-.02em}
+  .hero h1 em{font-style:italic;color:var(--gold-soft);font-weight:500}
+  .hero p.lede{font-size:18px;line-height:1.6;color:rgba(244,239,227,.78);margin:28px 0 40px;max-width:520px}
+  .ctas{display:flex;gap:14px;align-items:center}
+  .btn{display:inline-flex;align-items:center;gap:10px;padding:16px 28px;border-radius:999px;font-weight:600;font-size:14px;letter-spacing:.04em;transition:transform .15s, background .2s, color .2s}
+  .btn-gold{background:var(--gold);color:#1F1409}
+  .btn-gold:hover{background:var(--gold-soft);transform:translateY(-1px)}
+  .btn-outline{border:1.5px solid rgba(244,239,227,.5);color:#F4EFE3}
+  .btn-outline:hover{background:rgba(244,239,227,.08);border-color:#F4EFE3}
+  .btn .arrow{transition:transform .2s}
+  .btn:hover .arrow{transform:translateX(3px)}
+
+  .hero-stats{display:flex;gap:40px;margin-top:60px;padding-top:32px;border-top:1px solid rgba(244,239,227,.18);max-width:520px}
+  .hero-stats .s-num{font-family:'Playfair Display',serif;font-size:32px;color:var(--gold-soft);line-height:1}
+  .hero-stats .s-label{font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:rgba(244,239,227,.65);margin-top:6px}
+
+  /* Hero jar showcase */
+  .hero-visual{position:relative;height:560px}
+  .hero-jar{position:absolute;width:100%;height:100%;display:grid;place-items:center}
+  .hero-jar::before{content:"";position:absolute;inset:30px;background:radial-gradient(ellipse at center,rgba(200,134,10,.22),transparent 65%);filter:blur(20px)}
+  .hero-jar img{position:relative;max-height:560px;width:auto;filter:drop-shadow(0 30px 50px rgba(0,0,0,.4))}
+  .hero-badge{position:absolute;top:30px;right:20px;background:var(--cream);color:var(--green);width:120px;height:120px;border-radius:50%;display:grid;place-items:center;text-align:center;font-family:'Playfair Display',serif;font-style:italic;font-size:14px;line-height:1.2;transform:rotate(-8deg);box-shadow:0 8px 24px rgba(0,0,0,.2);z-index:2}
+  .hero-badge strong{display:block;font-family:'Playfair Display',serif;font-size:26px;font-style:normal;font-weight:600;color:var(--gold)}
+
+  .scroll-cue{position:absolute;left:50%;bottom:24px;transform:translateX(-50%);font-size:11px;letter-spacing:.3em;color:rgba(244,239,227,.5);text-transform:uppercase;display:flex;flex-direction:column;align-items:center;gap:10px}
+  .scroll-cue::after{content:"";width:1px;height:28px;background:rgba(244,239,227,.4)}
+
+  /* ====================== TRUST BAR ====================== */
+  .trust{background:var(--cream-warm);border-top:1px solid rgba(107,58,31,.08);border-bottom:1px solid rgba(107,58,31,.08)}
+  .trust-row{display:grid;grid-template-columns:repeat(4,1fr);align-items:center;padding:36px 0}
+  .trust-item{display:flex;align-items:center;gap:18px;padding:0 24px;border-right:1px solid rgba(107,58,31,.14)}
+  .trust-item:last-child{border-right:0}
+  .trust-ic{flex-shrink:0;width:48px;height:48px;border-radius:50%;background:#fff;display:grid;place-items:center;color:var(--green);border:1px solid rgba(45,106,45,.16)}
+  .trust-title{font-family:'Playfair Display',serif;font-size:17px;font-weight:600;color:var(--brown-deep);line-height:1.15}
+  .trust-sub{font-size:12px;color:var(--ink-soft);margin-top:2px;letter-spacing:.02em}
+
+  /* ====================== SECTIONS ====================== */
+  section.pad{padding:110px 0}
+  .section-head{text-align:center;margin-bottom:60px}
+  .section-head h2{font-size:48px;line-height:1.1;margin:14px 0 14px}
+  .section-head p{color:var(--ink-soft);font-size:16px;max-width:560px;margin:0 auto}
+  .ornament{display:flex;align-items:center;justify-content:center;gap:14px;color:var(--gold)}
+  .ornament .line{width:32px;height:1px;background:currentColor}
+
+  /* PRODUCTS */
+  .product-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:28px}
+  .product{background:#fff;border:1px solid var(--rule);border-radius:6px;overflow:hidden;display:flex;flex-direction:column;transition:transform .25s, box-shadow .25s;position:relative}
+  .product:hover{transform:translateY(-4px);box-shadow:0 18px 40px -16px rgba(31,26,20,.18)}
+  .product .pic{position:relative;aspect-ratio:1/1.05;background:var(--cream-warm);overflow:hidden}
+  .product .pic img{width:100%;height:100%;object-fit:cover;transition:transform .5s}
+  .product:hover .pic img{transform:scale(1.04)}
+  .tag{position:absolute;top:14px;left:14px;background:var(--green);color:#fff;font-size:10px;letter-spacing:.16em;text-transform:uppercase;font-weight:600;padding:5px 10px;border-radius:3px}
+  .tag.gold{background:var(--gold)}
+  .heart{position:absolute;top:14px;right:14px;width:34px;height:34px;border-radius:50%;background:rgba(255,255,255,.92);display:grid;place-items:center;color:var(--brown)}
+  .product .body{padding:22px 22px 24px;display:flex;flex-direction:column;gap:8px;flex:1}
+  .product .region{font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);font-weight:600}
+  .product h3{font-size:22px;line-height:1.15;font-weight:600}
+  .product .desc{font-size:13px;color:var(--ink-soft);line-height:1.5;flex:1}
+  .product .stars{display:flex;gap:2px;align-items:center;font-size:12px;color:var(--gold);margin-top:4px}
+  .product .stars span{color:var(--ink-soft);margin-left:6px}
+  .product .row{display:flex;align-items:center;justify-content:space-between;margin-top:14px;padding-top:18px;border-top:1px dashed var(--rule)}
+  .price{display:flex;align-items:baseline;gap:8px}
+  .price .now{font-family:'Playfair Display',serif;font-size:22px;color:var(--brown-deep);font-weight:600}
+  .price .was{font-size:13px;color:var(--ink-soft);text-decoration:line-through}
+  .add{display:inline-flex;align-items:center;gap:8px;background:var(--green);color:#fff;padding:10px 16px;border-radius:999px;font-size:12px;font-weight:600;letter-spacing:.06em}
+  .add:hover{background:var(--green-deep)}
+
+  .view-all{text-align:center;margin-top:50px}
+  .view-all a{display:inline-flex;align-items:center;gap:10px;color:var(--brown);font-weight:600;font-size:14px;letter-spacing:.06em;border-bottom:1px solid var(--brown);padding-bottom:4px}
+  .view-all a:hover{color:var(--green)}
+
+  /* BRAND STORY */
+  .story{background:var(--cream-warm)}
+  .story-grid{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center}
+  .story-img{position:relative;aspect-ratio:4/5;border-radius:4px;overflow:hidden}
+  .story-img img{width:100%;height:100%;object-fit:cover}
+  .story-img::after{content:"";position:absolute;inset:0;box-shadow:inset 0 0 0 8px var(--cream-warm), inset 0 0 0 9px var(--gold)}
+  .story-stamp{position:absolute;bottom:-30px;right:-30px;width:160px;height:160px;border-radius:50%;background:var(--green);color:var(--gold-soft);display:grid;place-items:center;text-align:center;padding:30px;z-index:2}
+  .story-stamp .yr{font-family:'Playfair Display',serif;font-size:42px;line-height:1;color:var(--gold-soft)}
+  .story-stamp .lbl{font-size:9px;letter-spacing:.22em;text-transform:uppercase;color:#F4EFE3;margin-top:6px}
+  .story-content h2{font-size:48px;line-height:1.1;margin:18px 0 28px}
+  .story-content p{color:var(--ink-soft);font-size:16px;margin-bottom:18px;line-height:1.7}
+  .story-content p:first-letter{font-family:'Playfair Display',serif;font-size:50px;float:left;line-height:.9;padding:6px 10px 0 0;color:var(--brown);font-weight:600}
+  .story-content p + p:first-letter{font-size:inherit;float:none;padding:0;color:inherit;font-family:inherit}
+  .story-link{display:inline-flex;align-items:center;gap:12px;margin-top:14px;color:var(--brown);font-weight:600;letter-spacing:.04em;border-bottom:1px solid var(--brown);padding-bottom:4px}
+  .signature{margin-top:36px;display:flex;align-items:center;gap:18px}
+  .signature .sig{font-family:'Playfair Display',serif;font-style:italic;font-size:28px;color:var(--brown)}
+  .signature .who{font-size:12px;color:var(--ink-soft);letter-spacing:.08em;text-transform:uppercase}
+
+  /* WHY */
+  .why-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:28px}
+  .why-card{background:#fff;border:1px solid var(--rule);padding:44px 36px;border-radius:6px;position:relative}
+  .why-card .num{position:absolute;top:24px;right:30px;font-family:'Playfair Display',serif;font-size:42px;color:rgba(45,106,45,.10);font-style:italic}
+  .why-ic{width:56px;height:56px;border-radius:50%;background:rgba(45,106,45,.08);color:var(--green);display:grid;place-items:center;margin-bottom:28px}
+  .why-card h3{font-size:24px;line-height:1.2;margin-bottom:14px}
+  .why-card p{color:var(--ink-soft);font-size:14px;line-height:1.65}
+
+  /* TESTIMONIALS */
+  .test{background:var(--green-deep);color:#F4EFE3;position:relative;overflow:hidden}
+  .test .section-head h2{color:#FFF8E7}
+  .test .section-head p{color:rgba(244,239,227,.7)}
+  .test .ornament{color:var(--gold-soft)}
+  .test .eyebrow{color:var(--gold-soft)}
+  .test-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:28px}
+  .quote{background:rgba(255,255,255,.04);border:1px solid rgba(244,239,227,.12);border-radius:6px;padding:36px 32px;position:relative}
+  .quote .mark{font-family:'Playfair Display',serif;font-size:88px;line-height:1;color:var(--gold-soft);position:absolute;top:6px;left:24px;opacity:.4}
+  .quote .stars{color:var(--gold-soft);font-size:14px;margin-bottom:18px;position:relative;letter-spacing:2px}
+  .quote blockquote{font-family:'Playfair Display',serif;font-style:italic;font-size:19px;line-height:1.5;color:#FFF8E7;margin-bottom:28px;position:relative}
+  .who{display:flex;align-items:center;gap:14px;padding-top:20px;border-top:1px solid rgba(244,239,227,.12)}
+  .ava{width:42px;height:42px;border-radius:50%;background:var(--gold);color:#1F1409;display:grid;place-items:center;font-weight:600;font-family:'Playfair Display',serif;font-size:16px}
+  .who-name{font-size:14px;font-weight:600;color:#FFF8E7}
+  .who-city{font-size:12px;color:rgba(244,239,227,.6);margin-top:2px;letter-spacing:.04em}
+
+  /* NEWSLETTER */
+  .news{background:var(--brown);color:#F4EFE3;padding:88px 0;position:relative;overflow:hidden}
+  .news-pattern{position:absolute;inset:0;opacity:.06;pointer-events:none}
+  .news-inner{display:grid;grid-template-columns:1.05fr .95fr;gap:60px;align-items:center;position:relative}
+  .news h2{color:#FFF8E7;font-size:42px;line-height:1.1;margin:12px 0 14px}
+  .news p{color:rgba(244,239,227,.78);font-size:15px;max-width:480px}
+  .news .eyebrow{color:var(--gold-soft)}
+  .news-form{display:flex;background:rgba(255,255,255,.95);border-radius:999px;padding:6px;align-items:center}
+  .news-form input{flex:1;border:0;background:transparent;padding:14px 22px;font-family:inherit;font-size:14px;color:var(--ink);outline:none}
+  .news-form input::placeholder{color:var(--ink-soft)}
+  .news-form button{background:var(--green);color:#fff;padding:14px 26px;border-radius:999px;font-weight:600;font-size:13px;letter-spacing:.06em;display:inline-flex;align-items:center;gap:8px}
+  .news-form button:hover{background:var(--green-deep)}
+  .news .fine{font-size:12px;color:rgba(244,239,227,.55);margin-top:14px}
+
+  /* FOOTER */
+  footer{background:#1A1410;color:rgba(244,239,227,.7);padding:80px 0 0}
+  .foot-grid{display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr 1fr;gap:48px;padding-bottom:60px}
+  .foot-brand img{height:60px;background:#FAF7F2;padding:8px;border-radius:6px}
+  .foot-brand p{margin-top:20px;font-size:13px;line-height:1.7;max-width:280px}
+  .socials{display:flex;gap:10px;margin-top:24px}
+  .socials a{width:36px;height:36px;border-radius:50%;border:1px solid rgba(244,239,227,.18);display:grid;place-items:center;color:rgba(244,239,227,.7)}
+  .socials a:hover{background:var(--gold);color:#1F1409;border-color:var(--gold)}
+  .foot-col h4{font-family:'Inter',sans-serif;font-size:12px;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:var(--gold-soft);margin-bottom:22px}
+  .foot-col ul{list-style:none;display:flex;flex-direction:column;gap:12px}
+  .foot-col a{font-size:13px;color:rgba(244,239,227,.7)}
+  .foot-col a:hover{color:#FFF8E7}
+  .copy{border-top:1px solid rgba(244,239,227,.10);padding:24px 0;display:flex;justify-content:space-between;align-items:center;font-size:12px;color:rgba(244,239,227,.45)}
+  .copy .pays{display:flex;gap:10px;align-items:center}
+  .copy .pays span{padding:4px 10px;border:1px solid rgba(244,239,227,.14);border-radius:4px;font-size:10px;letter-spacing:.1em;font-weight:600}
+
+  svg{display:block}
+</style>
+</head>
+<body>
+
+<!-- ====================== HEADER ====================== -->
+<header class="header" data-screen-label="Header">
+  <div class="wrap header-inner">
+    <a class="brand" href="#">
+      <img src="assets/logo.png" alt="Farm Puro Chutneys" />
+    </a>
+    <nav class="nav">
+      <a href="#" class="active">Home</a>
+      <a href="#">Shop</a>
+      <a href="#">About</a>
+      <a href="#">Recipes</a>
+      <a href="#">Contact</a>
+    </nav>
+    <div class="header-right">
+      <a href="#" class="login">Sign in</a>
+      <button class="icon-btn" aria-label="Search">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+      </button>
+      <button class="icon-btn cart" aria-label="Cart">
+        <svg width="18" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6 7h12l-1.2 11a2 2 0 0 1-2 1.8H9.2a2 2 0 0 1-2-1.8L6 7Z"/><path d="M9 7V5a3 3 0 0 1 6 0v2"/></svg>
+        <span class="cart-badge">2</span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<!-- ====================== HERO ====================== -->
+<section class="hero" data-screen-label="Hero">
+  <!-- leaf pattern -->
+  <svg class="hero-pattern" viewBox="0 0 1200 800" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <defs>
+      <pattern id="leaves" x="0" y="0" width="220" height="220" patternUnits="userSpaceOnUse" patternTransform="rotate(15)">
+        <path d="M40 110 C 40 60, 90 30, 140 50 C 130 100, 90 130, 40 110 Z M90 80 L 130 60" fill="none" stroke="#E0A93C" stroke-width="1.4" stroke-linecap="round"/>
+        <path d="M150 170 C 150 130, 190 110, 220 130 C 210 170, 180 195, 150 170 Z M180 145 L 210 130" fill="none" stroke="#E0A93C" stroke-width="1.4" stroke-linecap="round"/>
+        <circle cx="20" cy="200" r="2" fill="#E0A93C"/>
+        <circle cx="200" cy="20" r="2" fill="#E0A93C"/>
+        <circle cx="110" cy="160" r="1.5" fill="#E0A93C"/>
+      </pattern>
+    </defs>
+    <rect width="1200" height="800" fill="url(#leaves)"/>
+  </svg>
+
+  <div class="wrap hero-grid">
+    <div class="hero-copy">
+      <div class="hero-eyebrow"><span class="dot"></span>Handcrafted in small batches · Since 1987</div>
+      <h1>The taste of <em>nani's kitchen</em>, sealed in a jar.</h1>
+      <p class="lede">Slow-cooked chutneys made from heirloom recipes, single-origin spices and produce sourced directly from Indian farms — never a preservative in sight.</p>
+      <div class="ctas">
+        <a class="btn btn-gold" href="#">Shop Now <span class="arrow">→</span></a>
+        <a class="btn btn-outline" href="#">Our Story</a>
+      </div>
+      <div class="hero-stats">
+        <div><div class="s-num">12</div><div class="s-label">Regional recipes</div></div>
+        <div><div class="s-num">100%</div><div class="s-label">Natural ingredients</div></div>
+        <div><div class="s-num">4.9★</div><div class="s-label">From 2,400+ reviews</div></div>
+      </div>
+    </div>
+    <div class="hero-visual">
+      <div class="hero-badge"><div><strong>₹40</strong>off your first jar</div></div>
+      <div class="hero-jar"><img src="assets/coriander-mint.jpg" alt="Coriander Mint Chutney" /></div>
+    </div>
+  </div>
+
+  <div class="scroll-cue">Scroll</div>
+</section>
+
+<!-- ====================== TRUST BAR ====================== -->
+<section class="trust" data-screen-label="Trust Bar">
+  <div class="wrap trust-row">
+    <div class="trust-item">
+      <div class="trust-ic">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v3"/><path d="M5 8h14l-1.2 11a2 2 0 0 1-2 1.8H8.2a2 2 0 0 1-2-1.8L5 8Z"/><path d="M9 12c1 1.5 5 1.5 6 0"/></svg>
+      </div>
+      <div>
+        <div class="trust-title">Made Fresh</div>
+        <div class="trust-sub">Cooked weekly, never warehoused</div>
+      </div>
+    </div>
+    <div class="trust-item">
+      <div class="trust-ic">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="m6 6 12 12"/></svg>
+      </div>
+      <div>
+        <div class="trust-title">No Preservatives</div>
+        <div class="trust-sub">Zero additives or stabilisers</div>
+      </div>
+    </div>
+    <div class="trust-item">
+      <div class="trust-ic">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3c-3 4-3 7-3 10a3 3 0 1 0 6 0c0-3 0-6-3-10Z"/><path d="M7 14c-2 .5-3.5 2.5-3.5 5"/><path d="M17 14c2 .5 3.5 2.5 3.5 5"/></svg>
+      </div>
+      <div>
+        <div class="trust-title">Natural Ingredients</div>
+        <div class="trust-sub">Farm-direct, single-origin</div>
+      </div>
+    </div>
+    <div class="trust-item">
+      <div class="trust-ic">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M5 21h14"/><path d="M6 17h12l-1.5-7H7.5L6 17Z"/><path d="M9 10c0-2 1-4 3-4s3 2 3 4"/><path d="M12 6V3"/></svg>
+      </div>
+      <div>
+        <div class="trust-title">Authentic Taste</div>
+        <div class="trust-sub">Heirloom recipes, hand-ground</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ====================== FEATURED PRODUCTS ====================== -->
+<section class="pad" data-screen-label="Featured Products">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="ornament"><span class="line"></span><span class="eyebrow">Bestsellers</span><span class="line"></span></div>
+      <h2>Our most-loved chutneys</h2>
+      <p>Twelve regional recipes, slow-cooked on copper kadhais and bottled the same day. Here are four to begin your journey.</p>
+    </div>
+
+    <div class="product-grid">
+      <!-- Card 1 -->
+      <article class="product">
+        <div class="pic">
+          <span class="tag">Bestseller</span>
+          <button class="heart" aria-label="Save">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-7-4.5-9.5-9A5.5 5.5 0 0 1 12 6a5.5 5.5 0 0 1 9.5 6c-2.5 4.5-9.5 9-9.5 9Z"/></svg>
+          </button>
+          <img src="assets/coriander-mint.jpg" alt="Coriander Mint Chutney" />
+        </div>
+        <div class="body">
+          <div class="region">North Indian</div>
+          <h3>Coriander Mint Chutney</h3>
+          <p class="desc">Hand-ground fresh coriander, garden mint and green chillies. The classic everyday companion.</p>
+          <div class="stars">★★★★★ <span>(412)</span></div>
+          <div class="row">
+            <div class="price"><span class="now">₹249</span><span class="was">₹299</span></div>
+            <button class="add">Add to Cart →</button>
+          </div>
+        </div>
+      </article>
+
+      <!-- Card 2 -->
+      <article class="product">
+        <div class="pic">
+          <span class="tag gold">Limited</span>
+          <button class="heart" aria-label="Save">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-7-4.5-9.5-9A5.5 5.5 0 0 1 12 6a5.5 5.5 0 0 1 9.5 6c-2.5 4.5-9.5 9-9.5 9Z"/></svg>
+          </button>
+          <img src="assets/tamarind-date.jpg" alt="Tamarind Date Chutney" />
+        </div>
+        <div class="body">
+          <div class="region">Punjabi Meetha</div>
+          <h3>Tamarind &amp; Date</h3>
+          <p class="desc">Slow-reduced Medjool dates and aged tamarind, kissed with roasted cumin and black salt.</p>
+          <div class="stars">★★★★★ <span>(389)</span></div>
+          <div class="row">
+            <div class="price"><span class="now">₹279</span><span class="was">₹329</span></div>
+            <button class="add">Add to Cart →</button>
+          </div>
+        </div>
+      </article>
+
+      <!-- Card 3 -->
+      <article class="product">
+        <div class="pic">
+          <button class="heart" aria-label="Save">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-7-4.5-9.5-9A5.5 5.5 0 0 1 12 6a5.5 5.5 0 0 1 9.5 6c-2.5 4.5-9.5 9-9.5 9Z"/></svg>
+          </button>
+          <img src="assets/coconut.jpg" alt="Coconut Chutney" />
+        </div>
+        <div class="body">
+          <div class="region">South Indian</div>
+          <h3>Coconut Chutney</h3>
+          <p class="desc">Fresh-grated Kerala coconut, curry leaves and a tempering of mustard and urad dal.</p>
+          <div class="stars">★★★★☆ <span>(256)</span></div>
+          <div class="row">
+            <div class="price"><span class="now">₹229</span><span class="was">₹269</span></div>
+            <button class="add">Add to Cart →</button>
+          </div>
+        </div>
+      </article>
+
+      <!-- Card 4 -->
+      <article class="product">
+        <div class="pic">
+          <span class="tag">Hot</span>
+          <button class="heart" aria-label="Save">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-7-4.5-9.5-9A5.5 5.5 0 0 1 12 6a5.5 5.5 0 0 1 9.5 6c-2.5 4.5-9.5 9-9.5 9Z"/></svg>
+          </button>
+          <img src="assets/garlic-red.jpg" alt="Garlic Red Chutney" />
+        </div>
+        <div class="body">
+          <div class="region">Maharashtrian</div>
+          <h3>Garlic Red Chutney</h3>
+          <p class="desc">Kashmiri red chillies, roasted garlic and crushed peanuts — bold, smoky and warming.</p>
+          <div class="stars">★★★★★ <span>(508)</span></div>
+          <div class="row">
+            <div class="price"><span class="now">₹259</span><span class="was">₹299</span></div>
+            <button class="add">Add to Cart →</button>
+          </div>
+        </div>
+      </article>
+    </div>
+
+    <div class="view-all"><a href="#">View all 12 chutneys →</a></div>
+  </div>
+</section>
+
+<!-- ====================== BRAND STORY ====================== -->
+<section class="pad story" data-screen-label="Brand Story">
+  <div class="wrap story-grid">
+    <div class="story-img">
+      <img src="assets/story.jpg" alt="Hand-ground curry leaf chutney with stone mortar" />
+      <div class="story-stamp">
+        <div><div class="yr">38</div><div class="lbl">Years of tradition</div></div>
+      </div>
+    </div>
+    <div class="story-content">
+      <div class="ornament" style="justify-content:flex-start"><span class="eyebrow">Our story</span><span class="line"></span></div>
+      <h2>From a Pune kitchen to your dining table.</h2>
+      <p>Farm Puro began in 1987 in Aaji's tiny third-floor flat in Sadashiv Peth, where she ground chutneys on a stone <em>paata</em> for half the neighbourhood. The neighbours brought back empty jars and ten-rupee notes. The recipes stayed the same.</p>
+      <p>Three generations later, we still cook in small copper kadhais, still source our tamarind from the same orchard in Andhra, and still refuse to add a single thing that doesn't belong. Every jar is a promise — that what tasted like home then, will taste like home now.</p>
+      <a class="story-link" href="#">Read our full journey <span>→</span></a>
+      <div class="signature">
+        <div>
+          <div class="sig">Aarav &amp; Meera Joshi</div>
+          <div class="who">3rd-generation founders</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ====================== WHY FARM PURO ====================== -->
+<section class="pad" data-screen-label="Why Farm Puro" style="background:var(--cream)">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="ornament"><span class="line"></span><span class="eyebrow">The Farm Puro promise</span><span class="line"></span></div>
+      <h2>Why we make chutney differently</h2>
+      <p>No shortcuts, no synthetics, no compromises. Just the way it was made before factories decided otherwise.</p>
+    </div>
+    <div class="why-grid">
+      <div class="why-card">
+        <div class="num">01</div>
+        <div class="why-ic">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12c4-4 8-4 12 0s4 8 0 12c-4-4-4-8 0-12Z" transform="translate(-1 -3)"/><path d="M14 6c2-2 5-2 7 0"/></svg>
+        </div>
+        <h3>Farm-direct sourcing</h3>
+        <p>We buy tamarind from Andhra orchards, coconuts from Kerala backyards and chillies from Guntur — paying farmers 20% above market price and skipping every middleman in between.</p>
+      </div>
+      <div class="why-card">
+        <div class="num">02</div>
+        <div class="why-ic">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 19c0-3 3-5 7-5s7 2 7 5"/><path d="M12 14V9"/><path d="M9 9h6"/><path d="M10 5h4l-1 4h-2L10 5Z"/></svg>
+        </div>
+        <h3>Hand-ground, small batch</h3>
+        <p>Every jar starts on a stone slab, not a steel blade. We cook in 8-kilo copper kadhais — slow enough to coax out the flavour, small enough to taste-test by the spoonful.</p>
+      </div>
+      <div class="why-card">
+        <div class="num">03</div>
+        <div class="why-ic">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="m9 12 2 2 4-4"/></svg>
+        </div>
+        <h3>Zero preservatives, FSSAI-certified</h3>
+        <p>Cold-filled into amber glass, sealed within four hours of cooking and refrigerated through transit. The shelf life is shorter — the taste is the same as the day it was made.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ====================== TESTIMONIALS ====================== -->
+<section class="pad test" data-screen-label="Testimonials">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="ornament"><span class="line"></span><span class="eyebrow">Kind words</span><span class="line"></span></div>
+      <h2>Loved across India</h2>
+      <p>A small selection of 2,400+ reviews from kitchens we'll never visit.</p>
+    </div>
+    <div class="test-grid">
+      <div class="quote">
+        <span class="mark">"</span>
+        <div class="stars">★★★★★</div>
+        <blockquote>"This is the first store-bought chutney my mother has approved of. She tasted the imli and said only one word — <em>bilkul</em>. That's the highest praise in our house."</blockquote>
+        <div class="who"><div class="ava">PS</div><div><div class="who-name">Priya Sharma</div><div class="who-city">New Delhi</div></div></div>
+      </div>
+      <div class="quote">
+        <span class="mark">"</span>
+        <div class="stars">★★★★★</div>
+        <blockquote>"I run a small dosa cart in Bengaluru and started buying Farm Puro coconut chutney for weekends I'm short-staffed. My regulars haven't noticed a thing. Better than my own, honestly."</blockquote>
+        <div class="who"><div class="ava">RK</div><div><div class="who-name">Rajesh Kumar</div><div class="who-city">Bengaluru</div></div></div>
+      </div>
+      <div class="quote">
+        <span class="mark">"</span>
+        <div class="stars">★★★★★</div>
+        <blockquote>"The garlic red chutney is dangerous. I've stopped keeping it in the house because I'll eat it with a spoon, no bread, no roti, no shame. Worth every rupee."</blockquote>
+        <div class="who"><div class="ava">AM</div><div><div class="who-name">Anika Mehta</div><div class="who-city">Mumbai</div></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ====================== NEWSLETTER ====================== -->
+<section class="news" data-screen-label="Newsletter">
+  <svg class="news-pattern" viewBox="0 0 1200 400" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <defs>
+      <pattern id="leaves2" x="0" y="0" width="180" height="180" patternUnits="userSpaceOnUse" patternTransform="rotate(-12)">
+        <path d="M20 90 C 20 50, 60 30, 100 50 C 90 90, 60 110, 20 90 Z" fill="none" stroke="#E0A93C" stroke-width="1.2"/>
+        <circle cx="140" cy="140" r="2" fill="#E0A93C"/>
+      </pattern>
+    </defs>
+    <rect width="1200" height="400" fill="url(#leaves2)"/>
+  </svg>
+  <div class="wrap news-inner">
+    <div>
+      <div class="ornament" style="justify-content:flex-start"><span class="eyebrow">Join the table</span><span class="line"></span></div>
+      <h2>Recipes, founder notes &amp; ₹100 off your first order.</h2>
+      <p>One thoughtful letter a month. New batch releases, ancestral recipes from our family notebook, and the occasional kitchen story. Never spam.</p>
+    </div>
+    <div>
+      <form class="news-form" onsubmit="event.preventDefault()">
+        <input type="email" placeholder="your@email.com" />
+        <button type="submit">Subscribe <span>→</span></button>
+      </form>
+      <div class="fine">By subscribing you agree to receive marketing emails. Unsubscribe any time.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ====================== FOOTER ====================== -->
+<footer data-screen-label="Footer">
+  <div class="wrap">
+    <div class="foot-grid">
+      <div class="foot-brand">
+        <img src="assets/logo.png" alt="Farm Puro" />
+        <p>Authentic Indian chutneys, slow-cooked in small copper batches. Crafted in Pune, shipped pan-India.</p>
+        <div class="socials">
+          <a href="#" aria-label="Instagram"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r=".8" fill="currentColor"/></svg></a>
+          <a href="#" aria-label="Facebook"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M13 22v-8h3l.5-4H13V7.5c0-1.2.4-2 2-2h2V2.2C16.6 2.1 15.4 2 14 2c-3 0-5 1.8-5 5v3H6v4h3v8h4Z"/></svg></a>
+          <a href="#" aria-label="YouTube"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M22 12c0-3-.3-4.5-.8-5.2-.5-.7-1.3-1-2.2-1.1C17 5.5 12 5.5 12 5.5s-5 0-7 .2c-.9 0-1.7.4-2.2 1.1C2.3 7.5 2 9 2 12s.3 4.5.8 5.2c.5.7 1.3 1 2.2 1.1 2 .2 7 .2 7 .2s5 0 7-.2c.9 0 1.7-.4 2.2-1.1.5-.7.8-2.2.8-5.2Zm-12 3V9l5 3-5 3Z"/></svg></a>
+          <a href="#" aria-label="WhatsApp"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M20 4A10 10 0 0 0 4 16l-1 5 5-1A10 10 0 1 0 20 4Zm-8 17a8 8 0 0 1-4.3-1.2l-.3-.2-3 .7.8-3-.2-.3A8 8 0 1 1 12 21Zm4.6-5.6c-.3-.1-1.5-.7-1.7-.8-.2-.1-.4-.1-.6.1-.2.2-.7.8-.8 1-.1.1-.3.2-.5.1-1.5-.7-2.4-1.3-3.4-3-.3-.4.3-.4.7-1.3.1-.2 0-.4 0-.5 0-.1-.6-1.4-.8-1.9-.2-.5-.4-.4-.6-.4h-.5c-.2 0-.4 0-.6.3-.2.2-.8.8-.8 2s.8 2.3.9 2.5c.1.2 1.6 2.4 3.8 3.4 1.4.6 1.9.6 2.6.5.4 0 1.3-.5 1.5-1.1.2-.5.2-1 .1-1.1 0-.1-.2-.2-.5-.3Z"/></svg></a>
+        </div>
+      </div>
+      <div class="foot-col">
+        <h4>Shop</h4>
+        <ul>
+          <li><a href="#">All chutneys</a></li>
+          <li><a href="#">Pickles &amp; pastes</a></li>
+          <li><a href="#">Gift hampers</a></li>
+          <li><a href="#">Subscription box</a></li>
+          <li><a href="#">Sample pack</a></li>
+        </ul>
+      </div>
+      <div class="foot-col">
+        <h4>Company</h4>
+        <ul>
+          <li><a href="#">Our story</a></li>
+          <li><a href="#">The farms</a></li>
+          <li><a href="#">Press &amp; media</a></li>
+          <li><a href="#">Careers</a></li>
+          <li><a href="#">Wholesale</a></li>
+        </ul>
+      </div>
+      <div class="foot-col">
+        <h4>Help</h4>
+        <ul>
+          <li><a href="#">Track your order</a></li>
+          <li><a href="#">Shipping &amp; returns</a></li>
+          <li><a href="#">FAQ</a></li>
+          <li><a href="#">Contact us</a></li>
+          <li><a href="#">Storage &amp; shelf life</a></li>
+        </ul>
+      </div>
+      <div class="foot-col">
+        <h4>Visit</h4>
+        <ul>
+          <li>Farm Puro Foods Pvt Ltd</li>
+          <li>14, Tilak Road,<br/>Sadashiv Peth,<br/>Pune 411030</li>
+          <li><a href="#">hello@farmpuro.in</a></li>
+          <li>+91 20 2447 8800</li>
+        </ul>
+      </div>
+    </div>
+    <div class="copy">
+      <div>© 2026 Farm Puro Foods Pvt Ltd. All rights reserved. · <a href="#">Privacy</a> · <a href="#">Terms</a> · FSSAI Lic. 11521004000123</div>
+      <div class="pays"><span>UPI</span><span>VISA</span><span>RUPAY</span><span>COD</span></div>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
