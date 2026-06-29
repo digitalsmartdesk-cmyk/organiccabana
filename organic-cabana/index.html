@@ -1,0 +1,719 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Organic Cabana — Start Organic Living | 100% Pure &amp; Organic</title>
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&family=Nunito:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+  <!-- Shared Styles -->
+  <link rel="stylesheet" href="css/style.css">
+
+  <!-- Page-specific Styles -->
+  <style>
+    /* ===== HERO ===== */
+    .hero{position:relative;background:var(--green-tint);overflow:hidden;padding:80px 0 100px}
+    .hero-blobs{position:absolute;inset:0;z-index:0;pointer-events:none}
+    .hero-blobs .blob{position:absolute;border-radius:50%;opacity:.45;filter:blur(90px)}
+    .hero-blobs .blob-1{width:520px;height:520px;background:#B6E09C;top:-80px;left:-120px}
+    .hero-blobs .blob-2{width:380px;height:380px;background:#D4E9BF;bottom:-100px;right:-60px}
+    .hero-blobs .blob-3{width:260px;height:260px;background:#A3D977;top:30%;right:20%}
+    .hero-leaf-pattern{position:absolute;inset:0;z-index:0;pointer-events:none;opacity:.08}
+    .hero-inner{position:relative;z-index:1;display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center}
+    .hero-copy{max-width:520px}
+    .hero-kicker{display:inline-flex;align-items:center;gap:8px;background:rgba(255,255,255,.72);backdrop-filter:blur(6px);border:1.5px solid var(--green-tint-2);border-radius:100px;padding:8px 20px;font-size:11px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:var(--green-deep);margin-bottom:28px}
+    .hero-kicker .dot{width:4px;height:4px;background:var(--green);border-radius:50%}
+    .hero h1{font-size:52px;line-height:1.08;margin-bottom:22px;color:var(--ink)}
+    .hero h1 em{font-style:italic;color:var(--red)}
+    .hero .lede{font-size:17px;color:var(--ink-soft);line-height:1.7;margin-bottom:36px;max-width:440px;font-weight:500}
+    .hero-ctas{display:flex;gap:14px;margin-bottom:52px}
+    .hero-stats{display:flex;gap:36px}
+    .stat{display:flex;flex-direction:column;gap:2px}
+    .stat-val{font-family:'Lora',serif;font-size:28px;font-weight:700;color:var(--green-deep);line-height:1.1}
+    .stat-label{font-size:11px;color:var(--ink-soft);font-weight:700;letter-spacing:.06em;text-transform:uppercase}
+    .hero-visual{position:relative;display:flex;justify-content:center;align-items:center}
+    .hero-visual .pack{position:relative;z-index:2;width:340px;border-radius:16px;box-shadow:0 40px 80px -20px rgba(44,31,15,.25)}
+    .hero-visual .glow{position:absolute;width:340px;height:340px;background:radial-gradient(circle,rgba(90,158,47,.35) 0%,transparent 70%);border-radius:50%;z-index:1;top:50%;left:50%;transform:translate(-50%,-50%)}
+    .hero-badge{position:absolute;z-index:3;bottom:-10px;left:-20px;background:var(--red);color:#fff;padding:10px 16px;border-radius:10px;font-size:11px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;display:flex;align-items:center;gap:7px;box-shadow:0 8px 24px -6px rgba(192,39,45,.45)}
+    .hero-certs{position:absolute;z-index:3;top:10px;right:-10px;display:flex;flex-direction:column;gap:8px}
+    .hero-certs .cert{background:rgba(255,255,255,.92);backdrop-filter:blur(6px);border-radius:8px;padding:8px 12px;font-size:9px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:var(--green-deep);display:flex;align-items:center;gap:6px;box-shadow:0 4px 14px rgba(0,0,0,.08)}
+    .hero-certs .cert svg{width:18px;height:18px}
+
+    /* ===== TRUST BAR ===== */
+    .trust{background:var(--white);border-bottom:1px solid var(--rule);padding:36px 0}
+    .trust-inner{display:flex;justify-content:space-around;align-items:center;gap:24px;flex-wrap:wrap}
+    .trust-item{display:flex;align-items:center;gap:12px;font-size:14px;font-weight:700;color:var(--ink)}
+    .trust-icon{width:42px;height:42px;border-radius:10px;background:var(--green-tint);display:grid;place-items:center;color:var(--green)}
+
+    /* ===== BRAND STORY ===== */
+    .brand-story{background:var(--white);padding:100px 0}
+    .story-grid{display:grid;grid-template-columns:1fr 1fr;gap:72px;align-items:center}
+    .story-img{position:relative}
+    .story-img img{border-radius:16px;width:100%;aspect-ratio:4/5;object-fit:cover}
+    .story-img .frame{position:absolute;inset:-12px;border:2px solid var(--green-tint-2);border-radius:20px;pointer-events:none}
+    .story-stamp{position:absolute;bottom:24px;right:-18px;width:80px;height:80px;background:var(--red);border-radius:50%;display:flex;flex-direction:column;align-items:center;justify-content:center;color:#fff;box-shadow:0 8px 24px -6px rgba(192,39,45,.45)}
+    .story-stamp .num{font-family:'Lora',serif;font-size:30px;font-weight:700;line-height:1}
+    .story-stamp .txt{font-size:8px;font-weight:800;letter-spacing:.18em;text-transform:uppercase;line-height:1.2}
+    .story-content .eyebrow{margin-bottom:14px}
+    .story-content h2{font-size:42px;line-height:1.1;margin-bottom:22px}
+    .story-content .story-text{font-size:15px;color:var(--ink-soft);line-height:1.8;margin-bottom:28px;font-weight:500}
+    .story-content .story-text .drop{float:left;font-family:'Lora',serif;font-size:56px;font-weight:700;color:var(--green-deep);line-height:.85;margin:4px 10px 0 0}
+    .cert-pills{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:28px}
+    .cert-pill{display:flex;align-items:center;gap:6px;background:var(--green-tint);border:1px solid var(--green-tint-2);border-radius:100px;padding:7px 16px;font-size:11px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--green-deep)}
+    .story-link{font-size:13px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--green-deep);display:inline-flex;align-items:center;gap:8px;transition:color .15s}
+    .story-link:hover{color:var(--green)}
+    .story-link .arrow{transition:transform .2s}
+    .story-link:hover .arrow{transform:translateX(4px)}
+
+    /* ===== WHY SECTION ===== */
+    .why{background:var(--green-tint);padding:100px 0}
+    .why-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:28px}
+    .why-card{background:var(--white);border:1px solid var(--rule);border-radius:16px;padding:40px 32px;position:relative;overflow:hidden;transition:transform .25s,box-shadow .25s}
+    .why-card:hover{transform:translateY(-5px);box-shadow:0 20px 48px -18px rgba(44,31,15,.15)}
+    .why-card .num{position:absolute;top:16px;right:20px;font-family:'Lora',serif;font-size:56px;font-weight:700;color:var(--green-tint-2);line-height:1}
+    .why-card .why-icon{width:56px;height:56px;border-radius:14px;background:var(--green-tint);display:grid;place-items:center;color:var(--green);margin-bottom:24px}
+    .why-card h3{font-size:22px;margin-bottom:12px;line-height:1.2}
+    .why-card p{font-size:14px;color:var(--ink-soft);line-height:1.7;font-weight:500}
+
+    /* ===== TESTIMONIALS ===== */
+    .testimonials{background:var(--green-deep);padding:100px 0;position:relative;overflow:hidden}
+    .testimonials .dot-pattern{position:absolute;inset:0;opacity:.06;background-image:radial-gradient(circle,rgba(255,255,255,.5) 1px,transparent 1px);background-size:24px 24px;pointer-events:none}
+    .testimonials .section-head h2,.testimonials .section-head p{color:rgba(255,255,255,.92)}
+    .testimonials .section-head .eyebrow{color:var(--green-soft)}
+    .testimonials .ornament .line{background:var(--green-soft)}
+    .test-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;position:relative;z-index:1}
+    .test-card{background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.1);border-radius:16px;padding:36px 28px;backdrop-filter:blur(6px);transition:background .2s}
+    .test-card:hover{background:rgba(255,255,255,.12)}
+    .test-card .stars{display:flex;gap:2px;color:#F5C542;margin-bottom:16px}
+    .test-card blockquote{font-family:'Lora',serif;font-size:16px;font-style:italic;color:rgba(255,255,255,.88);line-height:1.7;margin-bottom:24px;font-weight:400}
+    .test-author{display:flex;align-items:center;gap:12px}
+    .test-ava{width:44px;height:44px;border-radius:50%;background:var(--green);display:grid;place-items:center;font-family:'Lora',serif;font-size:16px;font-weight:700;color:#fff}
+    .test-info .name{font-size:14px;font-weight:700;color:#fff}
+    .test-info .loc{font-size:12px;color:rgba(255,255,255,.5);font-weight:600}
+
+    /* ===== NEWSLETTER ===== */
+    .newsletter{background:var(--red);padding:80px 0;overflow:hidden}
+    .news-grid{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center}
+    .news-copy h2{font-size:40px;color:#fff;line-height:1.1;margin-bottom:10px}
+    .news-copy p{font-size:15px;color:rgba(255,255,255,.8);margin-bottom:28px;font-weight:500}
+    .news-form{display:flex;gap:10px}
+    .news-form input{flex:1;padding:15px 18px;border:0;border-radius:8px;font-size:15px;background:rgba(255,255,255,.18);color:#fff;backdrop-filter:blur(4px);outline:none;font-family:'Nunito',sans-serif}
+    .news-form input::placeholder{color:rgba(255,255,255,.6)}
+    .news-form input:focus{background:rgba(255,255,255,.28)}
+    .news-form .btn-green{white-space:nowrap}
+    .news-img{text-align:center}
+    .news-img img{border-radius:16px;width:90%;transform:rotate(3deg);box-shadow:0 20px 60px -15px rgba(0,0,0,.35)}
+
+    /* ===== RESPONSIVE — PAGE-SPECIFIC ===== */
+    @media(max-width:900px){
+      .hero{padding:60px 0 72px}
+      .hero-inner{grid-template-columns:1fr;text-align:center}
+      .hero-copy{max-width:100%;margin:0 auto}
+      .hero h1{font-size:38px}
+      .hero .lede{margin:0 auto 32px}
+      .hero-ctas{justify-content:center}
+      .hero-stats{justify-content:center}
+      .hero-visual{margin-top:40px}
+      .hero-visual .pack{width:260px}
+      .hero-visual .glow{width:260px;height:260px}
+      .story-grid{grid-template-columns:1fr;gap:48px}
+      .story-img{max-width:420px;margin:0 auto}
+      .story-content h2{font-size:32px}
+      .why-grid{grid-template-columns:1fr;gap:18px}
+      .test-grid{grid-template-columns:1fr;gap:18px}
+      .news-grid{grid-template-columns:1fr;text-align:center}
+      .news-form{max-width:420px;margin:0 auto}
+      .news-img{display:none}
+    }
+
+    @media(max-width:600px){
+      .hero{padding:44px 0 56px}
+      .hero h1{font-size:28px}
+      .hero .lede{font-size:15px}
+      .hero-kicker{font-size:9px;padding:6px 14px}
+      .hero-ctas{flex-direction:column;align-items:center}
+      .hero-stats{flex-direction:column;gap:18px;align-items:center}
+      .hero-visual .pack{width:200px}
+      .hero-visual .glow{width:200px;height:200px}
+      .trust-inner{flex-direction:column;gap:18px}
+      .brand-story{padding:60px 0}
+      .story-content h2{font-size:26px}
+      .why{padding:60px 0}
+      .testimonials{padding:60px 0}
+      .newsletter{padding:52px 0}
+      .news-copy h2{font-size:28px}
+      .news-form{flex-direction:column}
+    }
+  </style>
+</head>
+
+<body>
+
+<!-- ===== HEADER ===== -->
+<header class="header">
+  <div class="wrap header-inner">
+    <a href="index.html" class="brand"><img src="assets/logo.png" alt="Organic Cabana"></a>
+    <nav class="nav">
+      <a href="index.html" class="active">Home</a>
+      <a href="shop.html">Shop</a>
+      <a href="#">About</a>
+      <a href="#">Recipes</a>
+      <a href="#">Contact</a>
+    </nav>
+    <div class="header-right">
+      <button class="icon-btn" aria-label="Search">
+        <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="9" r="7"/><line x1="15" y1="15" x2="19" y2="19"/></svg>
+      </button>
+      <a href="checkout.html" class="icon-btn cart" aria-label="Cart">
+        <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="19" r="1.5"/><circle cx="17" cy="19" r="1.5"/><path d="M1 1h3l1.68 8.39a2 2 0 0 0 2 1.61h8.72a2 2 0 0 0 2-1.61L20 5H6"/></svg>
+        <span class="cart-badge">2</span>
+      </a>
+      <a href="login.html" class="login">Login</a>
+      <button class="hamburger" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+  <!-- Mobile Nav -->
+  <nav class="mobile-nav">
+    <a href="index.html" class="nav-link">Home</a>
+    <a href="shop.html" class="nav-link">Shop</a>
+    <a href="#" class="nav-link">About</a>
+    <a href="#" class="nav-link">Recipes</a>
+    <a href="#" class="nav-link">Contact</a>
+    <div class="m-actions">
+      <a href="shop.html" class="m-red">Shop Now</a>
+      <a href="login.html" class="m-outline">Login</a>
+    </div>
+  </nav>
+</header>
+
+<!-- ===== HERO ===== -->
+<section class="hero">
+  <div class="hero-blobs">
+    <div class="blob blob-1"></div>
+    <div class="blob blob-2"></div>
+    <div class="blob blob-3"></div>
+  </div>
+  <!-- Leaf pattern SVG -->
+  <svg class="hero-leaf-pattern" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+      <pattern id="leaf-pat" x="0" y="0" width="60" height="60" patternUnits="userSpaceOnUse">
+        <path d="M30 5c-8 0-15 12-15 25s7 25 15 25 15-12 15-25S38 5 30 5z" fill="currentColor"/>
+      </pattern>
+    </defs>
+    <rect width="100%" height="100%" fill="url(#leaf-pat)"/>
+  </svg>
+
+  <div class="wrap hero-inner">
+    <!-- Left: Copy -->
+    <div class="hero-copy">
+      <div class="hero-kicker">
+        <span>100% Pure</span>
+        <span class="dot"></span>
+        <span>100% Organic</span>
+        <span class="dot"></span>
+        <span>USDA Certified</span>
+      </div>
+      <h1>Nurture by nature.<br><em>Trusted by you.</em></h1>
+      <p class="lede">From our organic farms to your kitchen — pure, honest food with zero chemicals, zero compromises, and all the goodness nature intended.</p>
+      <div class="hero-ctas">
+        <a href="shop.html" class="btn btn-red">Shop Now <span class="arrow">&rarr;</span></a>
+        <a href="#" class="btn btn-green">Our Story <span class="arrow">&rarr;</span></a>
+      </div>
+      <div class="hero-stats">
+        <div class="stat">
+          <span class="stat-val">9+</span>
+          <span class="stat-label">Years of Trust</span>
+        </div>
+        <div class="stat">
+          <span class="stat-val">USDA</span>
+          <span class="stat-label">Certified Organic</span>
+        </div>
+        <div class="stat">
+          <span class="stat-val">Zero</span>
+          <span class="stat-label">Chemicals Used</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Right: Visual -->
+    <div class="hero-visual">
+      <div class="glow"></div>
+      <img class="pack" src="assets/wheat-atta.jpg" alt="Organic Cabana Wheat Atta">
+      <div class="hero-badge">
+        <!-- Shield icon -->
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        100% No Pesticides
+      </div>
+      <div class="hero-certs">
+        <div class="cert">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="M9 12l2 2 4-4"/></svg>
+          USDA Organic
+        </div>
+        <div class="cert">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
+          Jaivik Bharat
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== TRUST BAR ===== -->
+<section class="trust">
+  <div class="wrap trust-inner">
+    <div class="trust-item">
+      <div class="trust-icon">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="M9 12l2 2 4-4"/></svg>
+      </div>
+      100% Organic
+    </div>
+    <div class="trust-item">
+      <div class="trust-icon">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="4.93" y1="4.93" x2="19.07" y2="19.07"/></svg>
+      </div>
+      Chemical Free
+    </div>
+    <div class="trust-item">
+      <div class="trust-icon">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+      </div>
+      Stone Ground
+    </div>
+    <div class="trust-item">
+      <div class="trust-icon">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="3" width="15" height="13" rx="2"/><polygon points="16 8 22 4 22 16 16 12 16 8"/></svg>
+      </div>
+      Pan-India Delivery
+    </div>
+  </div>
+</section>
+
+<!-- ===== FEATURED PRODUCTS ===== -->
+<section class="pad">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="ornament"><span class="line"></span>
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--green)" stroke-width="2"><path d="M12 2a10 10 0 0 1 0 20C6 22 2 14 2 14s4-2 10-2"/><path d="M12 2c2 4 2 8 0 12"/></svg>
+      <span class="line"></span></div>
+      <p class="eyebrow">Our Bestsellers</p>
+      <h2>Featured Products</h2>
+      <p>Handpicked organic staples — loved by thousands of families across India.</p>
+    </div>
+
+    <div class="product-grid">
+      <!-- Product 1: Wheat Atta -->
+      <div class="product">
+        <div class="pic">
+          <a href="product.html"><img src="assets/wheat-atta.jpg" alt="Organic Wheat Atta"></a>
+          <span class="tag organic">Bestseller</span>
+          <button class="heart" aria-label="Wishlist">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+          </button>
+        </div>
+        <div class="body">
+          <span class="cat">Flour &amp; Atta</span>
+          <h3><a href="product.html">Organic Wheat Atta</a></h3>
+          <p class="desc">Stone-ground whole wheat flour from certified organic farms. Perfect for soft rotis.</p>
+          <div class="stars">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+            <span>(128)</span>
+          </div>
+          <div class="row">
+            <div class="price"><span class="now">&#8377;249</span><span class="was">&#8377;299</span></div>
+            <button class="add">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+              Add
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Product 2: Multigrain Atta -->
+      <div class="product">
+        <div class="pic">
+          <a href="product.html"><img src="assets/multigrain-atta.jpg" alt="Multigrain Atta"></a>
+          <span class="tag organic">Bestseller</span>
+          <button class="heart" aria-label="Wishlist">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+          </button>
+        </div>
+        <div class="body">
+          <span class="cat">Flour &amp; Atta</span>
+          <h3><a href="product.html">Multigrain Atta</a></h3>
+          <p class="desc">A nourishing blend of 7 organic grains — wheat, ragi, jowar, bajra, oats, soy &amp; barley.</p>
+          <div class="stars">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" opacity=".3"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+            <span>(94)</span>
+          </div>
+          <div class="row">
+            <div class="price"><span class="now">&#8377;289</span><span class="was">&#8377;349</span></div>
+            <button class="add">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+              Add
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Product 3: Basmati Rice -->
+      <div class="product">
+        <div class="pic">
+          <a href="product.html"><img src="assets/basmati-rice.jpg" alt="Basmati Rice"></a>
+          <span class="tag usda">USDA Organic</span>
+          <button class="heart" aria-label="Wishlist">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+          </button>
+        </div>
+        <div class="body">
+          <span class="cat">Rice &amp; Grains</span>
+          <h3><a href="product.html">Organic Basmati Rice</a></h3>
+          <p class="desc">Long-grain, aged basmati — aromatic, fluffy &amp; 100% chemical-free from Dehradun valley.</p>
+          <div class="stars">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+            <span>(156)</span>
+          </div>
+          <div class="row">
+            <div class="price"><span class="now">&#8377;399</span><span class="was">&#8377;479</span></div>
+            <button class="add">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+              Add
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Product 4: Ragi Flour -->
+      <div class="product">
+        <div class="pic">
+          <a href="product.html"><img src="assets/ragi-flour.jpg" alt="Ragi Flour"></a>
+          <span class="tag gf">Gluten Free</span>
+          <button class="heart" aria-label="Wishlist">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+          </button>
+        </div>
+        <div class="body">
+          <span class="cat">Flour &amp; Atta</span>
+          <h3><a href="product.html">Organic Ragi Flour</a></h3>
+          <p class="desc">Calcium-rich finger millet flour — perfect for dosas, porridge &amp; healthy baking.</p>
+          <div class="stars">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" opacity=".3"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+            <span>(72)</span>
+          </div>
+          <div class="row">
+            <div class="price"><span class="now">&#8377;199</span><span class="was">&#8377;249</span></div>
+            <button class="add">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+              Add
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div style="text-align:center;margin-top:48px">
+      <a href="shop.html" class="btn btn-red">View All Products <span class="arrow">&rarr;</span></a>
+    </div>
+  </div>
+</section>
+
+<!-- ===== BRAND STORY ===== -->
+<section class="brand-story">
+  <div class="wrap story-grid">
+    <!-- Left: Image -->
+    <div class="story-img">
+      <div class="frame"></div>
+      <img src="assets/toor-dal.jpg" alt="Organic Toor Dal">
+      <div class="story-stamp">
+        <span class="num">9+</span>
+        <span class="txt">Years</span>
+      </div>
+    </div>
+    <!-- Right: Content -->
+    <div class="story-content">
+      <div class="ornament" style="justify-content:flex-start;margin-bottom:8px"><span class="line"></span>
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--green)" stroke-width="2"><path d="M12 2a10 10 0 0 1 0 20C6 22 2 14 2 14s4-2 10-2"/><path d="M12 2c2 4 2 8 0 12"/></svg>
+      <span class="line"></span></div>
+      <p class="eyebrow">Our Story</p>
+      <h2>Rooted in tradition.<br>Grown with purpose.</h2>
+      <p class="story-text"><span class="drop">O</span>rganic Cabana was born from a simple belief: food should be pure, honest, and free from harmful chemicals. For over 9 years, we have worked directly with organic farmers across India to bring you staples that are stone-ground, nutrient-rich, and traceable from farm to kitchen. Every grain tells a story of sustainable farming, fair trade, and uncompromising quality.</p>
+      <div class="cert-pills">
+        <span class="cert-pill">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="M9 12l2 2 4-4"/></svg>
+          USDA Organic
+        </span>
+        <span class="cert-pill">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2a10 10 0 0 1 0 20C6 22 2 14 2 14s4-2 10-2"/><path d="M12 2c2 4 2 8 0 12"/></svg>
+          Jaivik Bharat
+        </span>
+        <span class="cert-pill">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+          India Organic
+        </span>
+        <span class="cert-pill">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+          100% Veg
+        </span>
+      </div>
+      <a href="#" class="story-link">Read Our Full Story <span class="arrow">&rarr;</span></a>
+    </div>
+  </div>
+</section>
+
+<!-- ===== WHY ORGANIC CABANA ===== -->
+<section class="why">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="ornament"><span class="line"></span>
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--green)" stroke-width="2"><path d="M12 2a10 10 0 0 1 0 20C6 22 2 14 2 14s4-2 10-2"/><path d="M12 2c2 4 2 8 0 12"/></svg>
+      <span class="line"></span></div>
+      <p class="eyebrow">Why Choose Us</p>
+      <h2>Why Organic Cabana?</h2>
+      <p>Three promises we make to every family that trusts us.</p>
+    </div>
+
+    <div class="why-grid">
+      <!-- Card 01 -->
+      <div class="why-card">
+        <span class="num">01</span>
+        <div class="why-icon">
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="M9 12l2 2 4-4"/></svg>
+        </div>
+        <h3>No pesticides.<br>No shortcuts.</h3>
+        <p>Every product is grown without synthetic pesticides, herbicides, or chemical fertilisers. Just pure, organic farming the way nature intended.</p>
+      </div>
+      <!-- Card 02 -->
+      <div class="why-card">
+        <span class="num">02</span>
+        <div class="why-icon">
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+        </div>
+        <h3>Stone-ground.<br>Nutrient-rich.</h3>
+        <p>We use traditional stone-grinding (chakki) that preserves fibre, vitamins, and the natural aroma that steel rollers strip away.</p>
+      </div>
+      <!-- Card 03 -->
+      <div class="why-card">
+        <span class="num">03</span>
+        <div class="why-icon">
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+        </div>
+        <h3>What the label says<br>is what you get.</h3>
+        <p>No hidden ingredients, no misleading claims. Full traceability from our partner farms to your kitchen shelf.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== TESTIMONIALS ===== -->
+<section class="testimonials">
+  <div class="dot-pattern"></div>
+  <div class="wrap">
+    <div class="section-head">
+      <div class="ornament"><span class="line"></span>
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--green-soft)" stroke-width="2"><path d="M12 2a10 10 0 0 1 0 20C6 22 2 14 2 14s4-2 10-2"/><path d="M12 2c2 4 2 8 0 12"/></svg>
+      <span class="line"></span></div>
+      <p class="eyebrow">Testimonials</p>
+      <h2>Loved by Families</h2>
+      <p>Real words from real customers who made the switch to organic.</p>
+    </div>
+
+    <div class="test-grid">
+      <!-- Testimonial 1 -->
+      <div class="test-card">
+        <div class="stars">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+        </div>
+        <blockquote>"The wheat atta is incredible — softest rotis I've ever made. My family can actually taste the difference. We're never going back to store brands."</blockquote>
+        <div class="test-author">
+          <div class="test-ava">NK</div>
+          <div class="test-info">
+            <div class="name">Nisha Kulkarni</div>
+            <div class="loc">Pune</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Testimonial 2 -->
+      <div class="test-card">
+        <div class="stars">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+        </div>
+        <blockquote>"As someone very particular about what goes into my food, Organic Cabana checks every box. Transparent sourcing, genuine certifications, great taste."</blockquote>
+        <div class="test-author">
+          <div class="test-ava">AS</div>
+          <div class="test-info">
+            <div class="name">Ajay Subramaniam</div>
+            <div class="loc">Chennai</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Testimonial 3 -->
+      <div class="test-card">
+        <div class="stars">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+        </div>
+        <blockquote>"I switched to their ragi flour for my toddler's porridge. Knowing it's pesticide-free and stone-ground gives me so much peace of mind as a mother."</blockquote>
+        <div class="test-author">
+          <div class="test-ava">RM</div>
+          <div class="test-info">
+            <div class="name">Ritu Mehrotra</div>
+            <div class="loc">Delhi</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== NEWSLETTER ===== -->
+<section class="newsletter">
+  <div class="wrap news-grid">
+    <div class="news-copy">
+      <h2>Stay rooted.<br>Stay organic.</h2>
+      <p>Subscribe for recipes, farm stories, and exclusive offers — delivered straight to your inbox.</p>
+      <form class="news-form" onsubmit="return false;">
+        <input type="email" placeholder="Your email address">
+        <button type="submit" class="btn btn-green">Subscribe</button>
+      </form>
+    </div>
+    <div class="news-img">
+      <img src="assets/quinoa.jpg" alt="Organic Quinoa">
+    </div>
+  </div>
+</section>
+
+<!-- ===== FOOTER ===== -->
+<footer>
+  <div class="wrap">
+    <div class="foot-grid">
+      <!-- Brand -->
+      <div class="foot-brand">
+        <img src="assets/logo.png" alt="Organic Cabana">
+        <p>From our organic farms to your kitchen — pure, honest food with zero chemicals and all the goodness nature intended.</p>
+        <div class="socials">
+          <a href="#" aria-label="Facebook">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+          </a>
+          <a href="#" aria-label="Instagram">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+          </a>
+          <a href="#" aria-label="Twitter">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z"/></svg>
+          </a>
+          <a href="#" aria-label="YouTube">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 0 0-1.94 2A29 29 0 0 0 1 11.75a29 29 0 0 0 .46 5.33A2.78 2.78 0 0 0 3.4 19.1c1.72.46 8.6.46 8.6.46s6.88 0 8.6-.46a2.78 2.78 0 0 0 1.94-2 29 29 0 0 0 .46-5.25 29 29 0 0 0-.46-5.43z"/><polygon points="9.75 15.02 15.5 11.75 9.75 8.48 9.75 15.02"/></svg>
+          </a>
+        </div>
+      </div>
+
+      <!-- Shop -->
+      <div class="foot-col">
+        <h4>Shop</h4>
+        <ul>
+          <li><a href="shop.html">All Products</a></li>
+          <li><a href="shop.html">Flour &amp; Atta</a></li>
+          <li><a href="shop.html">Rice &amp; Grains</a></li>
+          <li><a href="shop.html">Dals &amp; Pulses</a></li>
+          <li><a href="shop.html">Superfoods</a></li>
+        </ul>
+      </div>
+
+      <!-- Company -->
+      <div class="foot-col">
+        <h4>Company</h4>
+        <ul>
+          <li><a href="#">About Us</a></li>
+          <li><a href="#">Our Farms</a></li>
+          <li><a href="#">Certifications</a></li>
+          <li><a href="#">Blog</a></li>
+          <li><a href="#">Careers</a></li>
+        </ul>
+      </div>
+
+      <!-- Help -->
+      <div class="foot-col">
+        <h4>Help</h4>
+        <ul>
+          <li><a href="order-tracking.html">Track Order</a></li>
+          <li><a href="#">Shipping Policy</a></li>
+          <li><a href="#">Returns &amp; Refunds</a></li>
+          <li><a href="#">FAQ</a></li>
+          <li><a href="#">Contact Us</a></li>
+        </ul>
+      </div>
+
+      <!-- Contact -->
+      <div class="foot-col">
+        <h4>Contact</h4>
+        <ul>
+          <li><a href="mailto:hello@organiccabana.com">hello@organiccabana.com</a></li>
+          <li><a href="tel:+918001234567">+91 800 123 4567</a></li>
+          <li><a href="#">Jaipur, Rajasthan, India</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="copy">
+      <span>&copy; 2026 Organic Cabana. All rights reserved.</span>
+      <div class="certs">
+        <span>USDA ORGANIC</span>
+        <span>JAIVIK BHARAT</span>
+        <span>INDIA ORGANIC</span>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<!-- Shared JS -->
+<script src="js/main.js"></script>
+
+<!-- Page-specific JS -->
+<script>
+  // Smooth scroll for anchor links
+  document.querySelectorAll('a[href^="#"]').forEach(function(anchor) {
+    anchor.addEventListener('click', function(e) {
+      var target = document.querySelector(this.getAttribute('href'));
+      if (target) {
+        e.preventDefault();
+        target.scrollIntoView({ behavior: 'smooth' });
+      }
+    });
+  });
+</script>
+
+</body>
+</html>

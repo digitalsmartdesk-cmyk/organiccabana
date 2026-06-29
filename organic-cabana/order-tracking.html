@@ -1,0 +1,1031 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Track Your Order — Organic Cabana</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&family=Nunito:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+  <style>
+    /* ===== PAGE-TOP ===== */
+    .page-top {
+      background: var(--green-deep);
+      color: #fff;
+      padding: 56px 0 64px;
+      position: relative;
+      overflow: hidden;
+    }
+    .page-top .wrap { position: relative; z-index: 2 }
+    .page-top .leaf-pattern {
+      position: absolute;
+      inset: 0;
+      z-index: 1;
+      opacity: .06;
+    }
+    .breadcrumb {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 13px;
+      font-weight: 600;
+      color: rgba(255,255,255,.6);
+      margin-bottom: 20px;
+    }
+    .breadcrumb a { color: rgba(255,255,255,.6); transition: color .15s }
+    .breadcrumb a:hover { color: #fff }
+    .breadcrumb .sep { font-size: 11px }
+    .page-top h1 {
+      font-size: 48px;
+      line-height: 1.1;
+      color: #fff;
+      margin-bottom: 14px;
+    }
+    .page-top h1 em {
+      font-style: italic;
+      color: var(--green-soft);
+    }
+    .page-top .desc {
+      font-size: 16px;
+      color: rgba(255,255,255,.7);
+      max-width: 560px;
+      line-height: 1.65;
+      font-weight: 500;
+    }
+
+    /* ===== LOOKUP SECTION ===== */
+    .lookup { padding: 72px 0 56px; display: flex; justify-content: center }
+    .lookup-card {
+      max-width: 720px;
+      width: 100%;
+      background: var(--white);
+      border: 1px solid var(--rule);
+      border-radius: 16px;
+      padding: 48px 44px;
+      text-align: center;
+    }
+    .lookup-card .eyebrow { margin-bottom: 12px }
+    .lookup-card h2 {
+      font-size: 32px;
+      line-height: 1.15;
+      margin-bottom: 10px;
+    }
+    .lookup-card h2 em { font-style: italic; color: var(--green) }
+    .lookup-card .desc {
+      font-size: 15px;
+      color: var(--ink-soft);
+      max-width: 480px;
+      margin: 0 auto 28px;
+      font-weight: 500;
+      line-height: 1.6;
+    }
+    .lookup-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr auto;
+      gap: 12px;
+      text-align: left;
+    }
+    .lookup-row .field { margin-bottom: 0 }
+    .track-btn {
+      align-self: end;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: var(--red);
+      color: #fff;
+      padding: 15px 28px;
+      border-radius: 8px;
+      font-weight: 800;
+      font-size: 13px;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      border: none;
+      cursor: pointer;
+      transition: background .2s, transform .15s, box-shadow .2s;
+      box-shadow: 0 4px 18px -6px rgba(192,39,45,.5);
+      white-space: nowrap;
+    }
+    .track-btn:hover {
+      background: var(--red-deep);
+      transform: translateY(-2px);
+      box-shadow: 0 10px 28px -8px rgba(192,39,45,.55);
+    }
+    .track-btn .arrow { transition: transform .2s }
+    .track-btn:hover .arrow { transform: translateX(3px) }
+    .lookup-note {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      margin-top: 20px;
+      font-size: 13px;
+      color: var(--ink-soft);
+      font-weight: 600;
+    }
+    .lookup-note svg { flex-shrink: 0; color: var(--green) }
+
+    /* ===== RESULTS ===== */
+    .results {
+      padding: 0 0 80px;
+      display: none;
+    }
+    .results.visible { display: block }
+    .results .wrap { max-width: 1100px }
+
+    /* Order Banner */
+    .order-banner {
+      background: var(--green-tint);
+      border: 1px solid var(--green-tint-2);
+      border-radius: 16px;
+      padding: 36px 40px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 32px;
+      margin-bottom: 32px;
+    }
+    .ob-left { flex: 1 }
+    .ob-order-num {
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: .18em;
+      text-transform: uppercase;
+      color: var(--green);
+      margin-bottom: 8px;
+    }
+    .ob-left h2 {
+      font-size: 26px;
+      line-height: 1.25;
+      margin-bottom: 14px;
+      max-width: 440px;
+    }
+    .ob-details {
+      display: flex;
+      gap: 24px;
+      font-size: 13px;
+      color: var(--ink-soft);
+      font-weight: 600;
+    }
+    .ob-details span { display: flex; align-items: center; gap: 6px }
+    .ob-right { text-align: right; flex-shrink: 0 }
+    .status-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--green-deep);
+      color: #fff;
+      padding: 8px 18px;
+      border-radius: 20px;
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      margin-bottom: 10px;
+    }
+    .status-pill .dot {
+      width: 8px;
+      height: 8px;
+      background: var(--red);
+      border-radius: 50%;
+      animation: pulse 1.6s ease-in-out infinite;
+    }
+    @keyframes pulse {
+      0%, 100% { opacity: 1; transform: scale(1) }
+      50% { opacity: .4; transform: scale(.82) }
+    }
+    .ob-eta {
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--ink);
+      margin-top: 4px;
+    }
+
+    /* Results Grid */
+    .results-grid {
+      display: grid;
+      grid-template-columns: 1.4fr 1fr;
+      gap: 28px;
+      align-items: start;
+    }
+
+    /* Timeline Card */
+    .timeline-card {
+      background: var(--white);
+      border: 1px solid var(--rule);
+      border-radius: 16px;
+      padding: 36px 32px;
+    }
+    .timeline-card .tc-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 28px;
+    }
+    .tc-head h3 { font-size: 20px }
+    .tc-head a {
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      color: var(--green);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      transition: color .15s;
+    }
+    .tc-head a:hover { color: var(--green-deep) }
+    .timeline {
+      position: relative;
+      padding-left: 32px;
+    }
+    .timeline::before {
+      content: "";
+      position: absolute;
+      left: 11px;
+      top: 12px;
+      bottom: 12px;
+      width: 2px;
+      border-left: 2px dashed var(--rule-strong);
+    }
+    .t-step {
+      position: relative;
+      padding-bottom: 28px;
+      display: flex;
+      gap: 16px;
+    }
+    .t-step:last-child { padding-bottom: 0 }
+    .t-icon {
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      flex-shrink: 0;
+      position: absolute;
+      left: -32px;
+      top: 0;
+      z-index: 2;
+      background: var(--white);
+    }
+    .t-step.done .t-icon {
+      background: var(--green);
+      color: #fff;
+    }
+    .t-step.active .t-icon {
+      background: var(--white);
+      border: 2.5px solid var(--red);
+      color: var(--red);
+    }
+    .t-step.pending .t-icon {
+      background: var(--cream-warm);
+      border: 2px solid var(--rule-strong);
+      color: var(--ink-soft);
+    }
+    .t-body { flex: 1 }
+    .t-body .t-title {
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--ink);
+      margin-bottom: 2px;
+    }
+    .t-step.pending .t-body .t-title { color: var(--ink-soft) }
+    .t-body .t-time {
+      font-size: 12px;
+      color: var(--ink-soft);
+      font-weight: 600;
+    }
+    .t-detail {
+      margin-top: 10px;
+      background: var(--green-tint);
+      border-radius: 10px;
+      padding: 14px 16px;
+      font-size: 13px;
+      color: var(--ink-soft);
+      line-height: 1.6;
+      font-weight: 500;
+    }
+
+    /* Map Card */
+    .map-card {
+      background: var(--white);
+      border: 1px solid var(--rule);
+      border-radius: 16px;
+      overflow: hidden;
+      margin-top: 24px;
+    }
+    .map-ph {
+      height: 200px;
+      background: linear-gradient(135deg, var(--green-tint) 0%, var(--cream-warm) 100%);
+      position: relative;
+      overflow: hidden;
+    }
+    .map-ph .grid-lines {
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(44,31,15,.06) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(44,31,15,.06) 1px, transparent 1px);
+      background-size: 40px 40px;
+    }
+    .map-pin {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -100%);
+    }
+    .map-pin .pin-dot {
+      width: 16px;
+      height: 16px;
+      background: var(--red);
+      border-radius: 50%;
+      border: 3px solid #fff;
+      box-shadow: 0 2px 8px rgba(192,39,45,.4);
+    }
+    .map-pin .pin-stem {
+      width: 2px;
+      height: 10px;
+      background: var(--red);
+      margin: 0 auto;
+    }
+    .map-info {
+      padding: 20px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .map-info .addr {
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--ink);
+    }
+    .map-info .addr-sub {
+      font-size: 12px;
+      color: var(--ink-soft);
+      font-weight: 600;
+      margin-top: 2px;
+    }
+    .map-info .dist {
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--green);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    /* Action Buttons */
+    .actions-row {
+      display: flex;
+      gap: 12px;
+      margin-top: 24px;
+      flex-wrap: wrap;
+    }
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--green-deep);
+      color: #fff;
+      padding: 14px 24px;
+      border-radius: 8px;
+      font-size: 13px;
+      font-weight: 800;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      border: none;
+      cursor: pointer;
+      transition: background .2s, transform .15s;
+    }
+    .btn-primary:hover { background: #1E3D0E; transform: translateY(-2px) }
+    .btn-secondary {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--white);
+      color: var(--ink);
+      padding: 14px 24px;
+      border-radius: 8px;
+      font-size: 13px;
+      font-weight: 800;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      border: 1.5px solid var(--rule-strong);
+      cursor: pointer;
+      transition: border-color .2s, transform .15s;
+    }
+    .btn-secondary:hover { border-color: var(--green); transform: translateY(-2px) }
+    .btn-ghost {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: none;
+      color: var(--ink-soft);
+      padding: 14px 24px;
+      border-radius: 8px;
+      font-size: 13px;
+      font-weight: 800;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      border: none;
+      cursor: pointer;
+      transition: color .15s;
+    }
+    .btn-ghost:hover { color: var(--ink) }
+
+    /* Fresh Note */
+    .fresh-note {
+      background: var(--green-tint);
+      border: 1px solid var(--green-tint-2);
+      border-radius: 12px;
+      padding: 20px 24px;
+      margin-top: 24px;
+      display: flex;
+      gap: 14px;
+      align-items: flex-start;
+    }
+    .fresh-note svg { flex-shrink: 0; color: var(--green); margin-top: 2px }
+    .fresh-note .fn-text { font-size: 13px; color: var(--ink-soft); line-height: 1.6; font-weight: 500 }
+    .fresh-note .fn-text strong { color: var(--ink); font-weight: 700 }
+
+    /* Summary Card */
+    .summary-card {
+      background: var(--white);
+      border: 1px solid var(--rule);
+      border-radius: 16px;
+      padding: 32px 28px;
+      position: sticky;
+      top: 104px;
+    }
+    .sc-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 24px;
+      padding-bottom: 20px;
+      border-bottom: 1px solid var(--rule);
+    }
+    .sc-head h3 { font-size: 20px }
+    .sc-head .badge {
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      background: var(--green-tint);
+      color: var(--green-deep);
+      padding: 5px 12px;
+      border-radius: 6px;
+    }
+    .sc-items {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      margin-bottom: 24px;
+      padding-bottom: 24px;
+      border-bottom: 1px solid var(--rule);
+    }
+    .sc-item {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+    .sc-thumb {
+      width: 56px;
+      height: 56px;
+      border-radius: 10px;
+      overflow: hidden;
+      background: var(--cream-warm);
+      flex-shrink: 0;
+      position: relative;
+    }
+    .sc-thumb img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    .sc-qty {
+      position: absolute;
+      top: -4px;
+      right: -4px;
+      width: 20px;
+      height: 20px;
+      background: var(--green-deep);
+      color: #fff;
+      font-size: 10px;
+      font-weight: 800;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+    }
+    .sc-body { flex: 1 }
+    .sc-body .sc-name {
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--ink);
+      line-height: 1.3;
+    }
+    .sc-body .sc-weight {
+      font-size: 12px;
+      color: var(--ink-soft);
+      font-weight: 600;
+    }
+    .sc-price {
+      font-family: 'Lora', serif;
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--ink);
+      flex-shrink: 0;
+    }
+    .sc-totals {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin-bottom: 24px;
+      padding-bottom: 24px;
+      border-bottom: 1px solid var(--rule);
+    }
+    .sc-row {
+      display: flex;
+      justify-content: space-between;
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--ink-soft);
+    }
+    .sc-row.total {
+      font-weight: 800;
+      color: var(--ink);
+      font-size: 16px;
+      padding-top: 10px;
+      border-top: 1px solid var(--rule);
+    }
+    .sc-row .free {
+      color: var(--green);
+      font-weight: 700;
+    }
+    .sc-addr h4 {
+      font-size: 11px;
+      letter-spacing: .18em;
+      text-transform: uppercase;
+      color: var(--green-deep);
+      font-weight: 800;
+      margin-bottom: 8px;
+      font-family: 'Nunito', sans-serif;
+    }
+    .sc-addr .name {
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--ink);
+      margin-bottom: 4px;
+    }
+    .sc-addr .address {
+      font-size: 13px;
+      color: var(--ink-soft);
+      line-height: 1.55;
+      font-weight: 500;
+    }
+
+    /* ===== RESPONSIVE ===== */
+    @media (max-width: 900px) {
+      .page-top h1 { font-size: 36px }
+      .lookup-card { padding: 36px 28px }
+      .lookup-row {
+        grid-template-columns: 1fr;
+      }
+      .track-btn { justify-content: center }
+      .order-banner {
+        flex-direction: column;
+        text-align: center;
+        padding: 28px 24px;
+      }
+      .ob-details { justify-content: center; flex-wrap: wrap }
+      .ob-right { text-align: center }
+      .results-grid {
+        grid-template-columns: 1fr;
+      }
+      .summary-card { position: static }
+    }
+    @media (max-width: 600px) {
+      .page-top { padding: 40px 0 48px }
+      .page-top h1 { font-size: 26px }
+      .lookup { padding: 48px 0 36px }
+      .lookup-card { padding: 28px 20px }
+      .order-banner { padding: 22px 18px }
+      .ob-left h2 { font-size: 20px }
+      .timeline-card { padding: 28px 20px }
+      .actions-row { flex-direction: column }
+      .actions-row button, .actions-row a { width: 100%; justify-content: center }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ===== HEADER ===== -->
+<header class="header">
+  <div class="wrap">
+    <div class="header-inner">
+      <a href="index.html" class="brand"><img src="assets/logo.png" alt="Organic Cabana"></a>
+      <nav class="nav">
+        <a href="index.html">Home</a>
+        <a href="shop.html">Shop</a>
+        <a href="#">About</a>
+        <a href="#">Recipes</a>
+        <a href="#">Contact</a>
+      </nav>
+      <div class="header-right">
+        <a href="login.html" class="login">Sign in</a>
+        <a href="checkout.html" class="icon-btn cart">
+          <svg width="18" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 7h12l-1.2 11a2 2 0 0 1-2 1.8H9.2a2 2 0 0 1-2-1.8L6 7Z"/><path d="M9 7V5a3 3 0 0 1 6 0v2"/></svg>
+          <span class="cart-badge">3</span>
+        </a>
+        <button class="hamburger" aria-label="Menu">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- ===== MOBILE NAV ===== -->
+<nav class="mobile-nav">
+  <a href="index.html" class="nav-link">Home</a>
+  <a href="shop.html" class="nav-link">Shop</a>
+  <a href="#" class="nav-link">About</a>
+  <a href="#" class="nav-link">Recipes</a>
+  <a href="#" class="nav-link">Contact</a>
+  <div class="m-actions">
+    <a href="shop.html" class="m-red">Shop Now &rarr;</a>
+    <a href="login.html" class="m-outline">Sign in</a>
+  </div>
+</nav>
+
+<!-- ===== PAGE TOP ===== -->
+<section class="page-top">
+  <!-- SVG Leaf Pattern -->
+  <svg class="leaf-pattern" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+      <pattern id="leaves" x="0" y="0" width="80" height="80" patternUnits="userSpaceOnUse">
+        <path d="M20 10c8 4 14 16 6 24s-20 2-24-6 10-22 18-18z" fill="#fff"/>
+        <path d="M60 50c6 6 4 18-4 20s-16-6-14-14 12-12 18-6z" fill="#fff"/>
+      </pattern>
+    </defs>
+    <rect width="100%" height="100%" fill="url(#leaves)"/>
+  </svg>
+  <div class="wrap">
+    <div class="breadcrumb">
+      <a href="index.html">Home</a>
+      <span class="sep">&#8250;</span>
+      <a href="account.html">My Account</a>
+      <span class="sep">&#8250;</span>
+      <span>Track Order</span>
+    </div>
+    <h1>Track your <em>order.</em></h1>
+    <p class="desc">Follow your organic goodies in real time. Enter your order number and email below to see exactly where your delivery is right now.</p>
+  </div>
+</section>
+
+<!-- ===== LOOKUP SECTION ===== -->
+<section class="lookup">
+  <div class="lookup-card">
+    <p class="eyebrow">Order lookup</p>
+    <h2>Find your <em>order</em></h2>
+    <p class="desc">Enter the order number from your confirmation email and the email address you used at checkout.</p>
+    <div class="lookup-row">
+      <div class="field">
+        <label for="order-num">Order number</label>
+        <input type="text" id="order-num" class="input" value="OC-2026-3341" placeholder="e.g. OC-2026-XXXX">
+      </div>
+      <div class="field">
+        <label for="order-email">Email address</label>
+        <input type="email" id="order-email" class="input" value="ananya.krishnan@email.com" placeholder="you@example.com">
+      </div>
+      <button class="track-btn" id="trackBtn">
+        Track Order
+        <svg class="arrow" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8h10M9 4l4 4-4 4"/></svg>
+      </button>
+    </div>
+    <p class="lookup-note">
+      <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="8" cy="8" r="7"/><path d="M8 4v4l2.5 1.5"/></svg>
+      Order OC-2026-3341 is pre-loaded below as an example.
+    </p>
+  </div>
+</section>
+
+<!-- ===== RESULTS ===== -->
+<section class="results visible" id="resultsSection">
+  <div class="wrap">
+
+    <!-- Order Banner -->
+    <div class="order-banner">
+      <div class="ob-left">
+        <p class="ob-order-num">Order #OC-2026-3341</p>
+        <h2>Your organic staples are out for delivery today.</h2>
+        <div class="ob-details">
+          <span>
+            <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="3" width="12" height="10" rx="1.5"/><path d="M1 6h12"/></svg>
+            Placed 26 Jun 2026
+          </span>
+          <span>
+            <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h10l1 8H1z"/><path d="M5 11v2M9 11v2"/></svg>
+            Delhivery &middot; DL26834791IN
+          </span>
+        </div>
+      </div>
+      <div class="ob-right">
+        <div class="status-pill">
+          <span class="dot"></span>
+          In Transit
+        </div>
+        <p class="ob-eta">Today, 28 Jun &middot; Before 8 PM</p>
+      </div>
+    </div>
+
+    <!-- Results Grid -->
+    <div class="results-grid">
+
+      <!-- LEFT COLUMN -->
+      <div class="results-left">
+
+        <!-- Timeline Card -->
+        <div class="timeline-card">
+          <div class="tc-head">
+            <h3>Delivery timeline</h3>
+            <a href="#">
+              Open in Delhivery
+              <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 2h4v4"/><path d="M14 2L7 9"/><path d="M12 8v5a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V5a1 1 0 0 1 1-1h5"/></svg>
+            </a>
+          </div>
+          <div class="timeline">
+            <!-- Step 1: Done -->
+            <div class="t-step done">
+              <span class="t-icon">
+                <svg width="12" height="12" fill="none" stroke="#fff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M2.5 6l2.5 2.5L9.5 4"/></svg>
+              </span>
+              <div class="t-body">
+                <p class="t-title">Order placed</p>
+                <p class="t-time">26 Jun, 9:14 AM</p>
+              </div>
+            </div>
+            <!-- Step 2: Done -->
+            <div class="t-step done">
+              <span class="t-icon">
+                <svg width="12" height="12" fill="none" stroke="#fff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M2.5 6l2.5 2.5L9.5 4"/></svg>
+              </span>
+              <div class="t-body">
+                <p class="t-title">Confirmed &amp; verified</p>
+                <p class="t-time">26 Jun, 9:16 AM</p>
+              </div>
+            </div>
+            <!-- Step 3: Done -->
+            <div class="t-step done">
+              <span class="t-icon">
+                <svg width="12" height="12" fill="none" stroke="#fff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M2.5 6l2.5 2.5L9.5 4"/></svg>
+              </span>
+              <div class="t-body">
+                <p class="t-title">Quality checked &amp; packed</p>
+                <p class="t-time">26 Jun, 2:30 PM</p>
+              </div>
+            </div>
+            <!-- Step 4: Done -->
+            <div class="t-step done">
+              <span class="t-icon">
+                <svg width="12" height="12" fill="none" stroke="#fff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M2.5 6l2.5 2.5L9.5 4"/></svg>
+              </span>
+              <div class="t-body">
+                <p class="t-title">Dispatched</p>
+                <p class="t-time">27 Jun, 8:05 AM</p>
+              </div>
+            </div>
+            <!-- Step 5: Active -->
+            <div class="t-step active">
+              <span class="t-icon">
+                <svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="6" cy="6" r="3"/></svg>
+              </span>
+              <div class="t-body">
+                <p class="t-title">Out for delivery</p>
+                <p class="t-time">28 Jun, 10:40 AM</p>
+                <div class="t-detail">
+                  Your package is on its way! Delivery partner <strong>Rajan</strong> is heading to your address. You can expect your order to arrive before 8 PM today.
+                </div>
+              </div>
+            </div>
+            <!-- Step 6: Pending -->
+            <div class="t-step pending">
+              <span class="t-icon">
+                <svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="6" cy="6" r="2"/></svg>
+              </span>
+              <div class="t-body">
+                <p class="t-title">Delivered</p>
+                <p class="t-time">Expected today</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Map Card -->
+        <div class="map-card">
+          <div class="map-ph">
+            <div class="grid-lines"></div>
+            <div class="map-pin">
+              <div class="pin-dot"></div>
+              <div class="pin-stem"></div>
+            </div>
+          </div>
+          <div class="map-info">
+            <div>
+              <p class="addr">B-204, Lotus Heights</p>
+              <p class="addr-sub">Baner Road, Pune 411045</p>
+            </div>
+            <div class="dist">
+              <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="7" cy="6" r="3"/><path d="M7 1C4.24 1 2 3.13 2 5.75 2 9.5 7 13 7 13s5-3.5 5-7.25C12 3.13 9.76 1 7 1z"/></svg>
+              2.8 km away
+            </div>
+          </div>
+        </div>
+
+        <!-- Action Buttons -->
+        <div class="actions-row">
+          <button class="btn-primary">
+            <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 10V3a1 1 0 0 1 1-1h10a1 1 0 0 1 1 1v7"/><path d="M1 10h14v3a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1z"/></svg>
+            Reorder
+          </button>
+          <button class="btn-secondary">
+            <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 2v3h3"/><path d="M4 5l3-3h5a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V8"/><path d="M7 9h4M7 11h2"/></svg>
+            Invoice
+          </button>
+          <button class="btn-ghost">
+            <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 14l3-1 8-8-2-2-8 8z"/><path d="M11 5l2 2"/></svg>
+            Contact support
+          </button>
+        </div>
+
+        <!-- Fresh Note -->
+        <div class="fresh-note">
+          <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2C8 2 4 6 4 10c0 5 6 8 8 8s8-3 8-8c0-4-4-8-8-8z"/><path d="M12 2v8"/><path d="M8.5 5.5C10 7 12 8 12 10"/></svg>
+          <div class="fn-text">
+            <strong>Fresh tip:</strong> Store your organic wheat atta and ragi flour in airtight containers in a cool, dry place. For best freshness, refrigerate after opening and use within 45 days.
+          </div>
+        </div>
+      </div>
+
+      <!-- RIGHT COLUMN: Summary Card -->
+      <div class="results-right">
+        <div class="summary-card">
+          <div class="sc-head">
+            <h3>Your order</h3>
+            <span class="badge">3 items</span>
+          </div>
+          <div class="sc-items">
+            <!-- Item 1 -->
+            <div class="sc-item">
+              <div class="sc-thumb">
+                <img src="assets/wheat-atta.jpg" alt="Organic Wheat Atta">
+                <span class="sc-qty">1</span>
+              </div>
+              <div class="sc-body">
+                <p class="sc-name">Organic Wheat Atta</p>
+                <p class="sc-weight">5 kg</p>
+              </div>
+              <span class="sc-price">&#8377;349</span>
+            </div>
+            <!-- Item 2 -->
+            <div class="sc-item">
+              <div class="sc-thumb">
+                <img src="assets/toor-dal.jpg" alt="Organic Toor Dal">
+                <span class="sc-qty">1</span>
+              </div>
+              <div class="sc-body">
+                <p class="sc-name">Organic Toor Dal</p>
+                <p class="sc-weight">1 kg</p>
+              </div>
+              <span class="sc-price">&#8377;199</span>
+            </div>
+            <!-- Item 3 -->
+            <div class="sc-item">
+              <div class="sc-thumb">
+                <img src="assets/ragi-flour.jpg" alt="Organic Ragi Flour">
+                <span class="sc-qty">1</span>
+              </div>
+              <div class="sc-body">
+                <p class="sc-name">Organic Ragi Flour</p>
+                <p class="sc-weight">1 kg</p>
+              </div>
+              <span class="sc-price">&#8377;179</span>
+            </div>
+          </div>
+          <div class="sc-totals">
+            <div class="sc-row">
+              <span>Subtotal</span>
+              <span>&#8377;727</span>
+            </div>
+            <div class="sc-row">
+              <span>Delivery</span>
+              <span class="free">Free</span>
+            </div>
+            <div class="sc-row total">
+              <span>Total paid</span>
+              <span>&#8377;727</span>
+            </div>
+          </div>
+          <div class="sc-addr">
+            <h4>Delivery address</h4>
+            <p class="name">Ananya Krishnan</p>
+            <p class="address">B-204, Lotus Heights<br>Baner Road, Pune 411045<br>Maharashtra, India</p>
+          </div>
+        </div>
+      </div>
+
+    </div><!-- /results-grid -->
+  </div><!-- /wrap -->
+</section>
+
+<!-- ===== FOOTER ===== -->
+<footer>
+  <div class="wrap">
+    <div class="foot-grid">
+      <div class="foot-brand">
+        <img src="assets/logo.png" alt="Organic Cabana">
+        <p>Delivering certified organic groceries from trusted farms across India. Fresh, pure, and sustainably sourced for your family's health.</p>
+        <div class="socials">
+          <a href="#" aria-label="Instagram">
+            <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="1.5" y="1.5" width="13" height="13" rx="3.5"/><circle cx="8" cy="8" r="3.2"/><circle cx="12" cy="4" r=".8" fill="currentColor" stroke="none"/></svg>
+          </a>
+          <a href="#" aria-label="Facebook">
+            <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M10 1.5H8.5a3 3 0 0 0-3 3V7H4v3h1.5v5h3v-5H10l.5-3H8.5V4.5a.5.5 0 0 1 .5-.5H10z"/></svg>
+          </a>
+          <a href="#" aria-label="Twitter">
+            <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M15 2.5a7.5 7.5 0 0 1-2.2.6 3.8 3.8 0 0 0 1.7-2.1 7.5 7.5 0 0 1-2.4.9A3.8 3.8 0 0 0 5.6 5.4 10.7 10.7 0 0 1 1.8 1.6a3.8 3.8 0 0 0 1.2 5 3.7 3.7 0 0 1-1.7-.5v.1a3.8 3.8 0 0 0 3 3.7 3.8 3.8 0 0 1-1.7.1 3.8 3.8 0 0 0 3.5 2.6A7.6 7.6 0 0 1 1 14a10.7 10.7 0 0 0 5.8 1.7A10.7 10.7 0 0 0 17.5 5v-.5A7.7 7.7 0 0 0 15 2.5z"/></svg>
+          </a>
+          <a href="#" aria-label="YouTube">
+            <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="3" width="14" height="10" rx="3"/><path d="M6.5 6l4 2-4 2z"/></svg>
+          </a>
+        </div>
+      </div>
+      <div class="foot-col">
+        <h4>Shop</h4>
+        <ul>
+          <li><a href="shop.html">All Products</a></li>
+          <li><a href="shop.html">Flours &amp; Grains</a></li>
+          <li><a href="shop.html">Pulses &amp; Lentils</a></li>
+          <li><a href="shop.html">Rice &amp; Millets</a></li>
+          <li><a href="shop.html">Superfoods</a></li>
+        </ul>
+      </div>
+      <div class="foot-col">
+        <h4>Company</h4>
+        <ul>
+          <li><a href="#">About Us</a></li>
+          <li><a href="#">Our Farms</a></li>
+          <li><a href="#">Certifications</a></li>
+          <li><a href="#">Careers</a></li>
+          <li><a href="#">Press</a></li>
+        </ul>
+      </div>
+      <div class="foot-col">
+        <h4>Support</h4>
+        <ul>
+          <li><a href="#">Help Centre</a></li>
+          <li><a href="order-tracking.html">Track Order</a></li>
+          <li><a href="#">Shipping Info</a></li>
+          <li><a href="#">Returns</a></li>
+          <li><a href="#">Contact Us</a></li>
+        </ul>
+      </div>
+      <div class="foot-col">
+        <h4>Legal</h4>
+        <ul>
+          <li><a href="#">Privacy Policy</a></li>
+          <li><a href="#">Terms of Service</a></li>
+          <li><a href="#">Cookie Policy</a></li>
+          <li><a href="#">FSSAI Licence</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="copy">
+      <span>&copy; 2026 Organic Cabana. All rights reserved.</span>
+      <div class="certs">
+        <span>FSSAI</span>
+        <span>USDA ORGANIC</span>
+        <span>INDIA ORGANIC</span>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<!-- ===== SCRIPTS ===== -->
+<script src="js/main.js"></script>
+<script>
+(function () {
+  var trackBtn = document.getElementById('trackBtn');
+  var resultsSection = document.getElementById('resultsSection');
+
+  if (trackBtn && resultsSection) {
+    trackBtn.addEventListener('click', function () {
+      resultsSection.classList.add('visible');
+      resultsSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
+  }
+})();
+</script>
+
+</body>
+</html>

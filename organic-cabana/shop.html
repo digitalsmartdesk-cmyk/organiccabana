@@ -1,0 +1,624 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Shop — Organic Cabana | 100% Pure &amp; Organic</title>
+<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,500;0,600;0,700;1,500;1,600;1,700&family=Nunito:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+<style>
+/* ===== PAGE HERO ===== */
+.page-hero{position:relative;background:#2D5A16;color:#fff;padding:72px 0 64px;overflow:hidden}
+.page-hero .leaf-overlay{position:absolute;inset:0;opacity:.07;pointer-events:none}
+.page-hero .leaf-overlay svg{width:100%;height:100%}
+.page-hero .wrap{position:relative;z-index:2}
+.breadcrumb{font-size:13px;font-weight:600;color:rgba(255,255,255,.65);margin-bottom:28px;display:flex;align-items:center;gap:8px}
+.breadcrumb a{color:rgba(255,255,255,.65);transition:color .15s}
+.breadcrumb a:hover{color:#fff}
+.breadcrumb .sep{font-size:11px}
+.page-hero h1{font-family:'Lora',serif;font-size:56px;font-weight:700;line-height:1.08;margin-bottom:18px;color:#fff}
+.page-hero h1 em{font-style:italic;color:#A8D87E}
+.page-hero .hero-desc{font-size:17px;color:rgba(255,255,255,.78);max-width:520px;line-height:1.7;font-weight:500;margin-bottom:36px}
+.hero-meta{display:flex;gap:40px}
+.hero-meta .meta-item{display:flex;flex-direction:column;gap:4px}
+.hero-meta .meta-val{font-family:'Lora',serif;font-size:24px;font-weight:700;color:#fff}
+.hero-meta .meta-lbl{font-size:11px;letter-spacing:.18em;text-transform:uppercase;font-weight:800;color:rgba(255,255,255,.55)}
+
+/* ===== FILTER BAR ===== */
+.filter-bar{position:sticky;top:80px;z-index:30;background:var(--white);border-bottom:1px solid var(--rule);padding:16px 0}
+.filter-inner{display:flex;align-items:center;gap:16px;flex-wrap:wrap}
+.tabs{display:flex;gap:6px;flex:1;flex-wrap:wrap}
+.tabs button{padding:9px 18px;border-radius:8px;font-size:13px;font-weight:700;color:var(--ink-soft);background:none;border:1.5px solid transparent;transition:all .15s;cursor:pointer;white-space:nowrap}
+.tabs button:hover{color:var(--ink);background:var(--green-tint)}
+.tabs button.active{background:var(--green-deep);color:#fff;border-color:var(--green-deep)}
+.pills{display:flex;gap:6px;flex-wrap:wrap}
+.pill{padding:7px 14px;border-radius:20px;font-size:11px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;border:1.5px solid var(--rule);color:var(--ink-soft);cursor:pointer;transition:all .15s;white-space:nowrap}
+.pill:hover{border-color:var(--green);color:var(--green)}
+.pill.on{background:var(--green-tint);border-color:var(--green);color:var(--green-deep)}
+.select-wrap{position:relative}
+.select-wrap select{appearance:none;-webkit-appearance:none;background:var(--cream);border:1.5px solid var(--rule);border-radius:8px;padding:9px 36px 9px 14px;font-size:13px;font-weight:700;color:var(--ink);cursor:pointer;outline:none;transition:border-color .15s}
+.select-wrap select:hover{border-color:var(--rule-strong)}
+.select-wrap select:focus{border-color:var(--green)}
+.select-wrap .chev{position:absolute;right:12px;top:50%;transform:translateY(-50%);pointer-events:none;color:var(--ink-soft)}
+.results-row{width:100%;padding-top:10px;font-size:13px;font-weight:600;color:var(--ink-soft)}
+.results-row span{color:var(--green-deep);font-weight:800}
+
+/* ===== ASSURANCE STRIP ===== */
+.assurance{background:#D4E9BF;padding:56px 0}
+.assurance-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:28px;text-align:center}
+.assurance-item svg{margin:0 auto 14px;color:var(--green-deep)}
+.assurance-item h4{font-family:'Lora',serif;font-size:16px;font-weight:700;color:var(--green-deep);margin-bottom:4px}
+.assurance-item p{font-size:13px;color:var(--ink-soft);font-weight:500;line-height:1.5}
+
+/* ===== RESPONSIVE — PAGE SPECIFIC ===== */
+@media(max-width:900px){
+  .page-hero h1{font-size:40px}
+  .page-hero{padding:56px 0 48px}
+  .hero-meta{gap:28px}
+  .hero-meta .meta-val{font-size:20px}
+  .filter-bar{top:72px}
+  .filter-inner{gap:12px}
+  .pills{display:none}
+  .assurance-grid{grid-template-columns:repeat(2,1fr);gap:20px}
+}
+@media(max-width:600px){
+  .page-hero h1{font-size:28px}
+  .page-hero{padding:40px 0 36px}
+  .page-hero .hero-desc{font-size:15px}
+  .hero-meta{flex-direction:column;gap:16px}
+  .hero-meta .meta-val{font-size:18px}
+  .filter-bar{top:64px;padding:12px 0}
+  .tabs{gap:4px}
+  .tabs button{padding:7px 12px;font-size:12px}
+  .assurance-grid{grid-template-columns:1fr;gap:24px}
+  .results-row{font-size:12px}
+}
+</style>
+</head>
+<body>
+
+<!-- ===== HEADER ===== -->
+<header class="header">
+  <div class="wrap header-inner">
+    <a href="index.html" class="brand"><img src="assets/logo.png" alt="Organic Cabana"></a>
+    <nav class="nav">
+      <a href="index.html">Home</a>
+      <a href="shop.html" class="active">Shop</a>
+      <a href="#">About</a>
+      <a href="#">Recipes</a>
+      <a href="#">Contact</a>
+    </nav>
+    <div class="header-right">
+      <a href="login.html" class="login">Sign in</a>
+      <button class="icon-btn" aria-label="Search">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+      </button>
+      <a href="checkout.html" class="icon-btn cart" aria-label="Cart">
+        <svg width="18" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 7h12l-1.2 11a2 2 0 0 1-2 1.8H9.2a2 2 0 0 1-2-1.8L6 7Z"/><path d="M9 7V5a3 3 0 0 1 6 0v2"/></svg>
+        <span class="cart-badge">3</span>
+      </a>
+      <button class="hamburger" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<!-- ===== MOBILE NAV ===== -->
+<nav class="mobile-nav">
+  <a href="index.html" class="nav-link">Home</a>
+  <a href="shop.html" class="nav-link">Shop</a>
+  <a href="#" class="nav-link">About</a>
+  <a href="#" class="nav-link">Recipes</a>
+  <a href="#" class="nav-link">Contact</a>
+  <div class="m-actions">
+    <a href="checkout.html" class="m-red">Cart (3) &rarr;</a>
+    <a href="login.html" class="m-outline">Sign in</a>
+  </div>
+</nav>
+
+<!-- ===== PAGE HERO ===== -->
+<section class="page-hero">
+  <div class="leaf-overlay">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 400" preserveAspectRatio="xMidYMid slice">
+      <g fill="#fff">
+        <path d="M120 60c-20 30 10 60 40 50s20-50-10-60-30 0-30 10z"/>
+        <path d="M350 120c-15 25 8 50 33 42s17-42-8-50-25 0-25 8z"/>
+        <path d="M600 40c-18 28 9 55 37 46s18-46-9-55-28 0-28 9z"/>
+        <path d="M820 100c-22 33 11 66 44 55s22-55-11-66-33 0-33 11z"/>
+        <path d="M1050 50c-16 24 8 48 32 40s16-40-8-48-24 0-24 8z"/>
+        <path d="M1280 90c-19 29 10 58 39 48s19-48-10-58-29 0-29 10z"/>
+        <path d="M200 280c-14 21 7 42 28 35s14-35-7-42-21 0-21 7z"/>
+        <path d="M480 300c-17 26 9 51 34 43s17-43-9-51-26 0-26 8z"/>
+        <path d="M750 260c-20 30 10 60 40 50s20-50-10-60-30 0-30 10z"/>
+        <path d="M1000 320c-13 20 7 39 26 33s13-33-7-39-20 0-20 6z"/>
+        <path d="M1250 270c-16 24 8 48 32 40s16-40-8-48-24 0-24 8z"/>
+        <path d="M60 180c-10 15 5 30 20 25s10-25-5-30-15 0-15 5z"/>
+        <path d="M1400 180c-12 18 6 36 24 30s12-30-6-36-18 0-18 6z"/>
+      </g>
+    </svg>
+  </div>
+  <div class="wrap">
+    <div class="breadcrumb">
+      <a href="index.html">Home</a>
+      <span class="sep">&#8250;</span>
+      <span>Shop</span>
+    </div>
+    <h1>Pure. Organic. <em>Real.</em></h1>
+    <p class="hero-desc">Hand-picked from certified organic farms across India. No chemicals, no shortcuts — just pure food the way nature intended it.</p>
+    <div class="hero-meta">
+      <div class="meta-item">
+        <span class="meta-val">9 Products</span>
+        <span class="meta-lbl">In Our Store</span>
+      </div>
+      <div class="meta-item">
+        <span class="meta-val">USDA Certified</span>
+        <span class="meta-lbl">Organic Standard</span>
+      </div>
+      <div class="meta-item">
+        <span class="meta-val">Zero Chemicals</span>
+        <span class="meta-lbl">100% Natural</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== FILTER BAR ===== -->
+<div class="filter-bar">
+  <div class="wrap">
+    <div class="filter-inner">
+      <div class="tabs">
+        <button class="active" data-cat="all">All Products</button>
+        <button data-cat="atta">Atta &amp; Flours</button>
+        <button data-cat="rice">Organic Rice</button>
+        <button data-cat="dal">Dals &amp; Lentils</button>
+        <button data-cat="super">Superfoods</button>
+      </div>
+      <div class="pills">
+        <button class="pill" data-pill="usda">USDA Organic</button>
+        <button class="pill" data-pill="jaivik">Jaivik Bharat</button>
+        <button class="pill" data-pill="gf">Gluten Free</button>
+      </div>
+      <div class="select-wrap">
+        <select aria-label="Sort products">
+          <option>Sort by: Featured</option>
+          <option>Price: Low to High</option>
+          <option>Price: High to Low</option>
+          <option>Newest First</option>
+          <option>Rating</option>
+        </select>
+        <svg class="chev" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 5l3 3 3-3"/></svg>
+      </div>
+    </div>
+    <div class="results-row">Showing <span class="count">9</span> products</div>
+  </div>
+</div>
+
+<!-- ===== SHOP GRID ===== -->
+<section class="pad">
+  <div class="wrap">
+    <div class="product-grid">
+
+      <!-- 1 · Wheat Atta -->
+      <a href="product.html" class="product" data-cat="atta">
+        <div class="pic">
+          <img src="assets/wheat-atta.jpg" alt="Wheat Atta">
+          <span class="tag organic">Bestseller</span>
+          <button class="heart" aria-label="Add to wishlist" onclick="event.preventDefault()">
+            <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 14s-5.5-3.5-5.5-7A3.5 3.5 0 0 1 8 4a3.5 3.5 0 0 1 5.5 3c0 3.5-5.5 7-5.5 7z"/></svg>
+          </button>
+        </div>
+        <div class="body">
+          <div class="cat">Organic Atta</div>
+          <h3>Wheat Atta</h3>
+          <p class="desc">Stone-ground whole wheat flour from certified organic farms. Rich in fibre &amp; nutrients.</p>
+          <div class="stars">
+            <svg width="14" height="14" fill="currentColor" viewBox="0 0 20 20"><path d="M10 1l2.4 6.6H19l-5.3 4 2 6.5L10 14.3 4.3 18l2-6.5L1 7.6h6.6z"/></svg>
+            <svg width="14" height="14" fill="currentColor" viewBox="0 0 20 20"><path d="M10 1l2.4 6.6H19l-5.3 4 2 6.5L10 14.3 4.3 18l2-6.5L1 7.6h6.6z"/></svg>
+            <svg width="14" height="14" fill="currentColor" viewBox="0 0 20 20"><path d="M10 1l2.4 6.6H19l-5.3 4 2 6.5L10 14.3 4.3 18l2-6.5L1 7.6h6.6z"/></svg>
+            <svg width="14" height="14" fill="currentColor" viewBox="0 0 20 20"><path d="M10 1l2.4 6.6H19l-5.3 4 2 6.5L10 14.3 4.3 18l2-6.5L1 7.6h6.6z"/></svg>
+            <svg width="14" height="14" fill="currentColor" viewBox="0 0 20 20"><path d="M10 1l2.4 6.6H19l-5.3 4 2 6.5L10 14.3 4.3 18l2-6.5L1 7.6h6.6z"/></svg>
+            <span>4.9 (128)</span>
+          </div>
+          <div class="row">
+            <div class="price"><span class="now">&#8377;349</span><span class="was">&#8377;399</span></div>
+            <button class="add" onclick="event.preventDefault()">
+              <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="7" y1="1" x2="7" y2="13"/><line x1="1" y1="7" x2="13" y2="7"/></svg>
+              Add
+            </button>
+          </div>
+        </div>
+      </a>
+
+      <!-- 2 · Multigrain Atta -->
+      <div class="product" data-cat="atta">
+        <div class="pic">
+          <img src="assets/multigrain-atta.jpg" alt="Multigrain Atta">
+          <span class="tag organic">Bestseller</span>
+          <button class="heart" aria-label="Add to wishlist">
+            <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 14s-5.5-3.5-5.5-7A3.5 3.5 0 0 1 8 4a3.5 3.5 0 0 1 5.5 3c0 3.5-5.5 7-5.5 7z"/></svg>
+          </button>
+        </div>
+        <div class="body">
+          <div class="cat">Organic Atta</div>
+          <h3>Multigrain Atta</h3>
+          <p class="desc">A powerful blend of 7 organic grains for balanced nutrition in every roti.</p>
+          <div class="stars">
+            <svg width="14" height="14" fill="currentColor" viewBox="0 0 20 20"><path d="M10 1l2.4 6.6H19l-5.3 4 2 6.5L10 14.3 4.3 18l2-6.5L1 7.6h6.6z"/></svg>
+            <svg width="14" height="14" fill="currentColor" viewBox="0 0 20 20"><path d="M10 1l2.4 6.6H19l-5.3 4 2 6.5L10 14.3 4.3 18l2-6.5L1 7.6h6.6z"/></svg>
+            <svg width="14" height="14" fill="currentColor" viewBox="0 0 20 20"><path d="M10 1l2.4 6.6H19l-5.3 4 2 6.5L10 14.3 4.3 18l2-6.5L1 7.6h6.6z"/></svg>
+            <svg width="14" height="14" fill="currentColor" viewBox="0 0 20 20"><path d="M10 1l2.4 6.6H19l-5.3 4 2 6.5L10 14.3 4.3 18l2-6.5L1 7.6h6.6z"/></svg>
+            <svg width="14" height="14" fill="currentColor" viewBox="0 0 20 20"><path d="M10 1l2.4 6.6H19l-5.3 4 2 6.5L10 14.3 4.3 18l2-6.5L1 7.6h6.6z"/></svg>
+            <span>4.8 (96)</span>
+          </div>
+          <div class="row">
+            <div class="price"><span class="now">&#8377;399</span><span class="was">&#8377;449</span></div>
+            <button class="add">
+              <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="7" y1="1" x2="7" y2="13"/><line x1="1" y1="7" x2="13" y2="7"/></svg>
+              Add
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- 3 · Basmati Rice -->
+      <div class="product" data-cat="rice">
+        <div class="pic">
+          <img src="assets/basmati-rice.jpg" alt="Basmati Rice">
+          <span class="tag usda">USDA Organic</span>
+          <button class="heart" aria-label="Add to wishlist">
+            <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 14s-5.5-3.5-5.5-7A3.5 3.5 0 0 1 8 4a3.5 3.5 0 0 1 5.5 3c0 3.5-5.5 7-5.5 7z"/></svg>
+          </button>
+        </div>
+        <div class="body">
+          <div class="cat">Organic Rice</div>
+          <h3>Basmati Rice</h3>
+          <p class="desc">Premium aged basmati with long grains and aromatic fragrance. Pesticide-free.</p>
+          <div class="stars">
+            <svg width="14" height="14" fill="currentColor" viewBox="0 0 20 20"><path d="M10 1l2.4 6.6H19l-5.3 4 2 6.5L10 14.3 4.3 18l2-6.5L1 7.6h6.6z"/></svg>
+            <svg width="14" height="14" fill="currentColor" viewBox="0 0 20 20"><path d="M10 1l2.4 6.6H19l-5.3 4 2 6.5L10 14.3 4.3 18l2-6.5L1 7.6h6.6z"/></svg>
+            <svg width="14" height="14" fill="currentColor" viewBox="0 0 20 20"><path d="M10 1l2.4 6.6H19l-5.3 4 2 6.5L10 14.3 4.3 18l2-6.5L1 7.6h6.6z"/></svg>
+            <svg width="14" height="14" fill="currentColor" viewBox="0 0 20 20"><path d="M10 1l2.4 6.6H19l-5.3 4 2 6.5L10 14.3 4.3 18l2-6.5L1 7.6h6.6z"/></svg>
+            <svg width="14" height="14" fill="currentColor" viewBox="0 0 20 20"><path d="M10 1l2.4 6.6H19l-5.3 4 2 6.5L10 14.3 4.3 18l2-6.5L1 7.6h6.6z"/></svg>
+            <span>4.9 (214)</span>
+          </div>
+          <div class="row">
+            <div class="price"><span class="now">&#8377;279</span><span class="was">&#8377;319</span></div>
+            <button class="add">
+              <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="7" y1="1" x2="7" y2="13"/><line x1="1" y1="7" x2="13" y2="7"/></svg>
+              Add
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- 4 · Sona Masoori -->
+      <div class="product" data-cat="rice">
+        <div class="pic">
+          <img src="assets/sona-masoori.jpg" alt="Sona Masoori Rice">
+          <span class="tag usda">USDA Organic</span>
+          <button class="heart" aria-label="Add to wishlist">
+            <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 14s-5.5-3.5-5.5-7A3.5 3.5 0 0 1 8 4a3.5 3.5 0 0 1 5.5 3c0 3.5-5.5 7-5.5 7z"/></svg>
+          </button>
+        </div>
+        <div class="body">
+          <div class="cat">Organic Rice</div>
+          <h3>Sona Masoori</h3>
+          <p class="desc">Lightweight, aromatic everyday rice grown in organic paddies of South India.</p>
+          <div class="stars">
+            <svg width="14" height="14" fill="currentColor" viewBox="0 0 20 20"><path d="M10 1l2.4 6.6H19l-5.3 4 2 6.5L10 14.3 4.3 18l2-6.5L1 7.6h6.6z"/></svg>
+            <svg width="14" height="14" fill="currentColor" viewBox="0 0 20 20"><path d="M10 1l2.4 6.6H19l-5.3 4 2 6.5L10 14.3 4.3 18l2-6.5L1 7.6h6.6z"/></svg>
+            <svg width="14" height="14" fill="currentColor" viewBox="0 0 20 20"><path d="M10 1l2.4 6.6H19l-5.3 4 2 6.5L10 14.3 4.3 18l2-6.5L1 7.6h6.6z"/></svg>
+            <svg width="14" height="14" fill="currentColor" viewBox="0 0 20 20"><path d="M10 1l2.4 6.6H19l-5.3 4 2 6.5L10 14.3 4.3 18l2-6.5L1 7.6h6.6z"/></svg>
+            <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 20 20"><path d="M10 1l2.4 6.6H19l-5.3 4 2 6.5L10 14.3 4.3 18l2-6.5L1 7.6h6.6z"/></svg>
+            <span>4.7 (83)</span>
+          </div>
+          <div class="row">
+            <div class="price"><span class="now">&#8377;229</span><span class="was">&#8377;269</span></div>
+            <button class="add">
+              <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="7" y1="1" x2="7" y2="13"/><line x1="1" y1="7" x2="13" y2="7"/></svg>
+              Add
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- 5 · Toor Dal -->
+      <div class="product" data-cat="dal">
+        <div class="pic">
+          <img src="assets/toor-dal.jpg" alt="Toor Dal">
+          <span class="tag organic">Unpolished</span>
+          <button class="heart" aria-label="Add to wishlist">
+            <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 14s-5.5-3.5-5.5-7A3.5 3.5 0 0 1 8 4a3.5 3.5 0 0 1 5.5 3c0 3.5-5.5 7-5.5 7z"/></svg>
+          </button>
+        </div>
+        <div class="body">
+          <div class="cat">Organic Dal</div>
+          <h3>Toor Dal</h3>
+          <p class="desc">Unpolished, chemical-free toor dal rich in protein. Perfect for everyday cooking.</p>
+          <div class="stars">
+            <svg width="14" height="14" fill="currentColor" viewBox="0 0 20 20"><path d="M10 1l2.4 6.6H19l-5.3 4 2 6.5L10 14.3 4.3 18l2-6.5L1 7.6h6.6z"/></svg>
+            <svg width="14" height="14" fill="currentColor" viewBox="0 0 20 20"><path d="M10 1l2.4 6.6H19l-5.3 4 2 6.5L10 14.3 4.3 18l2-6.5L1 7.6h6.6z"/></svg>
+            <svg width="14" height="14" fill="currentColor" viewBox="0 0 20 20"><path d="M10 1l2.4 6.6H19l-5.3 4 2 6.5L10 14.3 4.3 18l2-6.5L1 7.6h6.6z"/></svg>
+            <svg width="14" height="14" fill="currentColor" viewBox="0 0 20 20"><path d="M10 1l2.4 6.6H19l-5.3 4 2 6.5L10 14.3 4.3 18l2-6.5L1 7.6h6.6z"/></svg>
+            <svg width="14" height="14" fill="currentColor" viewBox="0 0 20 20"><path d="M10 1l2.4 6.6H19l-5.3 4 2 6.5L10 14.3 4.3 18l2-6.5L1 7.6h6.6z"/></svg>
+            <span>4.8 (156)</span>
+          </div>
+          <div class="row">
+            <div class="price"><span class="now">&#8377;199</span><span class="was">&#8377;229</span></div>
+            <button class="add">
+              <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="7" y1="1" x2="7" y2="13"/><line x1="1" y1="7" x2="13" y2="7"/></svg>
+              Add
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- 6 · Moong Dal -->
+      <div class="product" data-cat="dal">
+        <div class="pic">
+          <img src="assets/moong-dal.jpg" alt="Moong Dal">
+          <span class="tag organic">Unpolished</span>
+          <button class="heart" aria-label="Add to wishlist">
+            <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 14s-5.5-3.5-5.5-7A3.5 3.5 0 0 1 8 4a3.5 3.5 0 0 1 5.5 3c0 3.5-5.5 7-5.5 7z"/></svg>
+          </button>
+        </div>
+        <div class="body">
+          <div class="cat">Organic Dal</div>
+          <h3>Moong Dal</h3>
+          <p class="desc">Split yellow moong dal, unpolished &amp; chemical-free. Light, nutritious &amp; easy to digest.</p>
+          <div class="stars">
+            <svg width="14" height="14" fill="currentColor" viewBox="0 0 20 20"><path d="M10 1l2.4 6.6H19l-5.3 4 2 6.5L10 14.3 4.3 18l2-6.5L1 7.6h6.6z"/></svg>
+            <svg width="14" height="14" fill="currentColor" viewBox="0 0 20 20"><path d="M10 1l2.4 6.6H19l-5.3 4 2 6.5L10 14.3 4.3 18l2-6.5L1 7.6h6.6z"/></svg>
+            <svg width="14" height="14" fill="currentColor" viewBox="0 0 20 20"><path d="M10 1l2.4 6.6H19l-5.3 4 2 6.5L10 14.3 4.3 18l2-6.5L1 7.6h6.6z"/></svg>
+            <svg width="14" height="14" fill="currentColor" viewBox="0 0 20 20"><path d="M10 1l2.4 6.6H19l-5.3 4 2 6.5L10 14.3 4.3 18l2-6.5L1 7.6h6.6z"/></svg>
+            <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 20 20"><path d="M10 1l2.4 6.6H19l-5.3 4 2 6.5L10 14.3 4.3 18l2-6.5L1 7.6h6.6z"/></svg>
+            <span>4.6 (72)</span>
+          </div>
+          <div class="row">
+            <div class="price"><span class="now">&#8377;189</span><span class="was">&#8377;219</span></div>
+            <button class="add">
+              <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="7" y1="1" x2="7" y2="13"/><line x1="1" y1="7" x2="13" y2="7"/></svg>
+              Add
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- 7 · Besan -->
+      <div class="product" data-cat="atta">
+        <div class="pic">
+          <img src="assets/besan.jpg" alt="Besan">
+          <span class="tag gf">Gluten Free</span>
+          <button class="heart" aria-label="Add to wishlist">
+            <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 14s-5.5-3.5-5.5-7A3.5 3.5 0 0 1 8 4a3.5 3.5 0 0 1 5.5 3c0 3.5-5.5 7-5.5 7z"/></svg>
+          </button>
+        </div>
+        <div class="body">
+          <div class="cat">Organic Flour</div>
+          <h3>Besan</h3>
+          <p class="desc">Stone-ground organic chickpea flour. Naturally gluten-free, high in protein.</p>
+          <div class="stars">
+            <svg width="14" height="14" fill="currentColor" viewBox="0 0 20 20"><path d="M10 1l2.4 6.6H19l-5.3 4 2 6.5L10 14.3 4.3 18l2-6.5L1 7.6h6.6z"/></svg>
+            <svg width="14" height="14" fill="currentColor" viewBox="0 0 20 20"><path d="M10 1l2.4 6.6H19l-5.3 4 2 6.5L10 14.3 4.3 18l2-6.5L1 7.6h6.6z"/></svg>
+            <svg width="14" height="14" fill="currentColor" viewBox="0 0 20 20"><path d="M10 1l2.4 6.6H19l-5.3 4 2 6.5L10 14.3 4.3 18l2-6.5L1 7.6h6.6z"/></svg>
+            <svg width="14" height="14" fill="currentColor" viewBox="0 0 20 20"><path d="M10 1l2.4 6.6H19l-5.3 4 2 6.5L10 14.3 4.3 18l2-6.5L1 7.6h6.6z"/></svg>
+            <svg width="14" height="14" fill="currentColor" viewBox="0 0 20 20"><path d="M10 1l2.4 6.6H19l-5.3 4 2 6.5L10 14.3 4.3 18l2-6.5L1 7.6h6.6z"/></svg>
+            <span>4.8 (64)</span>
+          </div>
+          <div class="row">
+            <div class="price"><span class="now">&#8377;149</span><span class="was">&#8377;179</span></div>
+            <button class="add">
+              <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="7" y1="1" x2="7" y2="13"/><line x1="1" y1="7" x2="13" y2="7"/></svg>
+              Add
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- 8 · Ragi Flour -->
+      <div class="product" data-cat="atta">
+        <div class="pic">
+          <img src="assets/ragi-flour.jpg" alt="Ragi Flour">
+          <span class="tag gf">Gluten Free</span>
+          <button class="heart" aria-label="Add to wishlist">
+            <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 14s-5.5-3.5-5.5-7A3.5 3.5 0 0 1 8 4a3.5 3.5 0 0 1 5.5 3c0 3.5-5.5 7-5.5 7z"/></svg>
+          </button>
+        </div>
+        <div class="body">
+          <div class="cat">Organic Flour</div>
+          <h3>Ragi Flour</h3>
+          <p class="desc">Organic finger millet flour, calcium-rich &amp; naturally gluten-free. A superfood staple.</p>
+          <div class="stars">
+            <svg width="14" height="14" fill="currentColor" viewBox="0 0 20 20"><path d="M10 1l2.4 6.6H19l-5.3 4 2 6.5L10 14.3 4.3 18l2-6.5L1 7.6h6.6z"/></svg>
+            <svg width="14" height="14" fill="currentColor" viewBox="0 0 20 20"><path d="M10 1l2.4 6.6H19l-5.3 4 2 6.5L10 14.3 4.3 18l2-6.5L1 7.6h6.6z"/></svg>
+            <svg width="14" height="14" fill="currentColor" viewBox="0 0 20 20"><path d="M10 1l2.4 6.6H19l-5.3 4 2 6.5L10 14.3 4.3 18l2-6.5L1 7.6h6.6z"/></svg>
+            <svg width="14" height="14" fill="currentColor" viewBox="0 0 20 20"><path d="M10 1l2.4 6.6H19l-5.3 4 2 6.5L10 14.3 4.3 18l2-6.5L1 7.6h6.6z"/></svg>
+            <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 20 20"><path d="M10 1l2.4 6.6H19l-5.3 4 2 6.5L10 14.3 4.3 18l2-6.5L1 7.6h6.6z"/></svg>
+            <span>4.7 (91)</span>
+          </div>
+          <div class="row">
+            <div class="price"><span class="now">&#8377;179</span><span class="was">&#8377;209</span></div>
+            <button class="add">
+              <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="7" y1="1" x2="7" y2="13"/><line x1="1" y1="7" x2="13" y2="7"/></svg>
+              Add
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- 9 · Quinoa -->
+      <div class="product" data-cat="super">
+        <div class="pic">
+          <img src="assets/quinoa.jpg" alt="Quinoa">
+          <span class="tag super">Superfood</span>
+          <button class="heart" aria-label="Add to wishlist">
+            <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 14s-5.5-3.5-5.5-7A3.5 3.5 0 0 1 8 4a3.5 3.5 0 0 1 5.5 3c0 3.5-5.5 7-5.5 7z"/></svg>
+          </button>
+        </div>
+        <div class="body">
+          <div class="cat">Superfood</div>
+          <h3>Quinoa</h3>
+          <p class="desc">Premium organic white quinoa. Complete protein, high in fibre &amp; essential amino acids.</p>
+          <div class="stars">
+            <svg width="14" height="14" fill="currentColor" viewBox="0 0 20 20"><path d="M10 1l2.4 6.6H19l-5.3 4 2 6.5L10 14.3 4.3 18l2-6.5L1 7.6h6.6z"/></svg>
+            <svg width="14" height="14" fill="currentColor" viewBox="0 0 20 20"><path d="M10 1l2.4 6.6H19l-5.3 4 2 6.5L10 14.3 4.3 18l2-6.5L1 7.6h6.6z"/></svg>
+            <svg width="14" height="14" fill="currentColor" viewBox="0 0 20 20"><path d="M10 1l2.4 6.6H19l-5.3 4 2 6.5L10 14.3 4.3 18l2-6.5L1 7.6h6.6z"/></svg>
+            <svg width="14" height="14" fill="currentColor" viewBox="0 0 20 20"><path d="M10 1l2.4 6.6H19l-5.3 4 2 6.5L10 14.3 4.3 18l2-6.5L1 7.6h6.6z"/></svg>
+            <svg width="14" height="14" fill="currentColor" viewBox="0 0 20 20"><path d="M10 1l2.4 6.6H19l-5.3 4 2 6.5L10 14.3 4.3 18l2-6.5L1 7.6h6.6z"/></svg>
+            <span>4.9 (47)</span>
+          </div>
+          <div class="row">
+            <div class="price"><span class="now">&#8377;349</span><span class="was">&#8377;399</span></div>
+            <button class="add">
+              <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="7" y1="1" x2="7" y2="13"/><line x1="1" y1="7" x2="13" y2="7"/></svg>
+              Add
+            </button>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ===== ASSURANCE STRIP ===== -->
+<section class="assurance">
+  <div class="wrap">
+    <div class="assurance-grid">
+      <div class="assurance-item">
+        <svg width="36" height="36" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="M9 12l2 2 4-4"/></svg>
+        <h4>USDA &amp; Jaivik Certified</h4>
+        <p>Every product carries verified organic certification</p>
+      </div>
+      <div class="assurance-item">
+        <svg width="36" height="36" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><rect x="1" y="3" width="15" height="13" rx="2"/><path d="M16 8h4l3 3v5h-3"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/><path d="M8 18h8"/></svg>
+        <h4>Free Shipping &#8377;499+</h4>
+        <p>Complimentary delivery on all orders above &#8377;499</p>
+      </div>
+      <div class="assurance-item">
+        <svg width="36" height="36" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 1 0 2.13-9.36L1 10"/></svg>
+        <h4>Easy Returns</h4>
+        <p>Hassle-free 7-day return policy on all products</p>
+      </div>
+      <div class="assurance-item">
+        <svg width="36" height="36" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><rect x="1" y="4" width="22" height="16" rx="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg>
+        <h4>Secure Payment</h4>
+        <p>256-bit SSL encryption for all transactions</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== FOOTER ===== -->
+<footer>
+  <div class="wrap">
+    <div class="foot-grid">
+      <div class="foot-brand">
+        <img src="assets/logo.png" alt="Organic Cabana">
+        <p>Pure organic groceries sourced directly from certified farms across India. No chemicals, no shortcuts.</p>
+        <div class="socials">
+          <a href="#" aria-label="Instagram">
+            <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+          </a>
+          <a href="#" aria-label="Facebook">
+            <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+          </a>
+          <a href="#" aria-label="Twitter">
+            <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M23 3a10.9 10.9 0 0 1-3.14 1.53A4.48 4.48 0 0 0 12 7.5v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z"/></svg>
+          </a>
+          <a href="#" aria-label="YouTube">
+            <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 0 0-1.94 2 29 29 0 0 0-.46 5.08 29 29 0 0 0 .46 5.08 2.78 2.78 0 0 0 1.94 2C5.12 20 12 20 12 20s6.88 0 8.6-.46a2.78 2.78 0 0 0 1.94-2 29 29 0 0 0 .46-5.08 29 29 0 0 0-.46-5.04z"/><polygon points="9.75 15.02 15.5 11.75 9.75 8.48 9.75 15.02"/></svg>
+          </a>
+        </div>
+      </div>
+      <div class="foot-col">
+        <h4>Quick Links</h4>
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="shop.html">Shop</a></li>
+          <li><a href="product.html">Product</a></li>
+          <li><a href="checkout.html">Checkout</a></li>
+          <li><a href="order-tracking.html">Track Order</a></li>
+        </ul>
+      </div>
+      <div class="foot-col">
+        <h4>Categories</h4>
+        <ul>
+          <li><a href="shop.html">Atta &amp; Flours</a></li>
+          <li><a href="shop.html">Organic Rice</a></li>
+          <li><a href="shop.html">Dals &amp; Lentils</a></li>
+          <li><a href="shop.html">Superfoods</a></li>
+        </ul>
+      </div>
+      <div class="foot-col">
+        <h4>Account</h4>
+        <ul>
+          <li><a href="login.html">Login</a></li>
+          <li><a href="account.html">My Account</a></li>
+          <li><a href="order-tracking.html">Order Tracking</a></li>
+          <li><a href="checkout.html">Cart</a></li>
+        </ul>
+      </div>
+      <div class="foot-col">
+        <h4>Support</h4>
+        <ul>
+          <li><a href="#">Contact Us</a></li>
+          <li><a href="#">FAQs</a></li>
+          <li><a href="#">Shipping Policy</a></li>
+          <li><a href="#">Return Policy</a></li>
+          <li><a href="#">Privacy Policy</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="copy">
+      <span>&copy; 2026 Organic Cabana. All rights reserved.</span>
+      <div class="certs">
+        <span>USDA ORGANIC</span>
+        <span>JAIVIK BHARAT</span>
+        <span>FSSAI</span>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<!-- ===== JS ===== -->
+<script src="js/main.js"></script>
+<script>
+(function () {
+  /* ---- Category Filter ---- */
+  var tabs = document.querySelectorAll('.tabs button');
+  var products = document.querySelectorAll('.product-grid .product');
+  var countEl = document.querySelector('.results-row .count');
+
+  tabs.forEach(function (tab) {
+    tab.addEventListener('click', function () {
+      tabs.forEach(function (t) { t.classList.remove('active'); });
+      tab.classList.add('active');
+      var cat = tab.getAttribute('data-cat');
+      var visible = 0;
+
+      products.forEach(function (p) {
+        if (cat === 'all' || p.getAttribute('data-cat') === cat) {
+          p.style.display = '';
+          visible++;
+        } else {
+          p.style.display = 'none';
+        }
+      });
+
+      if (countEl) countEl.textContent = visible;
+    });
+  });
+
+  /* ---- Pill Toggle ---- */
+  var pills = document.querySelectorAll('.pill');
+  pills.forEach(function (pill) {
+    pill.addEventListener('click', function () {
+      pill.classList.toggle('on');
+    });
+  });
+})();
+</script>
+</body>
+</html>
