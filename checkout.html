@@ -1,0 +1,496 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Checkout — Organic Cabana</title>
+<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Nunito:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+<style>
+/* ===== CHECKOUT HEADER ===== */
+.checkout-header{background:var(--white);border-bottom:2px solid var(--green-tint);position:sticky;top:0;z-index:50}
+.checkout-header .wrap{display:flex;align-items:center;justify-content:space-between;height:72px;max-width:1160px}
+.checkout-header .brand img{height:48px;width:auto}
+.checkout-header .secure-title{display:flex;align-items:center;gap:8px;font-family:'Lora',serif;font-size:18px;font-weight:600;color:var(--ink)}
+.checkout-header .secure-title svg{color:var(--green);flex-shrink:0}
+.checkout-header .ssl-label{font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--green-deep);opacity:.7}
+.checkout-header .hamburger{display:none}
+
+/* ===== CHECKOUT WRAP OVERRIDE ===== */
+.checkout-wrap{max-width:1160px;margin:0 auto;padding:0 40px}
+
+/* ===== STEPS INDICATOR ===== */
+.steps{padding:28px 0}
+.steps-card{background:var(--white);border-radius:12px;padding:20px 32px;display:flex;align-items:center;justify-content:center;gap:0;box-shadow:0 2px 12px -4px rgba(44,31,15,.07)}
+.step{display:flex;align-items:center;gap:10px;font-size:13px;font-weight:700;color:var(--ink-soft);white-space:nowrap}
+.step-num{width:32px;height:32px;border-radius:50%;display:grid;place-items:center;font-size:13px;font-weight:800;border:2px solid var(--rule-strong);color:var(--ink-soft);background:var(--white);transition:all .2s}
+.step.done .step-num{background:var(--green);border-color:var(--green);color:#fff}
+.step.done .step-num svg{display:block}
+.step.done .step-num span{display:none}
+.step.active .step-num{background:var(--red);border-color:var(--red);color:#fff}
+.step.active{color:var(--ink)}
+.step-sep{width:40px;height:2px;background:var(--rule);margin:0 16px;flex-shrink:0}
+
+/* ===== PAGE TOP HEADING ===== */
+.page-top{text-align:center;padding:12px 0 36px}
+.page-top h1{font-family:'Lora',serif;font-size:32px;font-weight:600;color:var(--ink)}
+.page-top h1 em{font-style:italic;color:var(--red)}
+
+/* ===== CHECKOUT GRID ===== */
+.checkout-grid{display:grid;grid-template-columns:1fr 380px;gap:32px;padding-bottom:64px;align-items:start}
+
+/* ===== FORM CARDS ===== */
+.form-card{background:var(--white);border-radius:12px;padding:28px;margin-bottom:20px;box-shadow:0 2px 12px -4px rgba(44,31,15,.07)}
+.form-card .section-head{text-align:left;margin-bottom:20px;display:flex;align-items:center;gap:10px}
+.form-card .section-head h3{font-family:'Lora',serif;font-size:18px;font-weight:600;color:var(--ink);margin:0}
+.form-card .section-head svg{color:var(--green);flex-shrink:0}
+.two-col{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+
+/* ===== DELIVERY OPTIONS ===== */
+.delivery-options{display:flex;flex-direction:column;gap:10px}
+.del-opt{display:flex;align-items:center;gap:14px;padding:16px 18px;border:2px solid var(--rule);border-radius:10px;cursor:pointer;transition:border-color .2s,background .2s}
+.del-opt.on{border-color:var(--green);background:var(--green-tint)}
+.del-opt .radio{width:20px;height:20px;border-radius:50%;border:2px solid var(--rule-strong);display:grid;place-items:center;flex-shrink:0;transition:border-color .2s}
+.del-opt.on .radio{border-color:var(--green)}
+.del-opt.on .radio::after{content:"";width:10px;height:10px;border-radius:50%;background:var(--green)}
+.del-opt .del-info{flex:1}
+.del-opt .del-info strong{font-size:14px;font-weight:700;color:var(--ink)}
+.del-opt .del-info span{font-size:12px;color:var(--ink-soft);margin-left:6px}
+.del-opt .del-price{font-family:'Lora',serif;font-size:15px;font-weight:700;color:var(--green-deep)}
+
+/* ===== PAYMENT TABS ===== */
+.pay-tabs{display:flex;gap:8px;margin-bottom:20px}
+.pay-tab{flex:1;padding:12px 16px;border-radius:8px;font-size:12px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;border:2px solid var(--rule);color:var(--ink-soft);text-align:center;transition:all .2s;cursor:pointer}
+.pay-tab.on{border-color:var(--green);background:var(--green-tint);color:var(--green-deep)}
+.pay-content{display:none}
+.pay-content.on{display:block}
+
+/* ===== CONTINUE / PLACE ORDER BUTTON ===== */
+.continue-btn{width:100%;padding:18px 28px;border-radius:10px;font-weight:800;font-size:14px;letter-spacing:.08em;text-transform:uppercase;background:var(--red);color:#fff;box-shadow:0 6px 22px -6px rgba(192,39,45,.45);transition:background .2s,transform .15s,box-shadow .2s;border:0;cursor:pointer;margin-top:8px;display:flex;align-items:center;justify-content:center;gap:10px}
+.continue-btn:hover{background:var(--red-deep);transform:translateY(-2px);box-shadow:0 10px 30px -8px rgba(192,39,45,.55)}
+.continue-btn svg{flex-shrink:0}
+
+/* ===== ORDER SUMMARY CARD ===== */
+.summary-card{background:var(--white);border-radius:12px;padding:28px;box-shadow:0 4px 20px -6px rgba(44,31,15,.10);position:sticky;top:92px}
+.sc-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:20px;padding-bottom:16px;border-bottom:1px solid var(--rule)}
+.sc-head h3{font-family:'Lora',serif;font-size:18px;font-weight:600;color:var(--ink)}
+.sc-head .badge{font-size:11px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;background:var(--green-tint);color:var(--green-deep);padding:5px 12px;border-radius:20px}
+
+/* ===== CART LIST ===== */
+.cart-list{display:flex;flex-direction:column;gap:14px;margin-bottom:20px;padding-bottom:20px;border-bottom:1px solid var(--rule)}
+.cart-item{display:flex;align-items:center;gap:12px}
+.ci-thumb{width:56px;height:56px;border-radius:8px;overflow:hidden;flex-shrink:0;position:relative;background:var(--cream-warm)}
+.ci-thumb img{width:100%;height:100%;object-fit:cover}
+.ci-qty{position:absolute;top:-5px;right:-5px;background:var(--red);color:#fff;font-size:10px;font-weight:800;min-width:18px;height:18px;border-radius:9px;display:grid;place-items:center;padding:0 4px}
+.ci-body{flex:1;min-width:0}
+.ci-body h4{font-family:'Nunito',sans-serif;font-size:14px;font-weight:700;color:var(--ink);line-height:1.3;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.ci-body span{font-size:12px;color:var(--ink-soft);font-weight:500}
+.ci-price{font-family:'Lora',serif;font-size:15px;font-weight:700;color:var(--ink);white-space:nowrap}
+
+/* ===== TOTALS ===== */
+.totals{display:flex;flex-direction:column;gap:10px;margin-bottom:20px;padding-bottom:20px;border-bottom:1px solid var(--rule)}
+.totals .row{display:flex;justify-content:space-between;font-size:14px;font-weight:600;color:var(--ink-soft)}
+.totals .row.total{font-family:'Lora',serif;font-size:20px;font-weight:700;color:var(--ink);padding-top:10px;border-top:1px solid var(--rule)}
+.totals .row .free{color:var(--green);font-weight:700}
+.totals .row .discount{color:var(--red)}
+
+/* ===== COUPON ===== */
+.coupon{display:flex;gap:8px;margin-bottom:20px;padding-bottom:20px;border-bottom:1px solid var(--rule)}
+.coupon .input{flex:1;padding:11px 14px;font-size:13px}
+.coupon button{padding:11px 18px;border-radius:8px;font-size:11px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;background:var(--green);color:#fff;border:0;cursor:pointer;transition:background .15s;white-space:nowrap}
+.coupon button:hover{background:var(--green-deep)}
+
+/* ===== PAYMENT BADGES STRIP ===== */
+.pay-strip{display:flex;gap:8px;align-items:center;justify-content:center;margin-bottom:18px}
+.pay-strip span{padding:6px 12px;border:1px solid var(--rule);border-radius:6px;font-size:10px;letter-spacing:.12em;font-weight:800;text-transform:uppercase;color:var(--ink-soft)}
+
+/* ===== TRUST LIST ===== */
+.trust-list{display:flex;flex-direction:column;gap:10px}
+.trust-list .item{display:flex;align-items:center;gap:10px;font-size:13px;font-weight:600;color:var(--ink-soft)}
+.trust-list .item svg{color:var(--green);flex-shrink:0}
+
+/* ===== RESPONSIVE — CHECKOUT ===== */
+@media(max-width:900px){
+  .checkout-wrap{padding:0 28px}
+  .checkout-header .wrap{padding:0 28px}
+  .checkout-grid{grid-template-columns:1fr}
+  .summary-card{position:static}
+  .steps-card{padding:16px 20px;gap:0;flex-wrap:wrap;justify-content:center}
+  .step-sep{width:24px;margin:0 8px}
+  .page-top h1{font-size:26px}
+  .checkout-header .ssl-label{display:none}
+  .checkout-header .hamburger{display:flex}
+}
+@media(max-width:600px){
+  .checkout-wrap{padding:0 18px}
+  .checkout-header .wrap{padding:0 18px;height:64px}
+  .checkout-header .brand img{height:40px}
+  .checkout-header .secure-title{font-size:15px}
+  .two-col{grid-template-columns:1fr}
+  .steps-card{padding:14px 16px}
+  .step{font-size:12px;gap:6px}
+  .step-num{width:28px;height:28px;font-size:11px}
+  .step-sep{width:16px;margin:0 4px}
+  .form-card{padding:20px}
+  .summary-card{padding:20px}
+  .page-top h1{font-size:22px}
+  .pay-tabs{flex-direction:column}
+}
+</style>
+</head>
+<body>
+
+<!-- ===== CHECKOUT HEADER ===== -->
+<header class="checkout-header">
+  <div class="wrap checkout-wrap">
+    <a href="index.html" class="brand"><img src="assets/logo.png" alt="Organic Cabana"></a>
+    <div class="secure-title">
+      <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="8" width="12" height="9" rx="2"/><path d="M6 8V5a3 3 0 0 1 6 0v3"/></svg>
+      Secure Checkout
+    </div>
+    <span class="ssl-label">256-bit SSL Protected</span>
+    <button class="hamburger" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<!-- ===== MOBILE NAV ===== -->
+<nav class="mobile-nav">
+  <a href="index.html" class="nav-link">Home</a>
+  <a href="shop.html" class="nav-link">Shop</a>
+  <a href="product.html" class="nav-link">Product</a>
+  <a href="checkout.html" class="nav-link">Checkout</a>
+  <a href="order-tracking.html" class="nav-link">Track Order</a>
+  <div class="m-actions">
+    <a href="login.html" class="m-outline">Login</a>
+    <a href="account.html" class="m-red">Account</a>
+  </div>
+</nav>
+
+<!-- ===== STEPS INDICATOR ===== -->
+<section class="steps">
+  <div class="checkout-wrap">
+    <div class="steps-card">
+      <div class="step done">
+        <span class="step-num">
+          <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="2 7 5.5 10.5 12 4"/></svg>
+          <span>1</span>
+        </span>
+        Cart
+      </div>
+      <span class="step-sep"></span>
+      <div class="step active">
+        <span class="step-num"><span>2</span></span>
+        Details
+      </div>
+      <span class="step-sep"></span>
+      <div class="step">
+        <span class="step-num"><span>3</span></span>
+        Payment
+      </div>
+      <span class="step-sep"></span>
+      <div class="step">
+        <span class="step-num"><span>4</span></span>
+        Confirm
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== PAGE HEADING ===== -->
+<div class="page-top checkout-wrap">
+  <h1>Almost there — <em>confirm your order.</em></h1>
+</div>
+
+<!-- ===== CHECKOUT GRID ===== -->
+<div class="checkout-wrap">
+  <div class="checkout-grid">
+
+    <!-- LEFT — FORM -->
+    <div class="form-col">
+
+      <!-- Contact Details -->
+      <div class="form-card">
+        <div class="section-head">
+          <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="5" r="4"/><path d="M1 17v-1a6 6 0 0 1 12 0v1"/></svg>
+          <h3>Contact Details</h3>
+        </div>
+        <div class="two-col">
+          <div class="field">
+            <label for="fname">First Name</label>
+            <input type="text" id="fname" class="input" value="Ananya">
+          </div>
+          <div class="field">
+            <label for="lname">Last Name</label>
+            <input type="text" id="lname" class="input" value="Krishnan">
+          </div>
+        </div>
+        <div class="field">
+          <label for="email">Email</label>
+          <input type="email" id="email" class="input" value="ananya.k@gmail.com">
+        </div>
+        <div class="field">
+          <label for="phone">Phone</label>
+          <input type="tel" id="phone" class="input" value="+91 98220 14478">
+        </div>
+      </div>
+
+      <!-- Delivery Address -->
+      <div class="form-card">
+        <div class="section-head">
+          <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 1C5.7 1 3 3.7 3 7c0 5 6 10 6 10s6-5 6-10c0-3.3-2.7-6-6-6Z"/><circle cx="9" cy="7" r="2"/></svg>
+          <h3>Delivery Address</h3>
+        </div>
+        <div class="field">
+          <label for="addr1">Address Line 1</label>
+          <input type="text" id="addr1" class="input" value="B-204, Lotus Heights, Koregaon Park">
+        </div>
+        <div class="field">
+          <label for="addr2">Address Line 2</label>
+          <input type="text" id="addr2" class="input" placeholder="Apartment, suite, landmark…">
+        </div>
+        <div class="two-col">
+          <div class="field">
+            <label for="city">City</label>
+            <input type="text" id="city" class="input" value="Pune">
+          </div>
+          <div class="field">
+            <label for="pin">PIN Code</label>
+            <input type="text" id="pin" class="input" value="411001">
+          </div>
+        </div>
+        <div class="two-col">
+          <div class="field">
+            <label for="state">State</label>
+            <input type="text" id="state" class="input" value="Maharashtra">
+          </div>
+          <div class="field">
+            <label for="country">Country</label>
+            <input type="text" id="country" class="input" value="India">
+          </div>
+        </div>
+      </div>
+
+      <!-- Delivery Option -->
+      <div class="form-card">
+        <div class="section-head">
+          <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="4" width="16" height="12" rx="2"/><path d="M11 4V2a2 2 0 0 0-4 0v2"/><path d="M1 10h16"/></svg>
+          <h3>Delivery Option</h3>
+        </div>
+        <div class="delivery-options">
+          <div class="del-opt on" data-delivery="standard">
+            <span class="radio"></span>
+            <div class="del-info">
+              <strong>Standard Delivery</strong>
+              <span>3 – 5 business days</span>
+            </div>
+            <span class="del-price">Free</span>
+          </div>
+          <div class="del-opt" data-delivery="express">
+            <span class="radio"></span>
+            <div class="del-info">
+              <strong>Express Delivery</strong>
+              <span>1 – 2 business days</span>
+            </div>
+            <span class="del-price">&#8377;79</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Payment -->
+      <div class="form-card">
+        <div class="section-head">
+          <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="3" width="16" height="13" rx="2"/><path d="M1 8h16"/></svg>
+          <h3>Payment</h3>
+        </div>
+        <div class="pay-tabs">
+          <button class="pay-tab on" data-tab="card">Card</button>
+          <button class="pay-tab" data-tab="upi">UPI</button>
+          <button class="pay-tab" data-tab="cod">COD</button>
+        </div>
+
+        <!-- Card -->
+        <div class="pay-content on" data-content="card">
+          <div class="field">
+            <label for="cardnum">Card Number</label>
+            <input type="text" id="cardnum" class="input" placeholder="1234 5678 9012 3456">
+          </div>
+          <div class="two-col">
+            <div class="field">
+              <label for="expiry">Expiry</label>
+              <input type="text" id="expiry" class="input" placeholder="MM / YY">
+            </div>
+            <div class="field">
+              <label for="cvv">CVV</label>
+              <input type="text" id="cvv" class="input" placeholder="123">
+            </div>
+          </div>
+          <div class="field">
+            <label for="cardname">Name on Card</label>
+            <input type="text" id="cardname" class="input" placeholder="Ananya Krishnan">
+          </div>
+        </div>
+
+        <!-- UPI -->
+        <div class="pay-content" data-content="upi">
+          <div class="field">
+            <label for="upiid">UPI ID</label>
+            <input type="text" id="upiid" class="input" placeholder="yourname@upi">
+          </div>
+        </div>
+
+        <!-- COD -->
+        <div class="pay-content" data-content="cod">
+          <p style="font-size:14px;color:var(--ink-soft);font-weight:600;padding:12px 0">Pay with cash when your order is delivered. No additional charges.</p>
+        </div>
+
+        <button class="continue-btn">
+          <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="12" height="11" rx="2"/><path d="M2 7h12"/></svg>
+          Place Order — &#8377;727
+        </button>
+      </div>
+    </div>
+
+    <!-- RIGHT — ORDER SUMMARY -->
+    <aside class="summary-card">
+      <div class="sc-head">
+        <h3>Your order</h3>
+        <span class="badge">3 Items</span>
+      </div>
+
+      <div class="cart-list">
+        <!-- Item 1 -->
+        <div class="cart-item">
+          <div class="ci-thumb">
+            <img src="assets/wheat-atta.jpg" alt="Organic Whole Wheat Atta">
+            <span class="ci-qty">1</span>
+          </div>
+          <div class="ci-body">
+            <h4>Organic Whole Wheat Atta</h4>
+            <span>5 kg &middot; Stone Ground</span>
+          </div>
+          <span class="ci-price">&#8377;349</span>
+        </div>
+        <!-- Item 2 -->
+        <div class="cart-item">
+          <div class="ci-thumb">
+            <img src="assets/toor-dal.jpg" alt="Organic Toor Dal">
+            <span class="ci-qty">1</span>
+          </div>
+          <div class="ci-body">
+            <h4>Organic Toor Dal</h4>
+            <span>1 kg &middot; Unpolished</span>
+          </div>
+          <span class="ci-price">&#8377;199</span>
+        </div>
+        <!-- Item 3 -->
+        <div class="cart-item">
+          <div class="ci-thumb">
+            <img src="assets/ragi-flour.jpg" alt="Organic Ragi Flour">
+            <span class="ci-qty">1</span>
+          </div>
+          <div class="ci-body">
+            <h4>Organic Ragi Flour</h4>
+            <span>1 kg &middot; Gluten Free</span>
+          </div>
+          <span class="ci-price">&#8377;179</span>
+        </div>
+      </div>
+
+      <div class="totals">
+        <div class="row">
+          <span>Subtotal</span>
+          <span>&#8377;727</span>
+        </div>
+        <div class="row">
+          <span>Delivery</span>
+          <span class="free">Free</span>
+        </div>
+        <div class="row">
+          <span>Discount</span>
+          <span class="discount">&ndash;&#8377;0</span>
+        </div>
+        <div class="row total">
+          <span>Total</span>
+          <span>&#8377;727</span>
+        </div>
+      </div>
+
+      <div class="coupon">
+        <input type="text" class="input" placeholder="Coupon code">
+        <button>Apply</button>
+      </div>
+
+      <div class="pay-strip">
+        <span>UPI</span>
+        <span>VISA</span>
+        <span>RUPAY</span>
+        <span>COD</span>
+      </div>
+
+      <div class="trust-list">
+        <div class="item">
+          <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 1l2 4h4.5l-3.6 2.8 1.4 4.5L8 9.8l-4.3 2.5 1.4-4.5L1.5 5H6Z"/></svg>
+          100% Organic Certified
+        </div>
+        <div class="item">
+          <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="7" width="10" height="8" rx="2"/><path d="M5 7V4.5a3 3 0 0 1 6 0V7"/></svg>
+          256-bit Secure Checkout
+        </div>
+        <div class="item">
+          <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 4v8a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V4"/><path d="M14 4l-3-3H5L2 4"/><path d="M8 7v4"/><path d="M6 9l2-2 2 2"/></svg>
+          Easy 7-day Returns
+        </div>
+      </div>
+    </aside>
+
+  </div>
+</div>
+
+<!-- ===== MINI FOOTER ===== -->
+<footer class="mini">
+  <div class="checkout-wrap">
+    <div class="mini-inner">
+      <span>&copy; 2026 Organic Cabana Foods &middot; Secure Checkout</span>
+      <div class="links">
+        <a href="#">Help</a>
+        <a href="#">Privacy</a>
+        <a href="#">Terms</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script src="js/main.js"></script>
+<script>
+/* ===== PAYMENT TAB TOGGLE ===== */
+(function(){
+  var tabs=document.querySelectorAll('.pay-tab');
+  var contents=document.querySelectorAll('.pay-content');
+  tabs.forEach(function(tab){
+    tab.addEventListener('click',function(){
+      tabs.forEach(function(t){t.classList.remove('on')});
+      contents.forEach(function(c){c.classList.remove('on')});
+      tab.classList.add('on');
+      var target=tab.getAttribute('data-tab');
+      var panel=document.querySelector('.pay-content[data-content="'+target+'"]');
+      if(panel) panel.classList.add('on');
+    });
+  });
+})();
+
+/* ===== DELIVERY OPTION TOGGLE ===== */
+(function(){
+  var opts=document.querySelectorAll('.del-opt');
+  opts.forEach(function(opt){
+    opt.addEventListener('click',function(){
+      opts.forEach(function(o){o.classList.remove('on')});
+      opt.classList.add('on');
+    });
+  });
+})();
+</script>
+
+</body>
+</html>

@@ -1,0 +1,617 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>My Account — Organic Cabana</title>
+<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,500;0,600;0,700;1,500;1,600&family=Nunito:wght@500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+<style>
+/* ===== ACCOUNT HERO ===== */
+.acc-hero{position:relative;background:var(--green-deep);overflow:hidden;padding:56px 0 48px}
+.acc-hero .wrap{max-width:1180px}
+.ah-pattern{position:absolute;inset:0;opacity:.08;pointer-events:none}
+.ah-inner{position:relative;z-index:1;display:flex;align-items:center;gap:32px;flex-wrap:wrap}
+.ah-ava{width:62px;height:62px;border-radius:10px;background:var(--green);display:grid;place-items:center;font-family:'Lora',serif;font-size:26px;font-weight:700;color:#fff;flex-shrink:0}
+.ah-text .eyebrow{color:var(--green-soft);margin-bottom:4px}
+.ah-text h1{font-size:32px;color:#fff;line-height:1.2;font-weight:600}
+.ah-text h1 em{font-style:italic;font-weight:500}
+.ah-stats{display:flex;gap:14px;margin-left:auto}
+.ah-stat{background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.14);border-radius:10px;padding:16px 24px;text-align:center;min-width:100px}
+.ah-stat strong{display:block;font-family:'Lora',serif;font-size:24px;color:#fff;font-weight:700;line-height:1}
+.ah-stat span{font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:rgba(255,255,255,.65);font-weight:700;margin-top:4px;display:block}
+
+/* ===== ACCOUNT LAYOUT ===== */
+.acc-layout{display:grid;grid-template-columns:240px 1fr;gap:32px;padding:40px 0 80px}
+.acc-layout .wrap{max-width:1180px}
+
+/* ===== SIDEBAR ===== */
+.side{position:sticky;top:112px;align-self:start;background:var(--white);border:1px solid var(--rule);border-radius:12px;overflow:hidden}
+.side-nav{list-style:none;padding:12px 0}
+.side-nav li{}
+.side-link{display:flex;align-items:center;gap:12px;padding:12px 20px;font-size:14px;font-weight:700;color:var(--ink-soft);cursor:pointer;border:0;width:100%;background:none;text-align:left;transition:background .15s,color .15s}
+.side-link svg{width:18px;height:18px;flex-shrink:0;color:var(--ink-soft);transition:color .15s}
+.side-link:hover{background:var(--green-tint);color:var(--ink)}
+.side-link.on{background:var(--green-tint);color:var(--green-deep);border-right:3px solid var(--green)}
+.side-link.on svg{color:var(--green)}
+.side-div{height:1px;background:var(--rule);margin:4px 20px}
+.side-ext{display:flex;align-items:center;gap:12px;padding:12px 20px;font-size:14px;font-weight:700;color:var(--ink-soft);transition:background .15s,color .15s}
+.side-ext:hover{background:var(--green-tint);color:var(--ink)}
+.side-ext svg{width:18px;height:18px;flex-shrink:0}
+.side-out{color:var(--red)}
+.side-out:hover{background:var(--red-tint);color:var(--red-deep)}
+
+/* ===== PANELS ===== */
+.panel{display:none}
+.panel.on{display:block}
+.panel-head{margin-bottom:28px}
+.panel-head h2{font-size:26px;line-height:1.2;margin-bottom:4px}
+.panel-head p{font-size:14px;color:var(--ink-soft);font-weight:500}
+.panel-head .ph-row{display:flex;align-items:baseline;justify-content:space-between;flex-wrap:wrap;gap:8px}
+.ph-link{font-size:13px;font-weight:700;color:var(--green-deep);transition:color .15s}
+.ph-link:hover{color:var(--red)}
+
+/* ===== ORDER CARDS ===== */
+.oc{background:var(--white);border:1px solid var(--rule);border-radius:12px;padding:24px;margin-bottom:18px;transition:box-shadow .25s}
+.oc:hover{box-shadow:0 12px 36px -12px rgba(44,31,15,.1)}
+.oc-top{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px;margin-bottom:16px}
+.oc-id{font-family:'Lora',serif;font-size:16px;font-weight:600}
+.oc-date{font-size:13px;color:var(--ink-soft);font-weight:600}
+.oc-amount{font-family:'Lora',serif;font-size:18px;font-weight:700;color:var(--red)}
+.oc-pill{display:inline-flex;align-items:center;gap:6px;padding:5px 12px;border-radius:20px;font-size:11px;font-weight:800;letter-spacing:.08em;text-transform:uppercase}
+.oc-pill.transit{background:#FFF3E0;color:#E65100}
+.oc-pill.delivered{background:var(--green-tint);color:var(--green-deep)}
+.oc-dot{width:8px;height:8px;border-radius:50%;background:var(--red);animation:pulse 1.4s ease-in-out infinite}
+.oc-check{width:14px;height:14px}
+.oc-mid{display:flex;align-items:center;gap:12px;margin-bottom:14px;flex-wrap:wrap}
+.oc-thumbs{display:flex;gap:8px}
+.oc-thumb{width:52px;height:52px;border-radius:8px;object-fit:cover;border:1px solid var(--rule)}
+.oc-more{width:52px;height:52px;border-radius:8px;background:var(--cream-warm);border:1px solid var(--rule);display:grid;place-items:center;font-size:13px;font-weight:800;color:var(--ink-soft)}
+.oc-summary{font-size:13px;color:var(--ink-soft);font-weight:600}
+.oc-bot{display:flex;gap:10px;margin-top:16px;padding-top:16px;border-top:1px solid var(--rule)}
+.oc-btn{display:inline-flex;align-items:center;gap:6px;padding:9px 16px;border-radius:8px;font-size:11px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;transition:background .15s,transform .15s;cursor:pointer;border:0}
+.oc-btn.primary{background:var(--green);color:#fff}
+.oc-btn.primary:hover{background:var(--green-deep);transform:translateY(-1px)}
+.oc-btn.secondary{background:var(--cream-warm);color:var(--ink)}
+.oc-btn.secondary:hover{background:var(--cream);transform:translateY(-1px)}
+
+@keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.4;transform:scale(.85)}}
+
+/* ===== ADDRESSES ===== */
+.addr-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+.addr-card{background:var(--white);border:1px solid var(--rule);border-radius:12px;overflow:hidden;position:relative}
+.addr-card.default .addr-top{background:linear-gradient(135deg,var(--green),var(--green-deep));height:5px}
+.addr-top{height:5px;background:var(--rule)}
+.addr-body{padding:22px}
+.addr-type{display:flex;align-items:center;gap:8px;margin-bottom:8px}
+.addr-type strong{font-size:14px;font-weight:800;color:var(--ink)}
+.addr-default-tag{font-size:10px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;background:var(--green-tint);color:var(--green-deep);padding:3px 8px;border-radius:4px}
+.addr-body p{font-size:14px;color:var(--ink-soft);line-height:1.7;font-weight:500}
+.addr-actions{display:flex;gap:10px;margin-top:14px;padding-top:14px;border-top:1px solid var(--rule)}
+.addr-act{font-size:12px;font-weight:700;color:var(--green-deep);cursor:pointer;background:none;border:0;padding:0;transition:color .15s}
+.addr-act:hover{color:var(--red)}
+.addr-act.del{color:var(--red)}
+.addr-act.del:hover{color:var(--red-deep)}
+.addr-add{border:2px dashed var(--rule-strong);border-radius:12px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;min-height:180px;cursor:pointer;transition:border-color .15s,background .15s}
+.addr-add:hover{border-color:var(--green);background:var(--green-tint)}
+.addr-add-icon{width:44px;height:44px;border-radius:50%;background:var(--green-tint);display:grid;place-items:center;color:var(--green)}
+.addr-add span{font-size:13px;font-weight:700;color:var(--ink-soft)}
+
+/* ===== WISHLIST ===== */
+.wish-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.wish-card{background:var(--white);border:1px solid var(--rule);border-radius:12px;overflow:hidden;transition:transform .25s,box-shadow .25s}
+.wish-card:hover{transform:translateY(-4px);box-shadow:0 16px 40px -14px rgba(44,31,15,.15)}
+.wish-pic{position:relative;aspect-ratio:1/1;background:var(--cream-warm);overflow:hidden}
+.wish-pic img{width:100%;height:100%;object-fit:cover;transition:transform .4s}
+.wish-card:hover .wish-pic img{transform:scale(1.05)}
+.wish-heart{position:absolute;top:10px;right:10px;width:32px;height:32px;border-radius:8px;background:rgba(255,255,255,.92);display:grid;place-items:center;color:var(--red);cursor:pointer}
+.wish-body{padding:18px}
+.wish-body h4{font-size:16px;font-weight:600;margin-bottom:6px}
+.wish-body .price .now{font-family:'Lora',serif;font-size:19px;color:var(--red);font-weight:700}
+.wish-add{margin-top:12px;width:100%;display:inline-flex;align-items:center;justify-content:center;gap:7px;background:var(--green);color:#fff;padding:10px 16px;border-radius:8px;font-size:11px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;border:0;cursor:pointer;transition:background .15s,transform .15s}
+.wish-add:hover{background:var(--green-deep);transform:translateY(-1px)}
+
+/* ===== PROFILE ===== */
+.pf-card{background:var(--white);border:1px solid var(--rule);border-radius:12px;padding:28px;margin-bottom:24px}
+.pf-card h3{font-size:18px;font-weight:600;margin-bottom:20px}
+.pf-row{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.pf-full{grid-column:1/-1}
+.pf-actions{display:flex;gap:12px;margin-top:20px;padding-top:20px;border-top:1px solid var(--rule)}
+.pf-save{display:inline-flex;align-items:center;gap:7px;background:var(--green);color:#fff;padding:12px 24px;border-radius:8px;font-size:12px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;border:0;cursor:pointer;transition:background .15s}
+.pf-save:hover{background:var(--green-deep)}
+.pf-cancel{display:inline-flex;align-items:center;gap:7px;background:var(--cream-warm);color:var(--ink);padding:12px 24px;border-radius:8px;font-size:12px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;border:0;cursor:pointer;transition:background .15s}
+.pf-cancel:hover{background:var(--cream)}
+.pref-card{background:var(--white);border:1px solid var(--rule);border-radius:12px;padding:28px}
+.pref-card h3{font-size:18px;font-weight:600;margin-bottom:20px}
+.pref-row{display:flex;align-items:center;justify-content:space-between;padding:14px 0;border-bottom:1px solid var(--rule)}
+.pref-row:last-child{border-bottom:0}
+.pref-info strong{display:block;font-size:14px;font-weight:700;color:var(--ink)}
+.pref-info span{font-size:12px;color:var(--ink-soft);font-weight:500}
+.toggle{position:relative;width:48px;height:26px;border-radius:13px;background:var(--rule-strong);cursor:pointer;transition:background .2s;border:0;flex-shrink:0}
+.toggle::after{content:'';position:absolute;top:3px;left:3px;width:20px;height:20px;border-radius:50%;background:#fff;transition:transform .2s;box-shadow:0 2px 6px rgba(0,0,0,.15)}
+.toggle.on{background:var(--green)}
+.toggle.on::after{transform:translateX(22px)}
+
+/* ===== ACCOUNT CHIP (HEADER) ===== */
+.acc-chip{display:flex;align-items:center;gap:8px;padding:4px 12px 4px 4px;border-radius:20px;background:var(--green-tint);font-size:13px;font-weight:700;color:var(--green-deep);transition:background .15s;text-decoration:none}
+.acc-chip:hover{background:var(--green-tint-2)}
+.acc-chip-ava{width:28px;height:28px;border-radius:50%;background:var(--green);display:grid;place-items:center;font-family:'Lora',serif;font-size:13px;font-weight:700;color:#fff}
+
+/* ===== RESPONSIVE ===== */
+@media(max-width:900px){
+  .acc-layout{grid-template-columns:1fr}
+  .side{position:static;display:flex;overflow-x:auto;border-radius:10px}
+  .side-nav{display:flex;padding:8px;gap:4px;white-space:nowrap}
+  .side-link{border-radius:8px;padding:10px 16px;font-size:13px}
+  .side-link.on{border-right:0;border-bottom:3px solid var(--green)}
+  .side-div,.side-ext{display:none}
+  .ah-inner{flex-direction:column;align-items:flex-start;gap:20px}
+  .ah-stats{margin-left:0}
+  .addr-grid{grid-template-columns:1fr}
+}
+@media(max-width:600px){
+  .acc-hero{padding:36px 0 32px}
+  .ah-text h1{font-size:24px}
+  .ah-stats{flex-direction:column;width:100%}
+  .ah-stat{min-width:auto}
+  .wish-grid{grid-template-columns:1fr}
+  .oc-top{flex-direction:column;align-items:flex-start}
+  .oc-thumbs{flex-wrap:wrap}
+  .pf-row{grid-template-columns:1fr}
+  .pf-full{grid-column:auto}
+  .panel-head h2{font-size:22px}
+}
+</style>
+</head>
+<body>
+
+<!-- ===== HEADER ===== -->
+<header class="header">
+  <div class="wrap" style="max-width:1180px">
+    <div class="header-inner">
+      <a href="index.html" class="brand"><img src="assets/logo.png" alt="Organic Cabana"></a>
+
+      <nav class="nav">
+        <a href="index.html">Home</a>
+        <a href="shop.html">Shop</a>
+        <a href="#">About</a>
+        <a href="#">Recipes</a>
+        <a href="#">Contact</a>
+      </nav>
+
+      <div class="header-right">
+        <a href="account.html" class="acc-chip">
+          <span class="acc-chip-ava">A</span>
+          Ananya
+        </a>
+
+        <a href="checkout.html" class="icon-btn cart">
+          <svg width="18" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 7h12l-1.2 11a2 2 0 0 1-2 1.8H9.2a2 2 0 0 1-2-1.8L6 7Z"/><path d="M9 7V5a3 3 0 0 1 6 0v2"/></svg>
+          <span class="cart-badge">3</span>
+        </a>
+
+        <button class="hamburger" aria-label="Menu">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- ===== MOBILE NAV ===== -->
+<nav class="mobile-nav">
+  <a href="index.html" class="nav-link">Home</a>
+  <a href="shop.html" class="nav-link">Shop</a>
+  <a href="#" class="nav-link">About</a>
+  <a href="#" class="nav-link">Recipes</a>
+  <a href="#" class="nav-link">Contact</a>
+  <div class="m-actions">
+    <a href="shop.html" class="m-red">Shop Now &rarr;</a>
+    <a href="login.html" class="m-outline">Sign out</a>
+  </div>
+</nav>
+
+<!-- ===== ACCOUNT HERO ===== -->
+<section class="acc-hero">
+  <!-- SVG pattern -->
+  <svg class="ah-pattern" width="100%" height="100%"><defs><pattern id="heroLeaf" x="0" y="0" width="60" height="60" patternUnits="userSpaceOnUse"><path d="M30 5c8 0 14 10 14 22S38 49 30 49 16 39 16 27 22 5 30 5z" fill="#fff"/><path d="M10 35c5-3 12 0 15 7s1 15-4 18-12 0-15-7-1-15 4-18z" fill="#fff"/></pattern></defs><rect width="100%" height="100%" fill="url(#heroLeaf)"/></svg>
+
+  <div class="wrap" style="max-width:1180px">
+    <div class="ah-inner">
+      <div class="ah-ava">A</div>
+      <div class="ah-text">
+        <p class="eyebrow">My Account</p>
+        <h1>Welcome back, <em>Ananya.</em></h1>
+      </div>
+      <div class="ah-stats">
+        <div class="ah-stat"><strong>8</strong><span>Orders</span></div>
+        <div class="ah-stat"><strong>5</strong><span>Wishlist</span></div>
+        <div class="ah-stat"><strong>&#8377;200</strong><span>Rewards</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== ACCOUNT LAYOUT ===== -->
+<div class="wrap" style="max-width:1180px">
+  <div class="acc-layout">
+
+    <!-- SIDEBAR -->
+    <aside class="side">
+      <ul class="side-nav">
+        <li>
+          <button class="side-link on" data-panel="orders">
+            <svg viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="14" height="13" rx="2"/><path d="M6 1v4M12 1v4M2 8h14"/></svg>
+            My Orders
+          </button>
+        </li>
+        <li>
+          <button class="side-link" data-panel="addresses">
+            <svg viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M9 17S2 11 2 7a7 7 0 1 1 14 0c0 4-7 10-7 10z"/><circle cx="9" cy="7" r="2.5"/></svg>
+            Addresses
+          </button>
+        </li>
+        <li>
+          <button class="side-link" data-panel="wishlist">
+            <svg viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M9 16S1 11 1 6.5A4.5 4.5 0 0 1 9 4a4.5 4.5 0 0 1 8 2.5C17 11 9 16 9 16z"/></svg>
+            Wishlist
+          </button>
+        </li>
+        <li>
+          <button class="side-link" data-panel="profile">
+            <svg viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="5.5" r="3.5"/><path d="M2 17a7 7 0 0 1 14 0"/></svg>
+            Profile &amp; Settings
+          </button>
+        </li>
+      </ul>
+      <div class="side-div"></div>
+      <a href="order-tracking.html" class="side-ext">
+        <svg viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="9" r="7"/><path d="M9 5v4l3 2"/></svg>
+        Track an Order
+      </a>
+      <a href="login.html" class="side-ext side-out">
+        <svg viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M6 16H3a1 1 0 0 1-1-1V3a1 1 0 0 1 1-1h3M12 13l4-4-4-4M16 9H7"/></svg>
+        Sign Out
+      </a>
+    </aside>
+
+    <!-- PANELS -->
+    <div class="panels">
+
+      <!-- ===== ORDERS PANEL ===== -->
+      <div class="panel on" id="orders">
+        <div class="panel-head">
+          <div class="ph-row">
+            <div>
+              <h2>My orders</h2>
+              <p>8 orders since you joined</p>
+            </div>
+            <a href="#" class="ph-link">Download history &rarr;</a>
+          </div>
+        </div>
+
+        <!-- Order 1 -->
+        <div class="oc">
+          <div class="oc-top">
+            <span class="oc-id">#OC-2026-3341</span>
+            <span class="oc-date">24 Jun 2026</span>
+            <span class="oc-amount">&#8377;727</span>
+            <span class="oc-pill transit"><span class="oc-dot"></span>Out for delivery</span>
+          </div>
+          <div class="oc-mid">
+            <div class="oc-thumbs">
+              <img class="oc-thumb" src="assets/wheat-atta.jpg" alt="Wheat Atta">
+              <img class="oc-thumb" src="assets/toor-dal.jpg" alt="Toor Dal">
+              <img class="oc-thumb" src="assets/ragi-flour.jpg" alt="Ragi Flour">
+            </div>
+            <span class="oc-summary">3 items &middot; Arriving today before 8 PM</span>
+          </div>
+          <div class="oc-bot">
+            <a href="order-tracking.html" class="oc-btn primary">
+              <svg width="14" height="14" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="7" cy="7" r="5.5"/><path d="M7 4v3l2 1.5"/></svg>
+              Track
+            </a>
+            <button class="oc-btn secondary">
+              <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 1v12l4-3 4 3V1z"/></svg>
+              Invoice
+            </button>
+          </div>
+        </div>
+
+        <!-- Order 2 -->
+        <div class="oc">
+          <div class="oc-top">
+            <span class="oc-id">#OC-2026-3104</span>
+            <span class="oc-date">8 Jun 2026</span>
+            <span class="oc-amount">&#8377;948</span>
+            <span class="oc-pill delivered">
+              <svg class="oc-check" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7.5l3 3 5-6"/></svg>
+              Delivered
+            </span>
+          </div>
+          <div class="oc-mid">
+            <div class="oc-thumbs">
+              <img class="oc-thumb" src="assets/multigrain-atta.jpg" alt="Multigrain Atta">
+              <img class="oc-thumb" src="assets/quinoa.jpg" alt="Quinoa">
+              <span class="oc-more">+2</span>
+            </div>
+            <span class="oc-summary">4 items &middot; Delivered 10 Jun 2026</span>
+          </div>
+          <div class="oc-bot">
+            <button class="oc-btn primary">
+              <svg width="14" height="14" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M1 1h2l1.5 9h7L13 4H4"/><circle cx="5.5" cy="12.5" r="1"/><circle cx="10.5" cy="12.5" r="1"/></svg>
+              Reorder
+            </button>
+            <button class="oc-btn secondary">
+              <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polygon points="7,1 9,5 13,5.5 10,8.5 11,13 7,11 3,13 4,8.5 1,5.5 5,5"/></svg>
+              Review
+            </button>
+          </div>
+        </div>
+
+        <!-- Order 3 -->
+        <div class="oc">
+          <div class="oc-top">
+            <span class="oc-id">#OC-2026-2890</span>
+            <span class="oc-date">20 May 2026</span>
+            <span class="oc-amount">&#8377;537</span>
+            <span class="oc-pill delivered">
+              <svg class="oc-check" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7.5l3 3 5-6"/></svg>
+              Delivered
+            </span>
+          </div>
+          <div class="oc-mid">
+            <div class="oc-thumbs">
+              <img class="oc-thumb" src="assets/basmati-rice.jpg" alt="Basmati Rice">
+              <img class="oc-thumb" src="assets/moong-dal.jpg" alt="Moong Dal">
+            </div>
+            <span class="oc-summary">2 items &middot; Delivered 23 May 2026</span>
+          </div>
+          <div class="oc-bot">
+            <button class="oc-btn primary">
+              <svg width="14" height="14" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M1 1h2l1.5 9h7L13 4H4"/><circle cx="5.5" cy="12.5" r="1"/><circle cx="10.5" cy="12.5" r="1"/></svg>
+              Reorder
+            </button>
+            <button class="oc-btn secondary">
+              <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polygon points="7,1 9,5 13,5.5 10,8.5 11,13 7,11 3,13 4,8.5 1,5.5 5,5"/></svg>
+              Review
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- ===== ADDRESSES PANEL ===== -->
+      <div class="panel" id="addresses">
+        <div class="panel-head">
+          <h2>Saved addresses</h2>
+          <p>Manage delivery locations</p>
+        </div>
+
+        <div class="addr-grid">
+          <!-- Home -->
+          <div class="addr-card default">
+            <div class="addr-top"></div>
+            <div class="addr-body">
+              <div class="addr-type">
+                <strong>Home</strong>
+                <span class="addr-default-tag">Default</span>
+              </div>
+              <p>Ananya Sharma<br>42, Jayanagar 4th Block<br>Bangalore, Karnataka 560041<br>Phone: +91 98765 43210</p>
+              <div class="addr-actions">
+                <button class="addr-act">Edit</button>
+                <button class="addr-act">Set default</button>
+                <button class="addr-act del">Delete</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Office -->
+          <div class="addr-card">
+            <div class="addr-top"></div>
+            <div class="addr-body">
+              <div class="addr-type">
+                <strong>Office</strong>
+              </div>
+              <p>Ananya Sharma<br>WeWork Galaxy, Residency Rd<br>Bangalore, Karnataka 560025<br>Phone: +91 98765 43210</p>
+              <div class="addr-actions">
+                <button class="addr-act">Edit</button>
+                <button class="addr-act">Set default</button>
+                <button class="addr-act del">Delete</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Add new -->
+          <div class="addr-add">
+            <div class="addr-add-icon">
+              <svg width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M11 4v14M4 11h14"/></svg>
+            </div>
+            <span>Add new address</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- ===== WISHLIST PANEL ===== -->
+      <div class="panel" id="wishlist">
+        <div class="panel-head">
+          <div class="ph-row">
+            <div>
+              <h2>Your wishlist</h2>
+              <p>5 products saved</p>
+            </div>
+            <a href="shop.html" class="ph-link">Browse all &rarr;</a>
+          </div>
+        </div>
+
+        <div class="wish-grid">
+          <!-- Quinoa -->
+          <div class="wish-card">
+            <div class="wish-pic">
+              <img src="assets/quinoa.jpg" alt="Quinoa">
+              <span class="wish-heart">
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path d="M8 14s-6-4.35-6-8.5A3.5 3.5 0 0 1 8 3.5 3.5 3.5 0 0 1 14 5.5C14 9.65 8 14 8 14z"/></svg>
+              </span>
+            </div>
+            <div class="wish-body">
+              <h4>Quinoa</h4>
+              <div class="price"><span class="now">&#8377;349</span></div>
+              <button class="wish-add">
+                <svg width="14" height="14" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round"><path d="M7 3v8M3 7h8"/></svg>
+                Add to Cart
+              </button>
+            </div>
+          </div>
+
+          <!-- Multigrain Atta -->
+          <div class="wish-card">
+            <div class="wish-pic">
+              <img src="assets/multigrain-atta.jpg" alt="Multigrain Atta">
+              <span class="wish-heart">
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path d="M8 14s-6-4.35-6-8.5A3.5 3.5 0 0 1 8 3.5 3.5 3.5 0 0 1 14 5.5C14 9.65 8 14 8 14z"/></svg>
+              </span>
+            </div>
+            <div class="wish-body">
+              <h4>Multigrain Atta</h4>
+              <div class="price"><span class="now">&#8377;399</span></div>
+              <button class="wish-add">
+                <svg width="14" height="14" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round"><path d="M7 3v8M3 7h8"/></svg>
+                Add to Cart
+              </button>
+            </div>
+          </div>
+
+          <!-- Besan -->
+          <div class="wish-card">
+            <div class="wish-pic">
+              <img src="assets/besan.jpg" alt="Besan">
+              <span class="wish-heart">
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path d="M8 14s-6-4.35-6-8.5A3.5 3.5 0 0 1 8 3.5 3.5 3.5 0 0 1 14 5.5C14 9.65 8 14 8 14z"/></svg>
+              </span>
+            </div>
+            <div class="wish-body">
+              <h4>Besan</h4>
+              <div class="price"><span class="now">&#8377;149</span></div>
+              <button class="wish-add">
+                <svg width="14" height="14" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round"><path d="M7 3v8M3 7h8"/></svg>
+                Add to Cart
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ===== PROFILE PANEL ===== -->
+      <div class="panel" id="profile">
+        <div class="panel-head">
+          <h2>Profile &amp; settings</h2>
+        </div>
+
+        <!-- Profile details -->
+        <div class="pf-card">
+          <h3>Personal information</h3>
+          <div class="pf-row">
+            <div class="field">
+              <label for="fname">First Name</label>
+              <input id="fname" class="input" type="text" value="Ananya">
+            </div>
+            <div class="field">
+              <label for="lname">Last Name</label>
+              <input id="lname" class="input" type="text" value="Sharma">
+            </div>
+          </div>
+          <div class="field pf-full">
+            <label for="email">Email</label>
+            <input id="email" class="input" type="email" value="ananya.sharma@email.com">
+          </div>
+          <div class="pf-row">
+            <div class="field">
+              <label for="phone">Phone</label>
+              <input id="phone" class="input" type="tel" value="+91 98765 43210">
+            </div>
+            <div class="field">
+              <label for="dob">Date of Birth</label>
+              <input id="dob" class="input" type="date" value="1994-03-15">
+            </div>
+          </div>
+          <div class="pf-actions">
+            <button class="pf-save">Save Changes</button>
+            <button class="pf-cancel">Cancel</button>
+          </div>
+        </div>
+
+        <!-- Preferences -->
+        <div class="pref-card">
+          <h3>Notification preferences</h3>
+          <div class="pref-row">
+            <div class="pref-info">
+              <strong>Order updates</strong>
+              <span>Get notified about order status changes</span>
+            </div>
+            <button class="toggle on" aria-label="Toggle order updates"></button>
+          </div>
+          <div class="pref-row">
+            <div class="pref-info">
+              <strong>New products</strong>
+              <span>Be the first to know about new arrivals</span>
+            </div>
+            <button class="toggle on" aria-label="Toggle new products"></button>
+          </div>
+          <div class="pref-row">
+            <div class="pref-info">
+              <strong>Newsletter</strong>
+              <span>Weekly recipes and organic living tips</span>
+            </div>
+            <button class="toggle" aria-label="Toggle newsletter"></button>
+          </div>
+        </div>
+      </div>
+
+    </div><!-- /.panels -->
+  </div><!-- /.acc-layout -->
+</div><!-- /.wrap -->
+
+<!-- ===== MINI FOOTER ===== -->
+<footer class="mini">
+  <div class="wrap" style="max-width:1180px">
+    <div class="mini-inner">
+      <span>&copy; 2026 Organic Cabana. All rights reserved.</span>
+      <div class="links">
+        <a href="#">Privacy</a>
+        <a href="#">Terms</a>
+        <a href="#">Help</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<!-- ===== SCRIPTS ===== -->
+<script src="js/main.js"></script>
+<script>
+(function(){
+  /* === Sidebar panel toggle === */
+  var links=document.querySelectorAll('.side-link[data-panel]');
+  var panels=document.querySelectorAll('.panel');
+
+  links.forEach(function(link){
+    link.addEventListener('click',function(){
+      var target=this.getAttribute('data-panel');
+
+      links.forEach(function(l){l.classList.remove('on')});
+      panels.forEach(function(p){p.classList.remove('on')});
+
+      this.classList.add('on');
+      var el=document.getElementById(target);
+      if(el) el.classList.add('on');
+    });
+  });
+
+  /* === Notification toggles === */
+  document.querySelectorAll('.toggle').forEach(function(btn){
+    btn.addEventListener('click',function(){
+      this.classList.toggle('on');
+    });
+  });
+})();
+</script>
+</body>
+</html>
